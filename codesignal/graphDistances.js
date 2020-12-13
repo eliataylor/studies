@@ -96,6 +96,7 @@ function graphDistances2(g, s) {
     console.timeEnd('time')
     return distance[s]
 }
+
 /******************* BINARY HEAP + MAP ****************************/
 function BinaryMinHeapMap() {
     let heap = [],
@@ -215,3 +216,41 @@ function BinaryMinHeapMap() {
     }
 }
 //*********************************
+
+
+const tests = [
+    {
+        name: 'Test 1',
+        arg: [[[-1,3,2],
+            [2,-1,0],
+            [-1,0,-1]], 0],
+        expected: [0, 2, 2]
+    },
+    {
+        name: 'Test 2',
+        arg: [[[-1,1,2],
+            [0,-1,3],
+            [0,0,-1]], 1],
+        expected: [0, 0, 2]
+    },
+    {
+        name: 'Test 3',
+        arg: [[[-1,0,0,0],
+            [-1,-1,-1,30],
+            [1,1,-1,1],
+            [2,2,0,-1]], 3],
+        expected: [1, 1, 0, 0]
+    },
+    {
+        name: 'Test 4',
+        arg: [[[-1,-1,2],
+            [1,-1,0],
+            [-1,1,-1]], 0],
+        expected: [0, 3, 2]
+    }
+];
+
+tests.forEach((o, i) => {
+    let result = graphDistances3(...o.arg);
+    console.log('TEST ' + o.name + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+})

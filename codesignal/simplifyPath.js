@@ -23,8 +23,7 @@ function simplifyPathMine(path) {
 }
 
 
-
-function simplifyPath(path) {
+function simplifyPathFilter(path) {
     let result = path.split(/\//).filter(elm => elm && elm !== '.')
     let t, x;
 
@@ -36,8 +35,6 @@ function simplifyPath(path) {
 
     return '/'+ result.join`/`
 }
-
-
 
 function simplifyPathStack(path) {
     var stack = [];
@@ -52,3 +49,33 @@ function simplifyPathStack(path) {
 
 
 simplifyPath = require('path').resolve
+
+
+const tests = [
+    {
+        name: 'Test 1',
+        arg: ['/home/a/./x/../b//c/'],
+        expected: '/home/a/b/c'
+    },
+    {
+        name: 'Test 2',
+        arg: ['/a/b/c/../..'],
+        expected: '/a'
+    },
+    {
+        name: 'Test 3',
+        arg: ['/../'],
+        expected: '/'
+    },
+    {
+        name: 'Test 4',
+        arg: ['//a//b//./././c'],
+        expected: '/a/b/c'
+    }
+];
+
+tests.forEach((o, i) => {
+    let result = simplifyPathMine(...o.arg);
+    console.log('TEST ' + o.name + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+})
+

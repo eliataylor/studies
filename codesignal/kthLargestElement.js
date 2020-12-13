@@ -147,3 +147,33 @@ function kthLargestElement(nums, k) {
  //Return the last value popped
  return out;
 }
+
+
+
+const tests = [
+ {
+  name: 'Test 1',
+  arg: [[7, 6, 5, 4, 3, 2, 1], 2],
+  expected: 6
+ },
+ {
+  name: 'Test 2',
+  arg: [[99, 99], 1],
+  expected: 99
+ },
+ {
+  name: 'Test 3',
+  arg: [[-1, 2, 0], 2],
+  expected: 0
+ },
+ {
+  name: 'Test 4',
+  arg: [[3, 1, 2, 4], 2],
+  expected: 3
+ }
+];
+
+tests.forEach((o, i) => {
+ let result = kthLargestElement(...o.arg);
+ console.log('TEST ' + o.name + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+})
