@@ -46,7 +46,7 @@ function climbingStaircase2(n, k, memo = {}) {
     let total = [];
 
     for(let jump = 1; jump <= Math.min(n, k); jump++) {
-        total.push(...climbingStaircase(n - jump, k, memo).map(arr => [jump, ...arr]))
+        total.push(...climbingStaircase2(n - jump, k, memo).map(arr => [jump, ...arr]))
     }
 
     memo[n] = total;
@@ -59,7 +59,7 @@ function climbingStaircase1(n, k) {
     let total = [];
 
     for(let jump = 1; jump <= Math.min(n, k); jump++) {
-        total.push(...climbingStaircase(n - jump, k).map(arr => [jump, ...arr]))
+        total.push(...climbingStaircase1(n - jump, k).map(arr => [jump, ...arr]))
     }
 
     return total;

@@ -25,7 +25,7 @@ let index = 9;
 while(index >= 0) {
     let calc = fibonacci(index);
     if (calc === f[index]) {
-        console.log('correct: ' + f[index] + ' found at  ' + index);
+        console.log('correct: ' + f[index] + ' found at  ' + index + ' = ' + calc);
     } else {
         console.log('incorrect: ' + f[index] + ' found at  ' + index);
     }
