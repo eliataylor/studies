@@ -76,6 +76,22 @@ function meanGroups(a) {
     result = result.sort( (a, b) => (a[0] - b[0]) );
     console.log(result);
     return result;
+
+    /*
+    let b = [];
+    for(let i =0; i < a.length; i++) {
+        let row = a[i];
+        let avg = row.reduce((acc, v) => acc + v, 0) / row.length;
+        if (typeof b[avg] === 'undefined') b[avg] = [];
+        b[avg].push(i);
+    }
+    let result = Object.values(b).sort( (a,b) => {
+        a = a.sort( (c,d) => c-d );
+        b = b.sort( (c,d) => c-d );
+        return a[0] > b[0] ? 1 : -1
+    })
+    return result;
+     */
 }
 
 const tests = [

@@ -29,22 +29,14 @@ The new array b will look like [1, 3, 4, 6, 5], which is not in strictly ascendi
  */
 
 function alternatingSort(a) {
-    if (a.length < 2) return true;
-    let b = [];
-    let i = 0;
-    while (a.length > 0) {
-        if (i % 2 === 0) {
-            b.push(a.shift());
-        } else {
-            b.push(a.pop());
-        }
+    let b = new Array();
+    while(a.length > 0) {
+        b.push(b.length % 2 === 0 ? a.shift() : a.pop());
         if (b.length > 1) {
-            if (b[b.length - 2] + 1 > b[b.length - 1]) {
-                console.log(b);
+            if (b[b.length-2] >= b[b.length-1]) {
                 return false;
             }
         }
-        i++;
     }
     return true;
 }

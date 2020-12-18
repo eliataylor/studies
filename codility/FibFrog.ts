@@ -72,16 +72,37 @@ function solution(A) {
     }
 
     if (isFibonacci(A.length + 1) === true) {
-        return 1;
+        return 1; // jumps the whole river
     }
 
     // TODO while last or first is not with fib(distance), remove it as a leaf
+    let left = A.indexOf(1);
+    while(left > -1 && isFibonacci(left + 1) === false) {
+        A[left] = -1; // never reachable
+        left = A.indexOf(1);
+    }
+    let reached = {};
+    reached[left] = 1;
 
-    function canLandHome(left, right) {
+    let next = A.indexOf(1, left);
+    while (next > -1) {
+        if(isFibonacci(next + 1) === true) {
+            A[left] = -1; // all previous are skippable;
+            left = next;
+        }
+    }
+
+
+
+
+
+    function canLandHome(left, right, min, jumps) {
         let distance = right - left;
         if (isFibonacci(distance) === true) {
+            jumps.push(left + '-' + right);
             if (left === 0) {
-                return true;
+                min = Math.min(min, jumps.length);
+                return min;
             }
             right = left;
 
@@ -91,56 +112,25 @@ function solution(A) {
                 A[route] = -1;
                 routes.push(route);
             }
-            let hasRoute = false;
-            while(routes.length > 0 && hasRoute === false) {
-                hasRoute = canLandHome(routes.pop(), right);
+            while(routes.length > 0) {
+                let hasRoute = canLandHome(routes.pop(), right, min);
+                if (hasRoute === true) {
+                    jumps = temp;
+                    return true;
+                }
             }
             return hasRoute;
         }
         return false;
     }
 
-    let tracker = new Set(); // jump order + ':' + index of origin left + '-' + index of destination leaf
     let jumps = [];
-    let total = 0;
-    let right = A.length;
-    let first = -1;
-    while(first < right && total <= A.length) { // until we've jumped the whole river
-        let left = first;
-        while (left < right) { // attempt largest jumps first
-            let distance = right - left;
-            let key = jumps.length + ':' + left + '-' + right;
-            if (isFibonacci(distance) === true && tracker.has(key) === false) {
-                tracker.add(key);
-                jumps.push(right);
-                right = left; // next destination leaf will be this right endpoint
-                total += distance;
-            } else {
-                left = A.indexOf(1, Math.max(0,left)); // try shorter distance jump
-            }
-        }
-        if (left === right) {
-            // back track:
-                // erase earlier jumps until
-                    // there is an tracker.has() === false
-            tracker.forEach(v => {
-                let last = jumps.pop();
-                if (v.indexOf(jumps.length - 1 + ':') === 0) {
-                    let ends = v.substring(v.indexOf(':') + 1).split('-');
-                    left = parseInt(ends[0]);
-                    right = parseInt(ends[1]);
-                    //
-                    // right = A.indexOf(1, right);
-                    tracker.delete(v);
-                }
-            });
-        }
-    }
-    console.log(jumps);
-    if (jumps.length > 0) {
-        return jumps.length;
+    let min = canLandHome(-1, A.length, Infinity, jumps);
+    if (min === Infinity) {
+        return -1;
     }
     return -1;
+
 
 }
 
