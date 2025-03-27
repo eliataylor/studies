@@ -7,11 +7,11 @@ function inorderSuccessor(root, p) {
         return p;
     }
 
-// the successor is somewhere upper in the tree
+    // the successor is somewhere upper in the tree
     let stack = [];
     let inorder = -Infinity;
 
-// inorder traversal : left -> node -> right
+    // inorder traversal : left -> node -> right
     while (stack.length > 0 || root != null) {
         // 1. go left till you can
         while (root != null) {

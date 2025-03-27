@@ -43,6 +43,7 @@ function graphDistances(g, s) {
     console.timeEnd('time')
     return distance
 }
+
 //******************** BELLMAN-FORD *************************************
 function graphDistances1(g, s) {
     console.time('time')
@@ -73,6 +74,7 @@ function graphDistances1(g, s) {
     console.timeEnd('time')
     return distance
 }
+
 //******************** FLOYED WHARSHALL **********************
 function graphDistances2(g, s) {
     //Floyd Warshall algorithmn

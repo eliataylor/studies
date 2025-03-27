@@ -225,8 +225,6 @@ function graphDistances(g, s) {
     return output;
 }
 
-
-
 const tests = [
     {
         name: 'Test 1',

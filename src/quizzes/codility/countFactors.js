@@ -15,8 +15,7 @@ Write an efficient algorithm for the following assumptions:
 
 N is an integer within the range [1..2,147,483,647].
 
- */
-
+*/
 
 function solution(N) {
     if (N < 3) return N;
@@ -34,8 +33,6 @@ function solution(N) {
     }
     console.log(total)
     return total.length;
-
-
 }
 
 
@@ -64,8 +61,7 @@ const tests = [
         "name": "Test 1",
         "arg": [8],
         "expected":4
-    }
-    ,
+    },
     {
         "name": "Test 1",
         "arg": [9],
