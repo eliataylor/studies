@@ -12,7 +12,7 @@ Template #2 (left < right):
 An advanced way to implement Binary Search.
 Search Condition needs to access element's immediate right neighbor
 Use element's right neighbor to determine if condition is met and decide whether to go left or right
-Gurantees Search Space is at least 2 in size at each step
+Guarantees Search Space is at least 2 in size at each step
 Post-processing required. Loop/Recursion ends when you have 1 element left. Need to assess if the remaining element meets the condition.
 
 
@@ -35,7 +35,7 @@ function binarySearch(nums, target){
     while(left <= right){
         // Prevent (left + right) overflow
         let mid = left + Math.floor((right - left) / 2);
-        if(nums[mid] == target){ return mid; }
+        if(nums[mid] === target){ return mid; }
         else if(nums[mid] < target) { left = mid + 1; }
         else { right = mid - 1; }
     }
@@ -268,7 +268,6 @@ function findPeakElement(nums) {
     return search(nums, 0, nums.length - 1);
 
 };
-
 
 
 // binary

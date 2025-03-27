@@ -1,0 +1,19 @@
+{
+  "name": "studies",
+  "version": "1.0.0",
+  "main": "sort_insert-quicksort-merge.ts",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/sort_insert-quicksort-merge.js",
+    "dev": "tsc && node dist/sort_insert-quicksort-merge.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^22.13.14",
+    "typescript": "^5.8.2"
+  }
+}
