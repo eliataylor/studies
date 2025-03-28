@@ -77,7 +77,7 @@ program
     .version('1.0.0')
     .option('-a, --algorithms <string>', 'Algorithm(s) to run (comma-separated list, category name, or "all")', 'all')
     .option('-s, --sizes <string>', 'Comma-separated list of data sizes to test', '1000')
-    .option('--targets <number>', 'Number of search targets to test', '10')
+    .option('--targets <number>', 'Number of search targets to test', '1')
     .option('--percent-present <number>', 'Percentage of targets present in data (0-100)', '50')
     .option('--seed <string>', 'Random seed for reproducible data')
     .option('-v, --verbose', 'Show detailed information about searches', false)

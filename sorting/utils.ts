@@ -31,17 +31,15 @@ export enum ArrayType {
  * Generates an array based on the specified type and sortedness level
  *
  * @param size The size of the array
- * @param min The minimum value in the array
- * @param max The maximum value in the array
  * @param sortedness Level of sortedness from 0 (completely random) to 100 (fully sorted)
  * @param arrayType The base type of array to generate
  * @returns An array of numbers
  */
 export function generateArray(
     size: number,
-    min: number = 0,
-    max: number = 1000,
     sortedness: number = 0,
+    min: number = 0,
+    max: number = size,
     arrayType: ArrayType = ArrayType.RANDOM
 ): number[] {
     // Generate the base array according to the specified type
@@ -53,7 +51,7 @@ export function generateArray(
             array = Array.from({length: size}, (_, i) => min + Math.floor(i * (max - min) / Math.max(1, size - 1)));
             break;
 
-        case ArrayType.REVERSED:
+        case ArrayType.REVERSED: // worst case for many algorithms
             // Generate a fully reversed array
             array = Array.from({length: size}, (_, i) => max - Math.floor(i * (max - min) / Math.max(1, size - 1)));
             break;
@@ -110,8 +108,8 @@ export function generateArray(
  * @param max The maximum value (default: 1000)
  * @returns An array of random integers
  */
-export function generateRandomArray(size: number, min: number = 0, max: number = 1000): number[] {
-    return generateArray(size, min, max, 0, ArrayType.RANDOM);
+export function generateRandomArray(size: number, min:number, max:number): number[] {
+    return generateArray(size, 0, min, max, ArrayType.RANDOM);
 }
 
 /**
@@ -120,8 +118,8 @@ export function generateRandomArray(size: number, min: number = 0, max: number =
  * @param sortedness Percentage of sortedness (0-100, default: 90)
  * @returns A nearly sorted array
  */
-export function generateNearlySortedArray(size: number, sortedness: number = 90): number[] {
-    return generateArray(size, 0, 1000, sortedness, ArrayType.SORTED);
+export function generateNearlySortedArray(size: number, min:number, max:number, sortedness: number = 90): number[] {
+    return generateArray(size, sortedness, min, max, ArrayType.SORTED);
 }
 
 /**
@@ -129,8 +127,8 @@ export function generateNearlySortedArray(size: number, sortedness: number = 90)
  * @param size The number of elements in the array
  * @returns A reversed array
  */
-export function generateReversedArray(size: number): number[] {
-    return generateArray(size, 0, 1000, 100, ArrayType.REVERSED);
+export function generateReversedArray(size: number, min:number, max:number): number[] {
+    return generateArray(size, 0, min, max, ArrayType.REVERSED);
 }
 
 /**
@@ -265,10 +263,12 @@ export function compareAlgorithms(
 ): void {
     // Store results for each algorithm
     const results: { name: string, avgTime: number, times: number[], success: boolean }[] = [];
+    let testCount = 0;
 
     // Test each algorithm
     for (const [name, func] of Object.entries(algorithms)) {
-        Logger.info(`Testing ${chalk.magenta(name)}...`);
+        testCount++;
+        Logger.preloader(`Testing ${chalk.magenta(name)}... (${testCount}/${Object.keys(algorithms).length})`);
         const result = runSort(func, array, runs);
         results.push({
             name,
@@ -277,6 +277,8 @@ export function compareAlgorithms(
             success: result.success
         });
     }
+
+    Logger.completePreloader(`${testCount} tests completed successfully`);
 
     // Sort results by average time (fastest first)
     results.sort((a, b) => a.avgTime - b.avgTime);
@@ -295,55 +297,53 @@ export function compareAlgorithms(
         ]
     ];
 
-    // Add data for each algorithm
-    results.forEach((result, index) => {
-        // Highlight the fastest algorithm
-        const algoName = index === 0
-            ? chalk.green.bold(result.name)
-            : chalk.magenta(result.name);
+    if (verbose > 1) {
+        // Add data for each algorithm
+        results.forEach((result, index) => {
+            // Highlight the fastest algorithm
+            const algoName = index === 0
+                ? chalk.green.bold(result.name)
+                : chalk.magenta(result.name);
 
-        tableData.push([
-            algoName,
-            result.avgTime.toFixed(4),
-            Math.min(...result.times).toFixed(4),
-            Math.max(...result.times).toFixed(4),
-            result.success ? chalk.green('✓ Success') : chalk.red('✗ Failed')
-        ]);
-    });
+            tableData.push([
+                algoName,
+                result.avgTime.toFixed(4),
+                Math.min(...result.times).toFixed(4),
+                Math.max(...result.times).toFixed(4),
+                result.success ? chalk.green('✓ Success') : chalk.red('✗ Failed')
+            ]);
+        });
 
-    // Display the table
-    console.log(table(tableData, {
-        border: getBorderCharacters('norc'),
-        columnDefault: {
-            alignment: 'right'
-        },
-        columns: {
-            0: {alignment: 'left'}
-        }
-    }));
+        // Display the table
+        console.log(table(tableData, {
+            border: getBorderCharacters('norc'),
+            columnDefault: {
+                alignment: 'right'
+            },
+            columns: {
+                0: {alignment: 'left'}
+            }
+        }));
+    }
 
     // Display relative performance (if more than one algorithm)
-    if (verbose > 1 && results.length > 1) {
+    if (results.length > 1) {
         Logger.subsection('Relative Performance');
 
         const fastestTime = results[0].avgTime;
         const relativeTableData = [
-            [chalk.bold.cyan('Algorithm'), chalk.bold.cyan('Relative Speed'), chalk.bold.cyan('Compared to Fastest')]
+            [chalk.bold.cyan('Algorithm'), chalk.bold.cyan('Relative Speed')]
         ];
 
         results.forEach((result, index) => {
             const relativeSpeed = result.avgTime / fastestTime;
-            const relativeSpeedStr = relativeSpeed === 1
-                ? chalk.green.bold('1.00x')
-                : chalk.yellow(`${relativeSpeed.toFixed(2)}x`);
 
             const comparisonStr = index === 0
-                ? chalk.green.bold('FASTEST')
-                : chalk.yellow(`${((relativeSpeed - 1) * 100).toFixed(1)}% slower`);
+                ? chalk.green.bold(`FASTEST (${result.avgTime.toFixed(4)} ms)`)
+                : chalk.yellow(`${((relativeSpeed - 1) * 100).toFixed(1)}% slower (${result.avgTime.toFixed(4)} ms)`);
 
             relativeTableData.push([
                 index === 0 ? chalk.green.bold(result.name) : chalk.magenta(result.name),
-                relativeSpeedStr,
                 comparisonStr
             ]);
         });
@@ -352,8 +352,7 @@ export function compareAlgorithms(
             border: getBorderCharacters('norc'),
             columns: {
                 0: {alignment: 'left'},
-                1: {alignment: 'right'},
-                2: {alignment: 'left'}
+                1: {alignment: 'left'}
             }
         }));
     }
@@ -363,4 +362,4 @@ export function compareAlgorithms(
  * A shared test array for comparing different sorting algorithms
  * Default size is 1000 elements
  */
-export const TestArray = generateRandomArray(1000);
+export const TestArray = generateRandomArray(1000, 0, 1000);

@@ -72,10 +72,10 @@ program
     .description('Unified testing framework for sorting algorithms')
     .option('-A, --algorithms <string>', 'Comma-separated list of algorithms to test, single algorithm, or category ("basic", "efficient", "nonComparison", "all")')
     .option('-s, --size <number>', 'Size of the array to sort', '1000')
-    .option('--min <number>', 'Minimum value in the array', '0')
-    .option('--max <number>', 'Maximum value in the array', '1000')
     .option('--seed <string>', 'Random seed for reproducible arrays')
     .option('-r, --runs <number>', 'Number of runs per algorithm', '1')
+    .option('--min <number>', 'Minimum value in the array', '0')
+    .option('--max <number>', 'Maximum value in the array', '1000')
     .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.RANDOM)
     .option('--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0')
     .option('--verbose <number>', 'Show additional details including array previews')
@@ -157,7 +157,6 @@ if (options.algorithms) {
 // Configuration information
 Logger.section('Test Configuration');
 Logger.keyValue('Array Size', size.toString());
-Logger.keyValue('Value Range', `[${min}, ${max}]`);
 Logger.keyValue('Array Type', chalk.cyan(arrayType));
 Logger.keyValue('Sortedness Level', `${chalk.yellow(sortedness.toString())}%`);
 Logger.keyValue('Random Seed', options.seed ? chalk.green(options.seed) : chalk.gray('Not set (using Math.random)'));
@@ -165,12 +164,8 @@ Logger.keyValue('Algorithms', Object.keys(selectedAlgorithms).map(algo => chalk.
 Logger.keyValue('Number of runs', chalk.bold(runs.toString()));
 
 // Generate test array
-const testArray = generateArray(size, min, max, sortedness, arrayType);
-
-// Display array preview if verbose
-if (verbose) {
-    Logger.arrayPreview('Test Array Preview', testArray);
-}
+const testArray = generateArray(size, sortedness, min, max, arrayType);
+Logger.arrayPreview('Test Array Preview', testArray);
 
 // Run the algorithm comparison
 compareAlgorithms(selectedAlgorithms, testArray, runs, verbose);
