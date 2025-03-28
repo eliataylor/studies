@@ -7,14 +7,14 @@ This document provides example commands for running different sorting algorithms
 ### Insertion Sort
 **Best Case:**
 ```bash
-npm run sort-test -- --algorithms insertion --arrayType ascending --sortedness 95 --size 10000
+npm run sort-test -- --algorithms insertion --arrayType ascending --sortedness 5 --size 10000
 ```
 **Best when**: Nearly sorted data, small arrays  
 **Key insight**: Insertion sort approaches O(n) time complexity on nearly sorted data.
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms insertion --arrayType descending --sortedness 100 --size 10000
+npm run sort-test -- --algorithms insertion --arrayType descending --sortedness 95 --size 10000
 ```
 **Worst when**: Reverse sorted data, large arrays  
 **Key insight**: Insertion sort degrades to O(n²) when elements need to be moved the maximum distance.
@@ -22,14 +22,14 @@ npm run sort-test -- --algorithms insertion --arrayType descending --sortedness 
 ### Bubble Sort
 **Best Case:**
 ```bash
-npm run sort-test -- --algorithms bubble --arrayType ascending --sortedness 95 --size 1000
+npm run sort-test -- --algorithms bubble --arrayType ascending --sortedness 5 --size 1000
 ```
 **Best when**: Nearly sorted arrays with few inversions  
 **Key insight**: Bubble sort approaches O(n) with few swaps needed.
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms bubble --arrayType descending --sortedness 100 --size 1000
+npm run sort-test -- --algorithms bubble --arrayType descending --sortedness 95 --size 1000
 ```
 **Worst when**: Reverse sorted arrays  
 **Key insight**: Maximum number of swaps required, performing poorly at O(n²).
@@ -44,7 +44,7 @@ npm run sort-test -- --algorithms selection --size 100 --uniqueness 100
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms selection --size 10000 --arrayType ascending --sortedness 100
+npm run sort-test -- --algorithms selection --size 10000 --arrayType ascending --sortedness 95
 ```
 **Worst when**: Large arrays, even already sorted ones  
 **Key insight**: Selection sort always performs O(n²) comparisons regardless of input order.
@@ -59,7 +59,7 @@ npm run sort-test -- --algorithms optimizedGnome --size 100 --arrayType ascendin
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms gnome --size 1000 --arrayType descending --sortedness 100
+npm run sort-test -- --algorithms gnome --size 1000 --arrayType descending --sortedness 95
 ```
 **Worst when**: Reverse sorted arrays  
 **Key insight**: Gnome sort performs poorly (O(n²)) with many backward moves.
@@ -74,7 +74,7 @@ npm run sort-test -- --algorithms shell --size 5000 --arrayType ascending --sort
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms shell --size 10000 --arrayType descending --sortedness 100
+npm run sort-test -- --algorithms shell --size 10000 --arrayType descending --sortedness 95
 ```
 **Worst when**: Reverse sorted large arrays  
 **Key insight**: Shell sort performs worse when the gap sequence isn't optimal for the data pattern.
@@ -89,7 +89,7 @@ npm run sort-test -- --algorithms comb --size 5000 --sortedness 80
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms comb --size 10000 --arrayType descending --sortedness 100
+npm run sort-test -- --algorithms comb --size 10000 --arrayType descending --sortedness 95
 ```
 **Worst when**: Reverse ordered arrays  
 **Key insight**: Performance degrades to O(n²) in worst case.
@@ -106,7 +106,7 @@ npm run sort-test -- --algorithms quick --size 100000 --sortedness 0 --uniquenes
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms quick --size 10000 --arrayType ascending --sortedness 100
+npm run sort-test -- --algorithms quick --size 10000 --arrayType ascending --sortedness 95
 ```
 **Worst when**: Already sorted (or reverse sorted) arrays  
 **Key insight**: Quick sort degrades to O(n²) when partitioning is unbalanced.
@@ -136,7 +136,7 @@ npm run sort-test -- --algorithms heap --size 100000 --sortedness 0
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms heap --size 10000 --arrayType ascending --sortedness 95
+npm run sort-test -- --algorithms heap --size 10000 --arrayType ascending --sortedness 5
 ```
 **Worst when**: Nearly sorted arrays  
 **Key insight**: Heap sort doesn't take advantage of partially sorted input.
@@ -166,7 +166,7 @@ npm run sort-test -- --algorithms intro --size 100000 --sortedness 0 --uniquenes
 
 **Worst Case:**
 ```bash
-npm run sort-test -- --algorithms intro --size 10000 --arrayType ascending --sortedness 100
+npm run sort-test -- --algorithms intro --size 10000 --arrayType ascending --sortedness 95
 ```
 **Worst when**: Already sorted arrays (but still performs better than pure quicksort)  
 **Key insight**: Falls back to heap sort to avoid quicksort's worst-case.
@@ -224,7 +224,7 @@ These examples compare algorithms under specific conditions to demonstrate how t
 
 ### Nearly Sorted Data: Insertion Sort vs. Quick Sort
 ```bash
-npm run sort-test -- --algorithms "insertion,quick" --arrayType ascending --sortedness 95 --size 10000
+npm run sort-test -- --algorithms "insertion,quick" --arrayType ascending --sortedness 5 --size 10000
 ```
 **Expected result**: Insertion sort outperforms quick sort on nearly sorted data.
 
@@ -242,7 +242,7 @@ npm run sort-test -- --algorithms "tim,quick" --arrayType ascending --sortedness
 
 ### Worst Case for Quick Sort vs. Heap Sort
 ```bash
-npm run sort-test -- --algorithms "quick,heap" --arrayType ascending --sortedness 100 --size 10000
+npm run sort-test -- --algorithms "quick,heap" --arrayType ascending --sortedness 95 --size 10000
 ```
 **Expected result**: Quick sort degrades to O(n²) on already sorted data, while heap sort maintains O(n log n).
 

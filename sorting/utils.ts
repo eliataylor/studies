@@ -21,8 +21,8 @@ export type SortFunction = (arr: number[]) => number[];
  * Predefined array types
  */
 export enum ArrayType {
-    SORTED = 'ascending',      // Perfectly sorted array
-    REVERSED = 'descending',  // Reversed order array
+    ASCENDING = 'ascending',      // Perfectly sorted array
+    DESCENDING = 'descending',  // Reversed order array
 }
 
 /**
@@ -41,7 +41,7 @@ export function generateArray(
     uniqueness: number = 100,
     min: number = 0,
     max: number = 1000,
-    arrayType: ArrayType = ArrayType.SORTED
+    arrayType: ArrayType = ArrayType.ASCENDING
 ): number[] {
 
     // Generate random & unique array, with random value distribution ranging from min to max
@@ -73,30 +73,28 @@ export function generateArray(
     const uniqueCount = Math.floor((uniqueness / 100) * size);
     const duplicateCount = size - uniqueCount;
     for (let i = 0; i < duplicateCount; i++) {
-        let fromIndex = Math.floor(Math.random() * (size-1));
-        array[fromIndex+1] = array[fromIndex];
+        let fromIndex = Math.floor(Math.random() * (size - 1));
+        array[fromIndex + 1] = array[fromIndex];
     }
 
     if (sortedness === 100) {
+        if (arrayType === ArrayType.DESCENDING) {
+            array.sort((a, b) => b - a);
+        } else {
+            array.sort((a, b) => a - b);
+        }
+        return array; // return completely sorted array
+    } else if (sortedness === 0) {
         return array; // return completely random array
     }
 
-    switch (arrayType) {
-        case ArrayType.SORTED:
-            array.sort((a, b) => a - b);
-            break;
-
-        case ArrayType.REVERSED: // worst case for many algorithms
-            array.sort((a, b) => b - a);
-            break;
-
-        default:
-            break;
+    if (arrayType === ArrayType.DESCENDING) {
+        array.sort((a, b) => b - a);
+    } else if (arrayType === ArrayType.ASCENDING) {
+        array.sort((a, b) => a - b);
     }
 
-    if (sortedness === 0) {
-        return array; // return completely sorted array
-    }
+
 
     const sortedCount = Math.floor((sortedness / 100) * size);
     const unsortedCount = size - sortedCount;

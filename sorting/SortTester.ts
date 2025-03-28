@@ -86,7 +86,7 @@ program
     .option('-r, --runs <number>', 'Number of runs per algorithm', '1')
     .option('--min <number>', 'Minimum value in the array', '0')
     .option('--max <number>', 'Maximum value in the array', '1000')
-    .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.SORTED)
+    .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.ASCENDING)
     .option('--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0')
     .option('--uniqueness <number>', 'Level of uniqueness from 0 (all same values) to 100 (all unique values)', '100')
     .option('-l, --loglevel <level>', `Set logging level for algorithm execution (${Object.keys(LOG_LEVELS).join(', ')})`, 'none')
