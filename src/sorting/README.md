@@ -2,76 +2,114 @@
 
 This repository contains implementations of various sorting algorithms in TypeScript, along with utilities for testing and comparing their performance.
 
-## Available Sorting Algorithms
+## Installation
 
-### Basic O(n²) Algorithms
-
-- **Bubble Sort**: Simple comparison-based algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order.
-- **Selection Sort**: Divides the input into a sorted and an unsorted region, and repeatedly selects the smallest element from the unsorted region and moves it to the sorted region.
-- **Insertion Sort**: Builds the sorted array one item at a time by repeatedly taking the next element and inserting it into its correct position in the sorted part.
-- **Gnome Sort**: Similar to insertion sort but moves elements to their proper position by a series of swaps.
-- **Comb Sort**: Improvement on bubble sort that eliminates turtles (small values near the end of the list) by using gap values.
-- **Shell Sort**: Generalization of insertion sort that allows the exchange of items that are far apart.
-
-### Efficient O(n log n) Algorithms
-
-- **Merge Sort**: Divide and conquer algorithm that divides the input array, recursively sorts the sub-arrays, and then merges them.
-- **Quick Sort**: Divide and conquer algorithm that selects a 'pivot' element and partitions the array around it.
-- **Heap Sort**: Uses a binary heap data structure to sort elements.
-- **Tim Sort**: Hybrid algorithm derived from merge sort and insertion sort, designed to perform well on many kinds of real-world data.
-- **Intro Sort**: Hybrid algorithm that provides both fast average performance and optimal worst-case performance, beginning with quicksort and switching to heapsort when needed.
-
-### Non-comparison Based Algorithms
-
-- **Counting Sort**: Integer sorting algorithm that counts occurrences of each element and uses that information to place elements in their correct position.
-- **Radix Sort**: Non-comparative integer sorting algorithm that sorts data with integer keys by grouping keys by individual digits.
-- **Bucket Sort**: Distributes elements into buckets and then sorts these buckets individually.
-
-## Usage
-
-### Installation
-
-1. Clone this repository
-2. Install dependencies:
+1. Install the dependencies:
 
 ```bash
 npm install
 ```
 
-### Running Comparison Tests
-
-To run the comparison tests:
+2. Build the TypeScript files:
 
 ```bash
-npx ts-node CompareSort.ts
+npm run build
 ```
 
-### Using Individual Sorting Algorithms
+## CLI Commands
 
-You can import and use any sorting algorithm:
+The package has been updated with command-line interfaces to test and compare sorting algorithms with configurable parameters.
 
-```typescript
-import { quickSort, mergeSort } from './index';
-
-const array = [5, 3, 8, 4, 2];
-const sortedArray = quickSort(array);
-console.log(sortedArray); // [2, 3, 4, 5, 8]
-```
-
-### Testing a Specific Sorting Algorithm
-
-Each algorithm file contains commented code to test that specific algorithm:
-
-```typescript
-// In QuickSort.ts, uncomment:
-// runSort(quickSort, TestArray, "Quick");
-```
-
-Then run:
+### Compare Multiple Sorting Algorithms
 
 ```bash
-npx ts-node QuickSort.ts
+npm run compare -- [options]
 ```
+
+Options:
+- `-s, --size <number>`: Size of the array to sort (default: 1000)
+- `-m, --min <number>`: Minimum value in the array (default: 0)
+- `-M, --max <number>`: Maximum value in the array (default: 1000)
+- `--seed <string>`: Random seed for reproducible arrays
+- `-a, --algorithms <string>`: Comma-separated list of algorithms to test, or use "basic", "efficient", "nonComparison", "all" (default: "all")
+- `-r, --runs <number>`: Number of runs for each algorithm (avg time will be reported) (default: 1)
+
+Example:
+```bash
+npm run compare -- --size 5000 --min 0 --max 10000 --seed 12345 --algorithms "quick,merge,heap" --runs 3
+```
+
+### Run a Single Sorting Algorithm
+
+```bash
+npm run sort -- [options]
+```
+
+Options:
+- `-a, --algorithm <string>`: Algorithm to run (required)
+- `-s, --size <number>`: Size of the array to sort (default: 1000)
+- `-m, --min <number>`: Minimum value in the array (default: 0)
+- `-M, --max <number>`: Maximum value in the array (default: 1000)
+- `--seed <string>`: Random seed for reproducible arrays
+- `-v, --verbose`: Show the entire sorted array (careful with large arrays)
+- `-r, --runs <number>`: Number of runs (avg time will be reported) (default: 1)
+
+Example:
+```bash
+npm run sort -- --algorithm quick --size 1000 --min 0 --max 10000 --seed 12345 --runs 3
+```
+
+### Test with Different Array Configurations
+
+```bash
+npm run test -- [options]
+```
+
+Options:
+- `-a, --algorithms <string>`: Comma-separated list of algorithms to test, or use "basic", "efficient", "nonComparison", "all" (default: "efficient")
+- `-s, --sizes <string>`: Comma-separated list of array sizes to test (default: "100,1000,10000")
+- `--seed <string>`: Random seed for reproducible arrays
+- `-r, --runs <number>`: Number of runs per test (default: 1)
+
+Example:
+```bash
+npm run test -- --algorithms "quick,merge" --sizes "10,100,1000,10000" --seed 12345 --runs 2
+```
+
+## Available Sorting Algorithms
+
+### Basic O(n²) Algorithms
+
+- **bubble**: Bubble Sort
+- **selection**: Selection Sort
+- **insertion**: Insertion Sort
+- **gnome**: Gnome Sort
+- **optimizedGnome**: Optimized Gnome Sort
+- **comb**: Comb Sort
+- **shell**: Shell Sort
+
+### Efficient O(n log n) Algorithms
+
+- **merge**: Merge Sort
+- **quick**: Quick Sort
+- **heap**: Heap Sort
+- **tim**: Tim Sort
+- **intro**: Intro Sort
+
+### Non-comparison Based Algorithms
+
+- **counting**: Counting Sort
+- **radix**: Radix Sort
+- **bucket**: Bucket Sort
+
+## Special Array Types for Testing
+
+The test script includes special array configurations to benchmark performance under different scenarios:
+
+1. **Random Arrays**: Fully randomized data
+2. **Nearly Sorted Arrays**: Arrays that are mostly in order with a few elements out of place
+3. **Reversed Arrays**: Arrays in reverse order (worst case for many algorithms)
+4. **Few Unique Values**: Arrays with many duplicate values
 
 ## Time and Space Complexity
 
@@ -96,14 +134,3 @@ Where:
 - n is the number of elements
 - k is the range of values or number of digits
 - p is the number of increments in comb sort
-
-## Project Structure
-
-- `utils.ts`: Utility functions for testing and comparing sorting algorithms
-- `*Sort.ts`: Individual implementations of each sorting algorithm
-- `index.ts`: Central export point for all sorting algorithms
-- `RunAll.ts`: Script to compare performance of different algorithms
-
-## Contributions
-
-Contributions are welcome! Feel free to add new sorting algorithms, improve existing implementations, or enhance the utility functions.
