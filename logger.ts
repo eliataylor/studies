@@ -7,7 +7,52 @@
 
 import chalk from 'chalk';
 
+/**
+ * LogLevel enum for controlling verbosity of algorithm execution logs
+ */
+export enum LogLevel {
+    NONE = 0,    // No algorithm execution logs
+    ERROR = 1,   // Only errors
+    INFO = 2,    // Basic information and errors
+    DEBUG = 3,   // Detailed execution information
+    TRACE = 4    // Verbose step-by-step execution details
+}
+
+// Default log level
+let currentLogLevel: LogLevel = LogLevel.NONE;
+
 export class Logger {
+    /**
+     * Set the global log level
+     */
+    static setLogLevel(level: LogLevel): void {
+        currentLogLevel = level;
+    }
+
+    /**
+     * Get the current log level
+     */
+    static getLogLevel(): LogLevel {
+        return currentLogLevel;
+    }
+
+    /**
+     * Log a message only if current level is greater than or equal to the specified level
+     */
+    static logAtLevel(level: LogLevel, message: string): void {
+        if (currentLogLevel >= level) {
+            console.log(message);
+        }
+    }
+
+    /**
+     * Log algorithm step (used within algorithm implementations)
+     */
+    static algorithmStep(level: LogLevel, message: string): void {
+        if (currentLogLevel >= level) {
+            console.log(`    ${chalk.dim('→')} ${message}`);
+        }
+    }
 
     static section(title: string): void {
         console.log('\n' + chalk.bold.cyan('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));

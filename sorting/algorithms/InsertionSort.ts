@@ -13,6 +13,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
+// import { Logger, LogLevel } from '../../logger';
 import {SortFunction} from '../utils';
 
 /**
@@ -21,26 +22,39 @@ import {SortFunction} from '../utils';
  * @returns The sorted array
  */
 export const insertionSort: SortFunction = (arr: number[]): number[] => {
-    const array = [...arr]; // Create a copy to avoid modifying the original
-    const n = array.length;
+    // Create a copy of the array (to avoid modifying the original)
+    const result = [...arr];
+    const n = result.length;
 
+    // Logger.algorithmStep(LogLevel.DEBUG, `Starting insertion sort with array of length ${n}`);
+
+    // Start from the second element (index 1)
     for (let i = 1; i < n; i++) {
-        // Select the current element to be inserted in the sorted part
-        const current = array[i];
+        // Store the current element to be inserted in the correct position
+        const current = result[i];
+        // Logger.algorithmStep(LogLevel.DEBUG, `Processing element #${i+1}: ${current}`);
 
-        // Find the position where current should be inserted
+        // Find the correct position for the current element
         let j = i - 1;
-        while (j >= 0 && array[j] > current) {
-            array[j + 1] = array[j]; // Shift elements to the right
+
+        // Move elements greater than current to one position ahead
+        while (j >= 0 && result[j] > current) {
+            // Logger.algorithmStep(LogLevel.TRACE, `${result[j]} > ${current}, shifting ${result[j]} to position ${j+1}`);
+            result[j + 1] = result[j];
             j--;
         }
 
-        // Insert the current element in its correct position
-        array[j + 1] = current;
+        // Place the current element in its correct position
+        result[j + 1] = current;
+
+        // Logger.algorithmStep(LogLevel.DEBUG, `Placed ${current} at position ${j+1}`);
+        // Logger.algorithmStep(LogLevel.TRACE, `Array after processing ${i+1} elements: [${result.join(', ')}]`);
     }
 
-    return array;
-};
+    // Logger.algorithmStep(LogLevel.DEBUG, `Insertion sort complete`);
+
+    return result;
+}
 
 /**
  * Example usage:

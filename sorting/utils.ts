@@ -21,7 +21,6 @@ export type SortFunction = (arr: number[]) => number[];
  * Predefined array types
  */
 export enum ArrayType {
-    RANDOM = 'random',      // Completely random array (actually controlled by sortedness = 0)
     SORTED = 'ascending',      // Perfectly sorted array
     REVERSED = 'descending',  // Reversed order array
 }
@@ -39,36 +38,39 @@ export enum ArrayType {
 export function generateArray(
     size: number,
     sortedness: number = 0,
+    uniqueness: number = 100,
     min: number = 0,
     max: number = 1000,
     arrayType: ArrayType = ArrayType.SORTED
 ): number[] {
 
-    // Method to generate random array with even distribution
-    let array: number[] = [];
-
-    if (max - min >= size) {
-        // Generate random array, with random value distribution ranging from min to max
-        const baseValues = new Set<number>();
-        let test = Math.floor(Math.random() * (max - min + 1)) + min;
-        for (let i = 0; i < size - 1; i++) {
-            while (baseValues.has(test) && baseValues.size < size && baseValues.size < max - min) {
+    // Generate random & unique array, with random value distribution ranging from min to max
+    const baseValues = new Set<number>();
+    let test = Math.floor(Math.random() * (max - min + 1)) + min;
+    for (let i = 0; i < size; i++) {
+        while (baseValues.has(test)) {
+            if (baseValues.size >= max - min) {
+                // support fractions since max - min < size.
+                test = +(Math.random() * (max - min + 1) + min).toFixed(4);
+            } else {
                 test = Math.floor(Math.random() * (max - min + 1)) + min;
             }
-            baseValues.add(test);
         }
-        array = Array.from(baseValues);
-    } else {
-        // Generate random array with EVEN value distribution ranging from min to max, since max - min < size.
-        // This means some duplicates are required TODO: include alpha numeric values to avoid duplicates
-        const step = (max - min) / (size - 1 || 1);
-        array = Array.from(
-            {length: size},
-            (_, i) => {
-                return Math.round(min + i * step)
-            }
-        ).sort(() => Math.random() - 0.5);
+        baseValues.add(test);
     }
+    let array: number[] = Array.from(baseValues);
+
+    /*** Generate random array with EVEN value distribution ranging from min to max (will include duplicates when size > max - min)
+     const step = (max - min) / (size - 1 || 1);
+     array = Array.from(
+     {length: size},
+     (_, i) => {
+     return Math.round(min + i * step)
+     }
+     ).sort(() => Math.random() - 0.5);
+     ***/
+
+    // TODO: add duplicates based on uniqueness
 
     if (sortedness === 100) {
         return array; // return completely random array
@@ -172,8 +174,7 @@ export function runSort(
 export function compareAlgorithms(
     algorithms: Record<string, SortFunction>,
     array: number[],
-    runs: number = 1,
-    verbose: number = 0
+    runs: number = 1
 ): void {
     // Store results for each algorithm
     const results: { name: string, avgTime: number, times: number[], success: boolean }[] = [];

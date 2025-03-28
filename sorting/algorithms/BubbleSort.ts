@@ -49,6 +49,6 @@ export const bubbleSort: SortFunction = (arr: number[]): number[] => {
 
 /**
  * Example usage:
- * const TestArray = generateArray(1000, 0, 0, 1000, ArrayType.RANDOM);
+ * const TestArray = generateArray(1000, 0, 100, 0, 1000, ArrayType.RANDOM);
  * runSort(bubbleSort, TestArray, "Bubble");
  */
