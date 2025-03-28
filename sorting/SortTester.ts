@@ -24,20 +24,20 @@ import {
 } from './utils';
 
 // Import all sorting algorithms
-import { bubbleSort } from './BubbleSort';
-import { selectionSort } from './SelectionSort';
-import { insertionSort } from './InsertionSort';
-import { mergeSort } from './MergeSort';
-import { quickSort } from './QuickSort';
-import { heapSort } from './HeapSort';
-import { extendedCountingSort } from './CountingSort';
-import { extendedRadixSort } from './RadixSort';
-import { bucketSort } from './BucketSort';
-import { shellSort } from './ShellSort';
-import { timSort } from './TimSort';
-import { introSort } from './IntroSort';
-import { combSort } from './CombSort';
-import { gnomeSort, optimizedGnomeSort } from './GnomeSort';
+import { bubbleSort } from './algorithms/BubbleSort';
+import { selectionSort } from './algorithms/SelectionSort';
+import { insertionSort } from './algorithms/InsertionSort';
+import { mergeSort } from './algorithms/MergeSort';
+import { quickSort } from './algorithms/QuickSort';
+import { heapSort } from './algorithms/HeapSort';
+import { extendedCountingSort } from './algorithms/CountingSort';
+import { extendedRadixSort } from './algorithms/RadixSort';
+import { bucketSort } from './algorithms/BucketSort';
+import { shellSort } from './algorithms/ShellSort';
+import { timSort } from './algorithms/TimSort';
+import { introSort } from './algorithms/IntroSort';
+import { combSort } from './algorithms/CombSort';
+import { gnomeSort, optimizedGnomeSort } from './algorithms/GnomeSort';
 
 // Create a mapping of sort names to sort functions
 const ALL_SORT_FUNCTIONS: Record<string, SortFunction> = {

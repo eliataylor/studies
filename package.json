@@ -8,12 +8,15 @@
     "sort-test": "ts-node sorting/SortTester.ts",
     "sort-help": "ts-node sorting/Help.ts",
     "search-test": "ts-node searching/SearchTester.ts",
-    "search-help": "ts-node searching/SearchHelp.ts"
+    "search-help": "ts-node searching/SearchHelp.ts",
+    "packing-test": "ts-node packing/PackingTester.ts",
+    "packing-help": "ts-node packing/PackingHelp.ts"
   },
   "keywords": [
     "algorithms",
     "sorting",
     "searching",
+    "packing",
     "typescript",
     "data-structures"
   ],

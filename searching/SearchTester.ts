@@ -33,22 +33,22 @@ import {
 } from './utils';
 
 // Import array search algorithms
-import { linearSearch } from './LinearSearch';
-import { binarySearch, recursiveBinarySearch } from './BinarySearch';
-import { jumpSearch } from './JumpSearch';
-import { interpolationSearch } from './InterpolationSearch';
-import { exponentialSearch } from './ExponentialSearch';
-import { fibonacciSearch } from './FibonacciSearch';
+import { linearSearch } from './algorithms/LinearSearch';
+import { binarySearch, recursiveBinarySearch } from './algorithms/BinarySearch';
+import { jumpSearch } from './algorithms/JumpSearch';
+import { interpolationSearch } from './algorithms/InterpolationSearch';
+import { exponentialSearch } from './algorithms/ExponentialSearch';
+import { fibonacciSearch } from './algorithms/FibonacciSearch';
 
 // Import matrix search algorithms
-import { rowColumnSearch } from './RowColumnSearch';
-import { binarySearchMatrix } from './BinarySearchMatrix';
-import { staircaseSearch } from './StaircaseSearch';
-import { blockSearch } from './BlockSearch';
+import { rowColumnSearch } from './algorithms/RowColumnSearch';
+import { binarySearchMatrix } from './algorithms/BinarySearchMatrix';
+import { staircaseSearch } from './algorithms/StaircaseSearch';
+import { blockSearch } from './algorithms/BlockSearch';
 
 // Import tree search algorithms
-import { preorderDFS, inorderDFS, postorderDFS, bstSearch } from './DFSSearch';
-import { bfs } from './BFSSearch';
+import { preorderDFS, inorderDFS, postorderDFS, bstSearch } from './algorithms/DFSSearch';
+import { bfs } from './algorithms/BFSSearch';
 
 // Create a full algorithm registry with functions
 const ALGORITHMS: Record<string, AlgorithmInfo> = {
