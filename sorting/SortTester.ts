@@ -89,7 +89,7 @@ Examples:
     npm run sort-test -- --algorithms "quick,merge,heap" --size 5000 --sortedness 50 --runs 3
   
   - Use predefined array types with sortedness:
-    npm run sort-test -- --algorithms "efficient" --arrayType reversed --sortedness 80 --size 1000
+    npm run sort-test -- --algorithms "efficient" --arrayType descending --sortedness 80 --size 1000
   
   - Test all algorithms with few unique values:
     npm run sort-test -- --algorithms all --arrayType fewUnique --size 1000 --runs 2

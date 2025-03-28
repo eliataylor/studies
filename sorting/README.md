@@ -49,9 +49,9 @@ The `--sortedness` parameter controls how sorted the array is (0-100%):
 
 This parameter works with all array types. For example, with a reversed array:
 
-- `--arrayType reversed --sortedness 100` = completely reversed
-- `--arrayType reversed --sortedness 0` = completely random
-- `--arrayType reversed --sortedness 80` = mostly reversed with some shuffling
+- `--arrayType descending --sortedness 100` = completely reversed
+- `--arrayType descending --sortedness 0` = completely random
+- `--arrayType descending --sortedness 80` = mostly reversed with some shuffling
 
 ## Available Algorithms
 

@@ -21,10 +21,9 @@ export type SortFunction = (arr: number[]) => number[];
  * Predefined array types
  */
 export enum ArrayType {
-    RANDOM = 'random',      // Completely random array
-    SORTED = 'sorted',      // Perfectly sorted array
-    REVERSED = 'reversed',  // Reversed order array
-    FEW_UNIQUE = 'fewUnique' // Array with few unique values
+    RANDOM = 'random',      // Completely random array (actually controlled by sortedness = 0)
+    SORTED = 'ascending',      // Perfectly sorted array
+    REVERSED = 'descending',  // Reversed order array
 }
 
 /**
@@ -32,6 +31,8 @@ export enum ArrayType {
  *
  * @param size The size of the array
  * @param sortedness Level of sortedness from 0 (completely random) to 100 (fully sorted)
+ * @param min Minimum value in the array
+ * @param max Maximum value in the array
  * @param arrayType The base type of array to generate
  * @returns An array of numbers
  */
@@ -39,63 +40,70 @@ export function generateArray(
     size: number,
     sortedness: number = 0,
     min: number = 0,
-    max: number = size,
-    arrayType: ArrayType = ArrayType.RANDOM
+    max: number = 1000,
+    arrayType: ArrayType = ArrayType.SORTED
 ): number[] {
-    // Generate the base array according to the specified type
+
+    // Method to generate random array with even distribution
     let array: number[] = [];
+
+    if (max - min >= size) {
+        // Generate random array, with random value distribution ranging from min to max
+        const baseValues = new Set<number>();
+        let test = Math.floor(Math.random() * (max - min + 1)) + min;
+        for (let i = 0; i < size - 1; i++) {
+            while (baseValues.has(test) && baseValues.size < size && baseValues.size < max - min) {
+                test = Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+            baseValues.add(test);
+        }
+        array = Array.from(baseValues);
+    } else {
+        // Generate random array with EVEN value distribution ranging from min to max, since max - min < size.
+        // This means some duplicates are required TODO: include alpha numeric values to avoid duplicates
+        const step = (max - min) / (size - 1 || 1);
+        array = Array.from(
+            {length: size},
+            (_, i) => {
+                return Math.round(min + i * step)
+            }
+        ).sort(() => Math.random() - 0.5);
+    }
+
+    if (sortedness === 100) {
+        return array; // return completely random array
+    }
 
     switch (arrayType) {
         case ArrayType.SORTED:
-            // Generate a fully sorted array
-            array = Array.from({length: size}, (_, i) => min + Math.floor(i * (max - min) / Math.max(1, size - 1)));
+            array.sort((a, b) => a - b);
             break;
 
         case ArrayType.REVERSED: // worst case for many algorithms
-            // Generate a fully reversed array
-            array = Array.from({length: size}, (_, i) => max - Math.floor(i * (max - min) / Math.max(1, size - 1)));
+            array.sort((a, b) => b - a);
             break;
 
-        case ArrayType.FEW_UNIQUE:
-            // Generate an array with few unique values (at most 10)
-            const uniqueValues = Math.min(10, max - min + 1);
-            array = Array.from({length: size}, () => min + Math.floor(Math.random() * uniqueValues));
-
-            // Sort it if needed for applying sortedness
-            if (sortedness > 0) {
-                array.sort((a, b) => a - b);
-            }
-            break;
-
-        case ArrayType.RANDOM:
         default:
-            if (sortedness > 0) {
-                // For non-zero sortedness, start with a sorted array
-                array = Array.from({length: size}, (_, i) => min + Math.floor(i * (max - min) / Math.max(1, size - 1)));
-            } else {
-                // For zero sortedness, use a completely random array
-                array = Array.from({length: size}, () => Math.floor(Math.random() * (max - min + 1)) + min);
-                return array; // Return immediately as no need to apply sortedness
-            }
             break;
     }
 
-    // If sortedness is 100, return the array as is (perfectly sorted or reversed)
-    if (sortedness >= 100) {
-        return array;
+    if (sortedness === 0) {
+        return array; // return completely sorted array
     }
 
-    // Apply sortedness by swapping elements
-    // Calculate how many elements to swap based on sortedness
-    // 0% sortedness = swap 50% of elements, 100% sortedness = swap 0% of elements
-    const swapPercentage = 50 * (1 - sortedness / 100);
-    const swapsCount = Math.ceil(size * swapPercentage / 100);
+    const sortedCount = Math.floor((sortedness / 100) * size);
+    const unsortedCount = size - sortedCount;
 
-    // Perform random swaps to decrease sortedness
-    for (let i = 0; i < swapsCount; i++) {
-        const idx1 = Math.floor(Math.random() * size);
-        const idx2 = Math.floor(Math.random() * size);
-        [array[idx1], array[idx2]] = [array[idx2], array[idx1]];
+    // TODO: add argument to control if unsorted area is only a specific area of array
+    for (let i = 0; i < unsortedCount; i++) {
+        let fromIndex = Math.floor(Math.random() * size);
+        let toIndex = Math.floor(Math.random() * size);
+        while (fromIndex === toIndex) {
+            toIndex = Math.floor(Math.random() * size);
+        }
+        const original = array[fromIndex];
+        array[fromIndex] = array[toIndex];
+        array[toIndex] = original;
     }
 
     return array;
@@ -260,9 +268,3 @@ export function compareAlgorithms(
         }));
     }
 }
-
-/**
- * A shared test array for comparing different sorting algorithms
- * Default size is 1000 elements
- */
-export const TestArray = generateArray(1000, 0, 0, 1000, ArrayType.RANDOM);
