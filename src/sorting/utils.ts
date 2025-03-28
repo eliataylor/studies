@@ -260,7 +260,8 @@ export function runSortTest(
 export function compareAlgorithms(
   algorithms: Record<string, SortFunction>,
   array: number[],
-  runs: number = 1
+  runs: number = 1,
+  verbose:number = 0
 ): void {
   // Store results for each algorithm
   const results: { name: string, avgTime: number, times: number[], success: boolean }[] = [];
@@ -322,7 +323,7 @@ export function compareAlgorithms(
   }));
 
   // Display relative performance (if more than one algorithm)
-  if (results.length > 1) {
+  if (verbose > 1 && results.length > 1) {
     Logger.subsection('Relative Performance');
 
     const fastestTime = results[0].avgTime;

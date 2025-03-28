@@ -96,30 +96,30 @@ This parameter works with all array types. For example, with a reversed array:
 
 ```bash
 # Test quicksort with a random array of 1000 elements
-npm run sort-test -- --algorithms quick
+npm run sort-test --algorithms quick
 
 # Test insertion sort with a nearly sorted array (90% sorted)
-npm run sort-test -- --algorithms insertion --sortedness 90
+npm run sort-test --algorithms insertion --sortedness 90
 ```
 
 ### 2. Comparing Algorithm Categories
 
 ```bash
 # Compare all basic (O(n²)) algorithms
-npm run sort-test -- --algorithms basic --size 5000
+npm run sort-test --algorithms basic --size 5000
 
 # Compare efficient (O(n log n)) algorithms on reversed data
-npm run sort-test -- --algorithms efficient --arrayType reversed
+npm run sort-test --algorithms efficient --arrayType reversed
 ```
 
 ### 3. Comparing Specific Algorithms
 
 ```bash
 # Compare quick, merge and heap sort with 5 runs for accuracy
-npm run sort-test -- --algorithms "quick,merge,heap" --runs 5
+npm run sort-test --algorithms "quick,merge,heap" --runs 5
 
 # Compare insertion sort and quick sort on nearly sorted data
-npm run sort-test -- --algorithms "insertion,quick" --sortedness 95
+npm run sort-test --algorithms "insertion,quick" --sortedness 95
 ```
 
 ### 4. Demonstrating Algorithm Strengths and Weaknesses
@@ -128,25 +128,25 @@ The following examples reveal how different algorithms perform under varying con
 
 #### Small Random Array (10 elements, unsorted)
 ```bash
-npm run sort-test -- --algorithms all --size 10 --sortedness 1
+npm run sort-test --algorithms all --size 10 --sortedness 1
 ```
 *Key insight: Simple O(n²) algorithms like insertion sort are often faster for very small arrays due to less overhead.*
 
 #### Small Nearly-Sorted Array (10 elements, 99% sorted)
 ```bash
-npm run sort-test -- --algorithms all --size 10 --sortedness 99
+npm run sort-test --algorithms all --size 10 --sortedness 99
 ```
 *Key insight: Insertion sort often outperforms even O(n log n) algorithms on nearly sorted data.*
 
 #### Large Random Array (50000 elements, unsorted)
 ```bash
-npm run sort-test -- --algorithms all --size 50000 --sortedness 1
+npm run sort-test --algorithms all --size 50000 --sortedness 1
 ```
 *Key insight: O(n log n) algorithms dramatically outperform O(n²) algorithms on large datasets. Quick and heap sort typically excel here.*
 
 #### Large Nearly-Sorted Array (50000 elements, 99% sorted)
 ```bash
-npm run sort-test -- --algorithms all --size 50000 --sortedness 99
+npm run sort-test --algorithms all --size 50000 --sortedness 99
 ```
 *Key insight: Algorithms like insertion sort and Tim sort that take advantage of existing order can outperform other algorithms on nearly sorted large arrays.*
 

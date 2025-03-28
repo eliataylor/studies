@@ -83,7 +83,7 @@ program
   .option('-r, --runs <number>', 'Number of runs per algorithm', '1')
   .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.RANDOM)
   .option('--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0')
-  .option('-v, --verbose', 'Show additional details including array previews')
+  .option('--verbose <number>', 'Show additional details including array previews')
   .helpOption('-h, --help', 'Display help for command')
   .addHelpText('after', `
 Examples:
@@ -116,7 +116,7 @@ const max = parseInt(options.max, 10);
 const runs = parseInt(options.runs, 10);
 const sortedness = Math.max(0, Math.min(100, parseInt(options.sortedness, 10)));
 const arrayType = options.arrayType as ArrayType;
-const verbose = options.verbose;
+const verbose = parseInt(options.verbose);
 
 // Determine which algorithms to run
 let selectedAlgorithms: Record<string, SortFunction> = {};
@@ -153,8 +153,8 @@ if (options.algorithms) {
   }
 } else {
   // Default to comparing efficient algorithms
-  Logger.info(chalk.yellow('No algorithms specified, using default "efficient" category'));
-  ALGORITHM_CATEGORIES['efficient'].forEach(algo => {
+  Logger.info(chalk.yellow('No algorithms specified, using default "all" category'));
+  ALGORITHM_CATEGORIES['all'].forEach(algo => {
     selectedAlgorithms[algo] = ALL_SORT_FUNCTIONS[algo];
   });
 }
@@ -178,4 +178,4 @@ if (verbose) {
 }
 
 // Run the algorithm comparison
-compareAlgorithms(selectedAlgorithms, testArray, runs);
+compareAlgorithms(selectedAlgorithms, testArray, runs, verbose);
