@@ -156,7 +156,7 @@ if (options.algorithms) {
 
 // Configuration information
 Logger.section('Test Configuration');
-Logger.keyValue('Array Size', size.toString());
+
 Logger.keyValue('Array Type', chalk.cyan(arrayType));
 Logger.keyValue('Sortedness Level', `${chalk.yellow(sortedness.toString())}%`);
 Logger.keyValue('Random Seed', options.seed ? chalk.green(options.seed) : chalk.gray('Not set (using Math.random)'));
@@ -165,7 +165,8 @@ Logger.keyValue('Number of runs', chalk.bold(runs.toString()));
 
 // Generate test array
 const testArray = generateArray(size, sortedness, min, max, arrayType);
-Logger.arrayPreview('Test Array Preview', testArray);
+Logger.arrayPreview('Array Preview', testArray);
+
 
 // Run the algorithm comparison
 compareAlgorithms(selectedAlgorithms, testArray, runs, verbose);

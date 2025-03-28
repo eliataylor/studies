@@ -102,36 +102,6 @@ export function generateArray(
 }
 
 /**
- * Generates an array of random integers between min and max (inclusive)
- * @param size The number of elements in the array
- * @param min The minimum value (default: 0)
- * @param max The maximum value (default: 1000)
- * @returns An array of random integers
- */
-export function generateRandomArray(size: number, min:number, max:number): number[] {
-    return generateArray(size, 0, min, max, ArrayType.RANDOM);
-}
-
-/**
- * Generates a nearly sorted array
- * @param size The number of elements in the array
- * @param sortedness Percentage of sortedness (0-100, default: 90)
- * @returns A nearly sorted array
- */
-export function generateNearlySortedArray(size: number, min:number, max:number, sortedness: number = 90): number[] {
-    return generateArray(size, sortedness, min, max, ArrayType.SORTED);
-}
-
-/**
- * Generates a reversed array
- * @param size The number of elements in the array
- * @returns A reversed array
- */
-export function generateReversedArray(size: number, min:number, max:number): number[] {
-    return generateArray(size, 0, min, max, ArrayType.REVERSED);
-}
-
-/**
  * Checks if an array is sorted in ascending order
  * @param array The array to check
  * @returns True if the array is sorted, false otherwise
@@ -183,70 +153,6 @@ export function runSort(
     const avgTime = times.reduce((sum, time) => sum + time, 0) / times.length;
 
     return {times, avgTime, success};
-}
-
-/**
- * Runs a sorting algorithm for a single test scenario and prints the results and timing
- * @param sortFunction The sorting function to test
- * @param array The array to sort
- * @param algorithmName The name of the algorithm for display
- * @param runs Number of runs to perform (default: 1)
- */
-export function runSortTest(
-    sortFunction: SortFunction,
-    array: number[],
-    algorithmName: string,
-    runs: number = 1
-): void {
-    Logger.section(`${algorithmName} Sort`);
-
-    // Prepare for multiple runs
-    let totalTime = 0;
-    let lastSortedArray: number[] = [];
-
-    for (let i = 0; i < runs; i++) {
-        // Create a copy of the array to avoid modifying the original
-        const arrCopy = [...array];
-
-        // Measure execution time
-        const startTime = performance.now();
-        const sortedArray = sortFunction(arrCopy);
-        const endTime = performance.now();
-
-        // Calculate execution time in milliseconds
-        const executionTime = endTime - startTime;
-        totalTime += executionTime;
-
-        // Store the last sorted array for verification
-        lastSortedArray = sortedArray;
-
-        if (runs > 1) {
-            Logger.algorithmResult(algorithmName, executionTime, i + 1);
-        }
-    }
-
-    // Calculate average time
-    const avgTime = totalTime / runs;
-
-    // Verify if the array is sorted correctly
-    const sorted = isSorted(lastSortedArray);
-
-    // Print results
-    Logger.keyValue('Input Array Size', array.length.toString());
-    Logger.keyValue(`Average Execution Time (${runs} run${runs !== 1 ? 's' : ''})`, `${avgTime.toFixed(4)} ms`);
-
-    if (sorted) {
-        Logger.success('Correctly Sorted');
-    } else {
-        Logger.error('Not Correctly Sorted!');
-    }
-
-    // Optional: print sample of the sorted array
-    if (lastSortedArray.length <= 20) {
-        Logger.arrayPreview('Sorted Array', lastSortedArray);
-    } else {
-        Logger.arrayPreview('Sorted Array Preview', lastSortedArray);
-    }
 }
 
 /**
@@ -362,4 +268,4 @@ export function compareAlgorithms(
  * A shared test array for comparing different sorting algorithms
  * Default size is 1000 elements
  */
-export const TestArray = generateRandomArray(1000, 0, 1000);
+export const TestArray = generateArray(1000, 0, 0, 1000, ArrayType.RANDOM);

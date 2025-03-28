@@ -120,8 +120,8 @@ export class Logger {
             }
         }
 
-        console.log(`  ${chalk.bold(title)} [${preview}]`);
-        console.log(`  ${chalk.dim(`Length: ${array.length} elements`)}`);
+        const lengthStr = `- total elements: ${array.length}`
+        console.log(`  ${chalk.cyan(title)} [${preview}] ${chalk.dim(lengthStr)}`);
     }
 
     /**
