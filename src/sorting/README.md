@@ -1,6 +1,6 @@
 # TypeScript Sorting Algorithms
 
-This repository contains implementations of various sorting algorithms in TypeScript, along with utilities for testing and comparing their performance.
+This repository contains implementations of various sorting algorithms in TypeScript, along with a unified framework for testing and comparing their performance.
 
 ## Installation
 
@@ -16,65 +16,61 @@ npm install
 npm run build
 ```
 
-## CLI Commands
+## Unified Testing Framework
 
-The package has been updated with command-line interfaces to test and compare sorting algorithms with configurable parameters.
-
-### Compare Multiple Sorting Algorithms
+The unified testing framework allows you to test individual sorting algorithms or compare multiple algorithms with configurable parameters.
 
 ```bash
-npm run compare -- [options]
+npm run sort-test -- [options]
 ```
 
-Options:
+### Key Features
+
+- Test individual or multiple algorithms
+- Configure array size, value range, and number of runs
+- Set the initial sortedness level of the test array (0-100%)
+- Use predefined array types (random, sorted, reversed, few unique values)
+- Set a random seed for reproducible results
+- Detailed performance metrics and relative comparison
+
+### Options
+
+- `-a, --algorithm <name>`: Single algorithm to test
+- `-A, --algorithms <string>`: Comma-separated list of algorithms to test, or category name
 - `-s, --size <number>`: Size of the array to sort (default: 1000)
 - `-m, --min <number>`: Minimum value in the array (default: 0)
 - `-M, --max <number>`: Maximum value in the array (default: 1000)
 - `--seed <string>`: Random seed for reproducible arrays
-- `-a, --algorithms <string>`: Comma-separated list of algorithms to test, or use "basic", "efficient", "nonComparison", "all" (default: "all")
-- `-r, --runs <number>`: Number of runs for each algorithm (avg time will be reported) (default: 1)
+- `-r, --runs <number>`: Number of runs per algorithm (default: 1)
+- `-t, --arrayType <type>`: Type of array to generate (random, sorted, reversed, fewUnique, customSortedness)
+- `--sortedness <number>`: Level of sortedness from 0 (random) to 100 (sorted) (default: 0)
+- `-v, --verbose`: Show additional details including array previews
 
-Example:
+### Examples
+
+Test a single algorithm with a random array:
 ```bash
-npm run compare -- --size 5000 --min 0 --max 10000 --seed 12345 --algorithms "quick,merge,heap" --runs 3
+npm run sort-test -- --algorithm quick --size 1000 --sortedness 0
 ```
 
-### Run a Single Sorting Algorithm
-
+Compare multiple efficient algorithms with a partially sorted array:
 ```bash
-npm run sort -- [options]
+npm run sort-test -- --algorithms "quick,merge,heap" --size 5000 --sortedness 50 --runs 3
 ```
 
-Options:
-- `-a, --algorithm <string>`: Algorithm to run (required)
-- `-s, --size <number>`: Size of the array to sort (default: 1000)
-- `-m, --min <number>`: Minimum value in the array (default: 0)
-- `-M, --max <number>`: Maximum value in the array (default: 1000)
-- `--seed <string>`: Random seed for reproducible arrays
-- `-v, --verbose`: Show the entire sorted array (careful with large arrays)
-- `-r, --runs <number>`: Number of runs (avg time will be reported) (default: 1)
-
-Example:
+Test all algorithms with a reversed array:
 ```bash
-npm run sort -- --algorithm quick --size 1000 --min 0 --max 10000 --seed 12345 --runs 3
+npm run sort-test -- --algorithms "all" --arrayType reversed --size 1000 --runs 2
 ```
 
-### Test with Different Array Configurations
+### Algorithm Categories
 
-```bash
-npm run test -- [options]
-```
+For convenience, you can use predefined algorithm categories:
 
-Options:
-- `-a, --algorithms <string>`: Comma-separated list of algorithms to test, or use "basic", "efficient", "nonComparison", "all" (default: "efficient")
-- `-s, --sizes <string>`: Comma-separated list of array sizes to test (default: "100,1000,10000")
-- `--seed <string>`: Random seed for reproducible arrays
-- `-r, --runs <number>`: Number of runs per test (default: 1)
-
-Example:
-```bash
-npm run test -- --algorithms "quick,merge" --sizes "10,100,1000,10000" --seed 12345 --runs 2
-```
+- `basic`: All O(n²) algorithms (bubble, selection, insertion, gnome, optimizedGnome, comb, shell)
+- `efficient`: All O(n log n) algorithms (merge, quick, heap, tim, intro)
+- `nonComparison`: Linear complexity algorithms (counting, radix, bucket)
+- `all`: All available algorithms
 
 ## Available Sorting Algorithms
 
@@ -101,15 +97,6 @@ npm run test -- --algorithms "quick,merge" --sizes "10,100,1000,10000" --seed 12
 - **counting**: Counting Sort
 - **radix**: Radix Sort
 - **bucket**: Bucket Sort
-
-## Special Array Types for Testing
-
-The test script includes special array configurations to benchmark performance under different scenarios:
-
-1. **Random Arrays**: Fully randomized data
-2. **Nearly Sorted Arrays**: Arrays that are mostly in order with a few elements out of place
-3. **Reversed Arrays**: Arrays in reverse order (worst case for many algorithms)
-4. **Few Unique Values**: Arrays with many duplicate values
 
 ## Time and Space Complexity
 

@@ -5,9 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "sort": "ts-node src/sorting/RunSorts.ts",
-    "compare": "ts-node src/sorting/CompareSorts.ts",
-    "test": "ts-node src/sorting/TestSorts.ts",
+    "sort-test": "ts-node src/sorting/SortTester.ts",
     "help": "ts-node src/sorting/Help.ts"
   },
   "keywords": [
