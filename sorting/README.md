@@ -17,29 +17,29 @@ npm install
 - Configure array size, value range, and number of test runs
 - Set the initial sortedness level of the test array (0-100%)
 - Choose predefined array types (random, sorted, reversed, few unique values)
+- Set uniqueness level to control the number of duplicate values
 - Use a random seed for reproducible results
 - View detailed performance metrics with colorful, well-formatted output
 
 ### Command-Line Options
 
-- `-A, --algorithms <string>`: Algorithm name, comma-separated list, or category name
+- `-A, --algorithms <string>`: Algorithm name, comma-separated list, or category name ("basic", "efficient", "nonComparison", "all")
 - `-s, --size <number>`: Size of the array to sort (default: 1000)
 - `--min <number>`: Minimum value in the array (default: 0)
 - `--max <number>`: Maximum value in the array (default: 1000)
 - `--seed <string>`: Random seed for reproducible arrays
 - `-r, --runs <number>`: Number of runs per algorithm (default: 1)
-- `-t, --arrayType <type>`: Type of array to generate (random, sorted, reversed, fewUnique)
+- `-t, --arrayType <type>`: Type of array to generate (ascending, descending)
 - `--sortedness <number>`: Level of sortedness from 0 (random) to 100 (sorted) (default: 0)
-- `-v, --verbose`: Show additional details including array previews
+- `--uniqueness <number>`: Level of uniqueness from 0 (all same values) to 100 (all unique values) (default: 100)
+- `-l, --loglevel <level>`: Set logging level for algorithm execution (none, error, info, debug, trace)
 
 ### Array Types, Value Range, and Sortedness
 
 The framework provides powerful ways to test algorithms with different input characteristics:
 
-- **Random arrays**: Completely unsorted data
-- **Sorted arrays**: Fully sorted data
-- **Reversed arrays**: Data in reverse order (worst case for many algorithms)
-- **Few unique values**: Many duplicate values (tests stability)
+- **Sorted arrays (ascending)**: Fully sorted data
+- **Reversed arrays (descending)**: Data in reverse order (worst case for many algorithms)
 
 The `--sortedness` parameter controls how sorted the array is (0-100%):
 
@@ -52,6 +52,12 @@ This parameter works with all array types. For example, with a reversed array:
 - `--arrayType descending --sortedness 100` = completely reversed
 - `--arrayType descending --sortedness 0` = completely random
 - `--arrayType descending --sortedness 80` = mostly reversed with some shuffling
+
+The `--uniqueness` parameter controls the percentage of unique values in the array (0-100%):
+
+- 0% = all values are the same (many duplicates)
+- 100% = all values are unique (no duplicates)
+- Values in between control the ratio of unique values to duplicates
 
 ## Available Algorithms
 

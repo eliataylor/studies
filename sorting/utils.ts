@@ -70,7 +70,12 @@ export function generateArray(
      ).sort(() => Math.random() - 0.5);
      ***/
 
-    // TODO: add duplicates based on uniqueness
+    const uniqueCount = Math.floor((uniqueness / 100) * size);
+    const duplicateCount = size - uniqueCount;
+    for (let i = 0; i < duplicateCount; i++) {
+        let fromIndex = Math.floor(Math.random() * (size-1));
+        array[fromIndex+1] = array[fromIndex];
+    }
 
     if (sortedness === 100) {
         return array; // return completely random array
