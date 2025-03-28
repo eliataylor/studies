@@ -8,18 +8,13 @@
 import chalk from 'chalk';
 
 export class Logger {
-    /**
-     * Display a major section header
-     */
+
     static section(title: string): void {
         console.log('\n' + chalk.bold.cyan('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
         console.log(' ' + chalk.bold.white(title.toUpperCase()));
         console.log(chalk.bold.cyan('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━'));
     }
 
-    /**
-     * Display a subsection header
-     */
     static subsection(title: string): void {
         console.log('\n' + chalk.bold.white('▶ ' + title));
         console.log(chalk.dim('  ' + '─'.repeat(title.length + 2)));

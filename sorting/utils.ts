@@ -203,7 +203,7 @@ export function compareAlgorithms(
         ]
     ];
 
-    if (verbose > 1) {
+    if (results.length === 1) {
         // Add data for each algorithm
         results.forEach((result, index) => {
             // Highlight the fastest algorithm
@@ -230,10 +230,7 @@ export function compareAlgorithms(
                 0: {alignment: 'left'}
             }
         }));
-    }
-
-    // Display relative performance (if more than one algorithm)
-    if (results.length > 1) {
+    } else {
         Logger.subsection('Relative Performance');
 
         const fastestTime = results[0].avgTime;
