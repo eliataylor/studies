@@ -1,17 +1,21 @@
 {
-  "name": "typescript-sorting-algorithms",
+  "name": "typescript-algorithms",
   "version": "1.0.0",
-  "description": "TypeScript implementations of various sorting algorithms",
+  "description": "TypeScript implementations of various algorithms",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "sort-test": "ts-node src/sorting/SortTester.ts",
-    "help": "ts-node src/sorting/Help.ts"
+    "sort-help": "ts-node src/sorting/Help.ts",
+    "search-test": "ts-node src/searching/SearchTester.ts",
+    "search-help": "ts-node src/searching/SearchHelp.ts"
   },
   "keywords": [
     "algorithms",
     "sorting",
-    "typescript"
+    "searching",
+    "typescript",
+    "data-structures"
   ],
   "author": "",
   "license": "MIT",

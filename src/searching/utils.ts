@@ -1,11 +1,62 @@
 /**
- * utils.ts - Utility for testing search algorithms
+ * Generate appropriate data structure based on type
+ * @param type The data structure type ('array', 'matrix', 'tree')
+ * @param size The size of the data structure
+ * @returns The generated data structure
+ */
+export function generateDataStructure(type: string, size: number): any {
+  switch (type) {
+    case 'array':
+      return generateSortedArray(size);
+    case 'matrix':
+      return generateSortedMatrix(size, size);
+    case 'tree':
+      return generateBinarySearchTree(size);
+    default:
+      throw new Error(`Unknown data structure type: ${type}`);
+  }
+}
+
+/**
+ * Get all searchable values from a data structure
+ * @param type The data structure type
+ * @param data The data structure
+ * @returns Array of all values in the data structure
+ */
+export function getAllValues(type: string, data: any): number[] {
+  switch (type) {
+    case 'array':
+      return [...data]; // Simple copy for arrays
+    case 'matrix':
+      return data.flat(); // Flatten the matrix
+    case 'tree':
+      // Collect all values from the tree
+      const values: number[] = [];
+      function collectValues(node: TreeNode | null): void {
+        if (node) {
+          collectValues(node.left);
+          values.push(node.value);
+          collectValues(node.right);
+        }
+      }
+      collectValues(data);
+      return values;
+    default:
+      throw new Error(`Unknown data structure type: ${type}`);
+  }
+}/**
+ * utils.ts - Enhanced utility for testing search algorithms
  *
  * This file provides:
  * 1. Functions to generate test data structures (arrays, matrices, trees)
  * 2. Utility functions to run search algorithms and measure performance
  * 3. Types and interfaces for search functions
+ * 4. Utility functions for algorithm grouping and categorization
  */
+
+import chalk from 'chalk';
+import { table, getBorderCharacters } from 'table';
+import { Logger } from '../logger';
 
 // ========== Type Definitions ==========
 
@@ -32,6 +83,56 @@ export interface TreeNode {
  * Type definition for tree search functions
  */
 export type TreeSearchFunction = (root: TreeNode | null, target: number) => TreeNode | null;
+
+/**
+ * Union type for all search function types
+ */
+export type SearchFunction = ArraySearchFunction | MatrixSearchFunction | TreeSearchFunction;
+
+/**
+ * Search algorithm data structure type
+ */
+export interface AlgorithmInfo {
+  type: 'array' | 'matrix' | 'tree';
+  fn?: SearchFunction;
+}
+
+/**
+ * Registry of algorithms with their types
+ */
+export const ALGORITHMS_REGISTRY: Record<string, AlgorithmInfo> = {
+  // Array search algorithms
+  'linear': { type: 'array' },
+  'binary': { type: 'array' },
+  'recursiveBinary': { type: 'array' },
+  'jump': { type: 'array' },
+  'interpolation': { type: 'array' },
+  'exponential': { type: 'array' },
+  'fibonacci': { type: 'array' },
+
+  // Matrix search algorithms
+  'rowColumn': { type: 'matrix' },
+  'binaryMatrix': { type: 'matrix' },
+  'staircase': { type: 'matrix' },
+  'block': { type: 'matrix' },
+
+  // Tree search algorithms
+  'preorderDFS': { type: 'tree' },
+  'inorderDFS': { type: 'tree' },
+  'postorderDFS': { type: 'tree' },
+  'bst': { type: 'tree' },
+  'bfs': { type: 'tree' }
+};
+
+/**
+ * Algorithm categories
+ */
+export const ALGORITHM_CATEGORIES = {
+  'array': ['linear', 'binary', 'recursiveBinary', 'jump', 'interpolation', 'exponential', 'fibonacci'],
+  'matrix': ['rowColumn', 'binaryMatrix', 'staircase', 'block'],
+  'tree': ['preorderDFS', 'inorderDFS', 'postorderDFS', 'bst', 'bfs'],
+  'all': Object.keys(ALGORITHMS_REGISTRY)
+};
 
 // ========== Data Generation Functions ==========
 
@@ -135,6 +236,93 @@ function sortedArrayToBST(arr: number[], start: number, end: number): TreeNode |
   node.right = sortedArrayToBST(arr, mid + 1, end);
 
   return node;
+}
+
+// ========== Utility Functions ==========
+
+/**
+ * Helper function to parse algorithm list
+ * @param algorithmsStr String containing algorithm names, comma separated, or a category
+ * @returns Array of valid algorithm names
+ */
+export function parseAlgorithms(algorithmsStr: string): string[] {
+  // @ts-ignore
+  if (ALGORITHM_CATEGORIES[algorithmsStr]) {
+    // Return all algorithms in the specified category
+    // @ts-ignore
+    return [...ALGORITHM_CATEGORIES[algorithmsStr]];
+  }
+
+  // Parse comma-separated list
+  const algorithmNames = algorithmsStr.split(',').map(name => name.trim());
+  const validAlgorithms = algorithmNames.filter(name => {
+    if (!ALGORITHMS_REGISTRY[name]) {
+      console.log(chalk.yellow(`Warning: Unknown algorithm: ${name}`));
+      return false;
+    }
+    return true;
+  });
+
+  return validAlgorithms;
+}
+
+/**
+ * Helper function to parse sizes list
+ * @param sizesStr Comma-separated list of sizes
+ * @returns Array of numbers
+ */
+export function parseSizes(sizesStr: string): number[] {
+  return sizesStr.split(',').map(size => parseInt(size.trim(), 10));
+}
+
+/**
+ * Group algorithms by their data structure type
+ * @param algorithms Array of algorithm names
+ * @returns Object with algorithms grouped by type
+ */
+export function groupAlgorithmsByType(algorithms: string[]): Record<string, string[]> {
+  const grouped: Record<string, string[]> = {
+    'array': [],
+    'matrix': [],
+    'tree': []
+  };
+
+  algorithms.forEach(algo => {
+    const type = ALGORITHMS_REGISTRY[algo]?.type;
+    if (type) {
+      grouped[type].push(algo);
+    }
+  });
+
+  return grouped;
+}
+
+/**
+ * Helper function to run a search algorithm with the appropriate test function
+ * @param algorithm The algorithm function to run
+ * @param type The data structure type ('array', 'matrix', 'tree')
+ * @param data The data structure to search in
+ * @param target The target value to search for
+ * @param algorithmName The name of the algorithm
+ * @returns The search result with timing information
+ */
+export function runSearchAlgorithm(
+  algorithm: SearchFunction,
+  type: string,
+  data: any,
+  target: number,
+  algorithmName: string
+): any {
+  switch (type) {
+    case 'array':
+      return runArraySearch(algorithm as ArraySearchFunction, data, target, algorithmName);
+    case 'matrix':
+      return runMatrixSearch(algorithm as MatrixSearchFunction, data, target, algorithmName);
+    case 'tree':
+      return runTreeSearch(algorithm as TreeSearchFunction, data, target, algorithmName);
+    default:
+      throw new Error(`Unknown data structure type: ${type}`);
+  }
 }
 
 // ========== Measurement and Testing Functions ==========
@@ -334,77 +522,67 @@ function treeContains(root: TreeNode | null, target: number): boolean {
 }
 
 /**
- * Compares multiple search algorithms on the same dataset
- * @param functions Object mapping algorithm names to search functions
- * @param performFunction Function to run the search and measure performance
- * @param args Arguments for the search functions
- * @param targets Array of search targets
+ * Display comparison results in a formatted table
+ * @param results Results of running multiple algorithms
+ * @param totalTargets Total number of targets tested
  */
-export function compareSearchAlgorithms<T extends ArraySearchFunction | MatrixSearchFunction | TreeSearchFunction>(
-  functions: Record<string, T>,
-  performFunction: Function,
-  args: any[],
-  targets: { target: number, exists: boolean }[]
+export function displayComparisonResults(
+  results: Record<string, {
+    totalTime: number,
+    successCount: number,
+    avgTime: number,
+    times: number[]
+  }>,
+  totalTargets: number
 ): void {
-  const results: Record<string, { totalTime: number, successRate: number }> = {};
+  Logger.section('Results Summary');
 
-  // Initialize results
-  Object.keys(functions).forEach(name => {
-    results[name] = { totalTime: 0, successRate: 0 };
-  });
-
-  // Run each search target against all algorithms
-  targets.forEach(({ target, exists }) => {
-    console.log(`\nSearching for ${target} (${exists ? 'exists' : 'does not exist'})`);
-
-    const searchResults: any[] = [];
-
-    for (const [name, func] of Object.entries(functions)) {
-      const result = performFunction(func, ...args, target, name);
-      searchResults.push(result);
-
-      // Update aggregate statistics
-      results[name].totalTime += result.time;
-      if (result.success) {
-        results[name].successRate += 1;
-      }
-    }
-
-    // Sort results by execution time
-    searchResults.sort((a, b) => a.time - b.time);
-
-    // Print results for this target
-    console.log('Algorithm\t\tTime (ms)\tResult\tSuccess');
-    console.log('------------------------------------------------------');
-    searchResults.forEach(result => {
-      console.log(
-        `${result.name.padEnd(20)}\t${result.time.toFixed(4)}\t${
-          typeof result.result === 'number' ? result.result : 
-          Array.isArray(result.result) ? `[${result.result}]` : 
-          result.found ? 'Found' : 'Not Found'
-        }\t${result.success ? 'Yes' : 'No'}`
-      );
-    });
-  });
-
-  // Calculate final statistics
-  console.log('\n=== Overall Results ===');
-  console.log('Algorithm\t\tTotal Time (ms)\tSuccess Rate');
-  console.log('------------------------------------------------------');
-
-  // Convert results to array and sort by total time
+  // Convert results to array and sort by average time
   const sortedResults = Object.entries(results).map(([name, stats]) => ({
     name,
-    totalTime: stats.totalTime,
-    successRate: (stats.successRate / targets.length) * 100
-  })).sort((a, b) => a.totalTime - b.totalTime);
+    avgTime: stats.avgTime,
+    minTime: Math.min(...stats.times),
+    maxTime: Math.max(...stats.times),
+    successRate: (stats.successCount / totalTargets) * 100
+  })).sort((a, b) => a.avgTime - b.avgTime);
 
-  // Print final results
-  sortedResults.forEach(result => {
-    console.log(
-      `${result.name.padEnd(20)}\t${result.totalTime.toFixed(4)}\t${result.successRate.toFixed(2)}%`
-    );
+  // Create table data
+  const tableData = [
+    [
+      chalk.bold.cyan('Algorithm'),
+      chalk.bold.cyan('Avg Time (ms)'),
+      chalk.bold.cyan('Min Time (ms)'),
+      chalk.bold.cyan('Max Time (ms)'),
+      chalk.bold.cyan('Success Rate')
+    ]
+  ];
+
+  // Add data for each algorithm
+  sortedResults.forEach((result, index) => {
+    // Highlight the fastest algorithm
+    const algoName = index === 0
+      ? chalk.green.bold(result.name)
+      : chalk.magenta(result.name);
+
+    tableData.push([
+      algoName,
+      result.avgTime.toFixed(4),
+      result.minTime.toFixed(4),
+      result.maxTime.toFixed(4),
+      `${result.successRate.toFixed(1)}%`
+    ]);
   });
+
+  // Display the table
+  console.log(table(tableData, {
+    border: getBorderCharacters('norc'),
+    columnDefault: {
+      alignment: 'right'
+    },
+    columns: {
+      0: { alignment: 'left' }
+    }
+  }));
 }
 
 /**
