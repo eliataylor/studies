@@ -5,10 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
-    "sort-test": "ts-node src/sorting/SortTester.ts",
-    "sort-help": "ts-node src/sorting/Help.ts",
-    "search-test": "ts-node src/searching/SearchTester.ts",
-    "search-help": "ts-node src/searching/SearchHelp.ts"
+    "sort-test": "ts-node sorting/SortTester.ts",
+    "sort-help": "ts-node sorting/Help.ts",
+    "search-test": "ts-node searching/SearchTester.ts",
+    "search-help": "ts-node searching/SearchHelp.ts"
   },
   "keywords": [
     "algorithms",
