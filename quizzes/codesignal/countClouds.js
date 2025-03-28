@@ -13,12 +13,12 @@ function countClouds2(skyMap) {
     // that has not already been visited already
     var cloudCount = 0;
 
-    for(var i=0; i<lenY; i++) {
+    for (var i = 0; i < lenY; i++) {
         visited.push([]);
     }
 
-    for(var x=0; x<lenX; x++) {
-        for(var y=0; y<lenY; y++) {
+    for (var x = 0; x < lenX; x++) {
+        for (var y = 0; y < lenY; y++) {
 
             var isCloud = skyMap[y][x] === '1';
 
@@ -53,20 +53,20 @@ function visitAdjascentNodes(skyMap, visited, x, y) {
 
     visited[y][x] = true;
 
-    visitAdjascentNodes(skyMap, visited, x-1, y);
-    visitAdjascentNodes(skyMap, visited, x+1, y);
-    visitAdjascentNodes(skyMap, visited, x, y+1);
-    visitAdjascentNodes(skyMap, visited, x, y-1);
+    visitAdjascentNodes(skyMap, visited, x - 1, y);
+    visitAdjascentNodes(skyMap, visited, x + 1, y);
+    visitAdjascentNodes(skyMap, visited, x, y + 1);
+    visitAdjascentNodes(skyMap, visited, x, y - 1);
 }
 
 
 const tests = [
     {
-        name:'Test 1',
-        arg: [[["0","1","1","0","1"],
-            ["0","1","1","1","1"],
-            ["0","0","0","0","1"],
-            ["1","0","0","1","1"]]],
+        name: 'Test 1',
+        arg: [[["0", "1", "1", "0", "1"],
+            ["0", "1", "1", "1", "1"],
+            ["0", "0", "0", "0", "1"],
+            ["1", "0", "0", "1", "1"]]],
         expected: 2
     }
 ];

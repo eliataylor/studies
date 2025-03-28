@@ -15,7 +15,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Implementation of shell sort using the Knuth sequence for gaps
@@ -23,38 +23,38 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const shellSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // Start with a large gap and reduce it on each iteration
-  // This implementation uses Knuth's sequence: h = 3h + 1
-  let gap = 1;
-  while (gap < n / 3) {
-    gap = gap * 3 + 1;
-  }
-
-  // Perform insertion sort for elements at the current gap
-  while (gap > 0) {
-    for (let i = gap; i < n; i++) {
-      // Save current element
-      const temp = array[i];
-
-      // Shift earlier gap-sorted elements up until the correct location for temp is found
-      let j = i;
-      while (j >= gap && array[j - gap] > temp) {
-        array[j] = array[j - gap];
-        j -= gap;
-      }
-
-      // Put temp in its correct location
-      array[j] = temp;
+    // Start with a large gap and reduce it on each iteration
+    // This implementation uses Knuth's sequence: h = 3h + 1
+    let gap = 1;
+    while (gap < n / 3) {
+        gap = gap * 3 + 1;
     }
 
-    // Reduce the gap based on Knuth's sequence
-    gap = Math.floor(gap / 3);
-  }
+    // Perform insertion sort for elements at the current gap
+    while (gap > 0) {
+        for (let i = gap; i < n; i++) {
+            // Save current element
+            const temp = array[i];
 
-  return array;
+            // Shift earlier gap-sorted elements up until the correct location for temp is found
+            let j = i;
+            while (j >= gap && array[j - gap] > temp) {
+                array[j] = array[j - gap];
+                j -= gap;
+            }
+
+            // Put temp in its correct location
+            array[j] = temp;
+        }
+
+        // Reduce the gap based on Knuth's sequence
+        gap = Math.floor(gap / 3);
+    }
+
+    return array;
 };
 
 /**
@@ -64,25 +64,25 @@ export const shellSort: SortFunction = (arr: number[]): number[] => {
  * @returns The sorted array
  */
 export const shellSortOriginal: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // Start with a large gap and reduce it by half on each iteration
-  for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
-    // Perform insertion sort for elements at the current gap
-    for (let i = gap; i < n; i++) {
-      const temp = array[i];
+    // Start with a large gap and reduce it by half on each iteration
+    for (let gap = Math.floor(n / 2); gap > 0; gap = Math.floor(gap / 2)) {
+        // Perform insertion sort for elements at the current gap
+        for (let i = gap; i < n; i++) {
+            const temp = array[i];
 
-      let j;
-      for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
-        array[j] = array[j - gap];
-      }
+            let j;
+            for (j = i; j >= gap && array[j - gap] > temp; j -= gap) {
+                array[j] = array[j - gap];
+            }
 
-      array[j] = temp;
+            array[j] = temp;
+        }
     }
-  }
 
-  return array;
+    return array;
 };
 
 /**

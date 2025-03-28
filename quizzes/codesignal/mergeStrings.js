@@ -47,19 +47,29 @@ function mergeStrings(s1, s2) {
     s2 = s2.split('');
     let sums = {};
     let its = 0;
-    while(s1.length > 0 && s2.length > 0) {
+    while (s1.length > 0 && s2.length > 0) {
         let l1 = s1[0];
         let l2 = s2[0];
 
         if (!sums[s1]) {
-            sums[s1] = s1.reduce((acc, v)=> { if (v === l1) {acc++;} return acc; }, 0);
+            sums[s1] = s1.reduce((acc, v) => {
+                if (v === l1) {
+                    acc++;
+                }
+                return acc;
+            }, 0);
         }
         if (!sums[s2]) {
-            sums[s2] = s2.reduce((acc, v)=> { if (v === l2) {acc++;} return acc; }, 0)
+            sums[s2] = s2.reduce((acc, v) => {
+                if (v === l2) {
+                    acc++;
+                }
+                return acc;
+            }, 0)
         }
 
         if (sums[s1] < sums[s2]) {
-            result += s1.splice(0,1);
+            result += s1.splice(0, 1);
         } else if (sums[s1] > sums[s2]) {
             result += s2.splice(0, 1);
         } else if (s1[0] > s2[0]) {

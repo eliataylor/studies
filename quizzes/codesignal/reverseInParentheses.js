@@ -2,7 +2,7 @@ function handlePortion(arr) {
     let left = arr.lastIndexOf('(');
     let right = arr.indexOf(')', left);
     if (left < right) {
-        let inner = arr.slice(left+1, right).reverse();
+        let inner = arr.slice(left + 1, right).reverse();
         arr.splice(left, inner.length + 2, ...inner);
         console.log('cut ' + inner.join('') + ' into ', arr)
     }

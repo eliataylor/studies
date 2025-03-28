@@ -1,5 +1,5 @@
 var Util = {
-    toBinary: function(input) {
+    toBinary: function (input) {
         var result = "";
         for (var i = 0; i < input.length; i++) {
             var bin = input[i].charCodeAt().toString(2);
@@ -8,7 +8,7 @@ var Util = {
         return result;
     },
 
-    toAscii: function(input) {
+    toAscii: function (input) {
         var result = "";
         var arr = input.match(/.{1,8}/g);
         for (var i = 0; i < arr.length; i++) {
@@ -24,7 +24,7 @@ function messageFromBinaryCode(message) {
 
 //可以，注意重复
 function messageFromBinaryCodeOther(code) {
-    return code.match(/.{8}/g).reduce((a,b)=>a+String.fromCharCode(parseInt(b,2)),"")
+    return code.match(/.{8}/g).reduce((a, b) => a + String.fromCharCode(parseInt(b, 2)), "")
 }
 
 

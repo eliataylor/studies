@@ -14,7 +14,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Implementation of comb sort
@@ -22,37 +22,37 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const combSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // Initialize gap size
-  let gap = n;
+    // Initialize gap size
+    let gap = n;
 
-  // Initialize the shrink factor
-  const shrink = 1.3;
+    // Initialize the shrink factor
+    const shrink = 1.3;
 
-  // Initialize swapped as true to enter the loop
-  let swapped = true;
+    // Initialize swapped as true to enter the loop
+    let swapped = true;
 
-  // Keep running while gap is more than 1 and last iteration caused a swap
-  while (gap > 1 || swapped) {
-    // Update the gap value
-    gap = Math.floor(gap / shrink);
-    if (gap < 1) gap = 1;
+    // Keep running while gap is more than 1 and last iteration caused a swap
+    while (gap > 1 || swapped) {
+        // Update the gap value
+        gap = Math.floor(gap / shrink);
+        if (gap < 1) gap = 1;
 
-    swapped = false;
+        swapped = false;
 
-    // Compare elements with the given gap
-    for (let i = 0; i < n - gap; i++) {
-      if (array[i] > array[i + gap]) {
-        // Swap the elements
-        [array[i], array[i + gap]] = [array[i + gap], array[i]];
-        swapped = true;
-      }
+        // Compare elements with the given gap
+        for (let i = 0; i < n - gap; i++) {
+            if (array[i] > array[i + gap]) {
+                // Swap the elements
+                [array[i], array[i + gap]] = [array[i + gap], array[i]];
+                swapped = true;
+            }
+        }
     }
-  }
 
-  return array;
+    return array;
 };
 
 /**

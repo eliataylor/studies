@@ -1,7 +1,7 @@
 const alpha = 'abcdefghijklmnopqrstuvwxyz';
 
 function hasPreviousLetters(str, i) {
-    for(i; i >= 0; i--) {
+    for (i; i >= 0; i--) {
         if (str.indexOf(alpha[i]) === -1) {
             console.log("MISSING " + alpha[i]);
             return false;
@@ -48,7 +48,7 @@ function isBeautifulString(inputString) {
             return false;
         } */
 
-        if (hasPreviousLetters(strParts, alpha1Index-1) === false) {
+        if (hasPreviousLetters(strParts, alpha1Index - 1) === false) {
             return false;
         }
 
@@ -63,7 +63,7 @@ function isBeautifulString(inputString) {
 // OTHERS
 function isBeautifulString(inputString) {
     a = new Array(26).fill(0)
-    inputString.split``.map(v => a[Buffer(v)[0]-97]++)
+    inputString.split``.map(v => a[Buffer(v)[0] - 97]++)
     m = a[0]
-    return a.every(v => m>=v && (m=v,1))
+    return a.every(v => m >= v && (m = v, 1))
 }

@@ -75,11 +75,11 @@ function peaks(A) {
         let divisors = [];
 
         let sqrt = Math.sqrt(N);
-        let i=2; // skip 1 and N
+        let i = 2; // skip 1 and N
         for (i; i < sqrt; i++) {
             if (N % i == 0) {
                 divisors.push(i);
-                divisors.push(N/i);
+                divisors.push(N / i);
             }
         }
         if (i * i === N) {
@@ -103,34 +103,34 @@ function peaks(A) {
     let peaks = map_peaks(A);
     if (peaks.length < 3) return peaks.length;
 
-/*
-    let divisors = getDivisors(A.length);
-    // result will be at least 1 at this point
+    /*
+        let divisors = getDivisors(A.length);
+        // result will be at least 1 at this point
 
-    while(divisors.length > 0) {
-        let maxblocks = divisors.pop();
-        let blocksize = A.length / maxblocks;
-        let bIndex = 0;
-        for(bIndex=0; bIndex < maxblocks; bIndex++) {
-            let left = bIndex * blocksize;
-            let right = left + blocksize - 1;
-            // peaks.find(...) ANY peaks in this range
-            if (peaks[bIndex] >= left && peaks[bIndex] <= right) {
-                //
-                console.log(bIndex + ' of ' + blocksize + ' has peak ' + peaks[bIndex])
-            } else {
-                console.log(bIndex + ' of ' + blocksize + ' missing peak ' + peaks[bIndex])
-                break;
+        while(divisors.length > 0) {
+            let maxblocks = divisors.pop();
+            let blocksize = A.length / maxblocks;
+            let bIndex = 0;
+            for(bIndex=0; bIndex < maxblocks; bIndex++) {
+                let left = bIndex * blocksize;
+                let right = left + blocksize - 1;
+                // peaks.find(...) ANY peaks in this range
+                if (peaks[bIndex] >= left && peaks[bIndex] <= right) {
+                    //
+                    console.log(bIndex + ' of ' + blocksize + ' has peak ' + peaks[bIndex])
+                } else {
+                    console.log(bIndex + ' of ' + blocksize + ' missing peak ' + peaks[bIndex])
+                    break;
+                }
+            }
+            if (bIndex === maxblocks - 1) {
+                console.log(' found ' + maxblocks);
+                return maxblocks;
             }
         }
-        if (bIndex === maxblocks - 1) {
-            console.log(' found ' + maxblocks);
-            return maxblocks;
-        }
-    }
 
-    return 0;
-*/
+        return 0;
+    */
 
     console.log("PEAKS", peaks)
     let maxblocks = Math.min(peaks.length, Math.ceil(Math.sqrt(A.length)));
@@ -140,10 +140,10 @@ function peaks(A) {
         blocksize = A.length / maxblocks;
     }
 
-    while(blocksize > 0) {
+    while (blocksize > 0) {
         let hasPeak = false;
 
-        for(let bIndex=0; bIndex < maxblocks; bIndex++) {
+        for (let bIndex = 0; bIndex < maxblocks; bIndex++) {
             let left = bIndex * blocksize;
             let right = left + blocksize - 1;
             let minP = 0;
@@ -156,12 +156,12 @@ function peaks(A) {
                     console.log(bIndex + ' of ' + blocksize + ' missing peak ' + peaks[bIndex])
                 }
             }
-            if (hasPeak===false) {
+            if (hasPeak === false) {
                 blocksize--;
                 break;
             }
         }
-        if (hasPeak===true) {
+        if (hasPeak === true) {
             return maxblocks;
         }
     }
@@ -186,5 +186,5 @@ const tests = [
 
 tests.forEach((o, i) => {
     let result = peaks(...o.arg);
-    console.log((o.name || 'TEST')  + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log((o.name || 'TEST') + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })

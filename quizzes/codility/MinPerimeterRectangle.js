@@ -31,12 +31,12 @@ function solution(N) {
     let divisors = [];
     if (sqrt * sqrt === N) {
         divisors.push(sqrt);
-        divisors.push(N/sqrt);
+        divisors.push(N / sqrt);
     } else {
-        while(sqrt > 0 && divisors.length < 2) {
+        while (sqrt > 0 && divisors.length < 2) {
             if (N % sqrt == 0) {
                 divisors.push(sqrt);
-                divisors.push(N/sqrt);
+                divisors.push(N / sqrt);
             }
             sqrt--;
         }
@@ -51,26 +51,26 @@ const tests = [
     {
         "name": "Test 1",
         "arg": [36],
-        "expected":24
+        "expected": 24
     },
     {
         "name": "Test 1",
         "arg": [30],
-        "expected":22
+        "expected": 22
     },
     {
         "name": "Test 2",
         "arg": [1],
-        "expected":2
+        "expected": 2
     },
     {
         "name": "Test 3",
         "arg": [100000000],
-        "expected":40000
+        "expected": 40000
     }
 ];
 
 tests.forEach((o, i) => {
     let result = solution(...o.arg);
-    console.log((o.name || 'TEST')  + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log((o.name || 'TEST') + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })

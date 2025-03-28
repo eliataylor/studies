@@ -3,18 +3,18 @@ let codec = new NaryTree();
 let test = null;
 let tests = [];
 
-let hard = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14];
-let easy = [1,null,3,2,4,null,5,6];
+let hard = [1, null, 2, 3, 4, 5, null, null, 6, 7, null, 8, null, 9, 10, null, null, 11, null, 12, null, 13, null, null, 14];
+let easy = [1, null, 3, 2, 4, null, 5, 6];
 
 /**** PRE ORDER TRAVERSAL - N-ARY *****/
-const preOrderRecursive = (root, result=[]) => {
-    if(!root) {
+const preOrderRecursive = (root, result = []) => {
+    if (!root) {
         return result
     }
 
     result.push(root.val)
 
-    if(root.children) {
+    if (root.children) {
         root.children.forEach((child) => {
             preOrderRecursive(child, result)
         })
@@ -23,7 +23,7 @@ const preOrderRecursive = (root, result=[]) => {
     return result
 }
 
-const preOrderIteractive = function(root) {
+const preOrderIteractive = function (root) {
     const res = [], stack = [root];
     while (stack.length > 0) {
         const curr = stack.pop();
@@ -37,26 +37,27 @@ const preOrderIteractive = function(root) {
 
 tests = [
     {
-        name:'preOrderEasy',
-        arg:[codec.deserialize([...easy])],
-        expected: [1,3,5,6,2,4]
+        name: 'preOrderEasy',
+        arg: [codec.deserialize([...easy])],
+        expected: [1, 3, 5, 6, 2, 4]
     },
     {
-        name:'preOrderHard',
-        arg:[codec.deserialize([...hard])],
-        expected: [1,2,3,6,7,11,14,4,8,12,5,9,13,10]
+        name: 'preOrderHard',
+        arg: [codec.deserialize([...hard])],
+        expected: [1, 2, 3, 6, 7, 11, 14, 4, 8, 12, 5, 9, 13, 10]
     }
 ];
 tests.forEach((o, i) => {
     test = preOrderIteractive(...o.arg);
-    console.log('IT ' + o.name + ' >> ' +((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log('IT ' + o.name + ' >> ' + ((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
     test = preOrderRecursive(...o.arg);
-    console.log('RE ' + o.name + ' >> ' +((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log('RE ' + o.name + ' >> ' + ((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })
 
 /**** POST ORDER TRAVERSAL - N-ARY *****/
-var postorderRecursive = function(root) {
+var postorderRecursive = function (root) {
     let res = [];
+
     function dfsTraversal(root) {
         if (!root) return;
         for (let child of root.children) {
@@ -64,16 +65,17 @@ var postorderRecursive = function(root) {
         }
         res.push(root.val);
     }
+
     dfsTraversal(root);
     return res;
     // Time Complexity: O(N)
     // Space Complexity: O(H)
 };
-var postOrderIterative = function(root) {
+var postOrderIterative = function (root) {
     if (!root) return [];
     let res = [], stack = [root];
     while (stack.length > 0) {
-        let node = stack[stack.length-1];
+        let node = stack[stack.length - 1];
         if (node.children.length > 0) {
             for (let i = node.children.length - 1; i >= 0; i--) {
                 if (node.children[i]) {
@@ -92,27 +94,27 @@ var postOrderIterative = function(root) {
 
 tests = [
     {
-        name:'postOrderEasy',
-        arg:[codec.deserialize([...easy])],
-        expected:[5,6,3,2,4,1]
+        name: 'postOrderEasy',
+        arg: [codec.deserialize([...easy])],
+        expected: [5, 6, 3, 2, 4, 1]
     },
     {
-        name:'postOrderHard',
-        arg:[codec.deserialize([...hard])],
-        expected:[2,6,14,11,7,3,12,8,4,13,9,10,5,1]
+        name: 'postOrderHard',
+        arg: [codec.deserialize([...hard])],
+        expected: [2, 6, 14, 11, 7, 3, 12, 8, 4, 13, 9, 10, 5, 1]
     }
 ];
 
 tests.forEach((o, i) => {
     test = postOrderIterative(...o.arg);
-    console.log('IT ' + o.name + ' >> ' +((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log('IT ' + o.name + ' >> ' + ((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
     test = postorderRecursive(...o.arg);
     console.log('RE ' + o.name + ' >> ' + ((JSON.stringify(test) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })
 
 
 /**** LEVEL ORDER TRAVERSAL - N-ARY *****/
-var levelOrder = function(root) {
+var levelOrder = function (root) {
     const res = [], queue = [];
     let depth = 0, num = 0;
     if (root) queue.push(root);
@@ -129,7 +131,7 @@ var levelOrder = function(root) {
     }
     return res;
 };
-var levelOrderRecursive = function(root) {
+var levelOrderRecursive = function (root) {
     const res = [];
     BFS(root, 0);
     return res;
@@ -149,14 +151,14 @@ var levelOrderRecursive = function(root) {
 
 tests = [
     {
-        name:'levelOrderEasy',
-        arg:[codec.deserialize([...easy])],
-        expected:[[1],[3,2,4],[5,6]]
+        name: 'levelOrderEasy',
+        arg: [codec.deserialize([...easy])],
+        expected: [[1], [3, 2, 4], [5, 6]]
     },
     {
-        name:'levelOrderHard',
-        arg:[codec.deserialize([...hard])],
-        expected:[[1],[2,3,4,5],[6,7,8,9,10],[11,12,13],[14]]
+        name: 'levelOrderHard',
+        arg: [codec.deserialize([...hard])],
+        expected: [[1], [2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13], [14]]
     }
 ];
 

@@ -18,12 +18,11 @@ There are 4 pairs of consecutive identical words in the text. They are shown in 
 
  */
 function repetitionEncryption(letter) {
-    var pattern = /(\w+)[\d\W]+\1\b/gi ;
+    var pattern = /(\w+)[\d\W]+\1\b/gi;
     var matches = letter.match(pattern);
     if (matches) {
         return matches.length;
-    }
-    else {
+    } else {
         return 0;
     }
 }
@@ -34,8 +33,7 @@ function repetitionEncryption(letter) {
     var matches = letter.match(pattern);
     if (matches) {
         return matches.length;
-    }
-    else {
+    } else {
         return 0;
     }
 }

@@ -1,7 +1,7 @@
 function firstDuplicate(a) {
     let checks = {};
     let set1 = Array.from(new Set(a));
-    let min = set1.reduce((acc,v) => {
+    let min = set1.reduce((acc, v) => {
         if (checks[v] === false && a.indexOf(v) !== a.lastIndexOf(v)) {
             checks[v] = true;
             if (acc === -1) {
@@ -21,13 +21,13 @@ function firstDuplicate(a) {
 
 const tests = [
     {
-      name:'Test 3',
-      arg:[[1, 1, 2, 2, 1]],
-      expected:1
+        name: 'Test 3',
+        arg: [[1, 1, 2, 2, 1]],
+        expected: 1
     },
     {
-        name:'Test 1',
-        arg:[[2, 1, 3, 5, 3, 2]],
+        name: 'Test 1',
+        arg: [[2, 1, 3, 5, 3, 2]],
         expected: 3
     }
 ];

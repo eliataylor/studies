@@ -3,18 +3,18 @@ Ratiorg got statues of different sizes as a present from CodeMaster for his birt
 
  */
 function makeArrayConsecutive2(sequence) {
-    return Math.max(...sequence)-Math.min(...sequence)+1-sequence.length
+    return Math.max(...sequence) - Math.min(...sequence) + 1 - sequence.length
 }
 
 
 function makeArrayConsecutive2Old(statues) {
-    statues.sort((a,b) => a - b);
+    statues.sort((a, b) => a - b);
     console.log(statues);
 
     let more = 0;
-    statues.forEach( (val, i) => {
+    statues.forEach((val, i) => {
         if (i > 0) {
-            more += Math.max(0, val - statues[i-1] - 1);
+            more += Math.max(0, val - statues[i - 1] - 1);
             console.log(i + ' more ' + more);
         }
     })

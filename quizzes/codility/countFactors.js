@@ -22,11 +22,11 @@ function solution(N) {
 
     let total = [];
     let sqrt = Math.floor(Math.sqrt(N));
-    while(sqrt > 0) {
+    while (sqrt > 0) {
         if (N % sqrt === 0) {
             total.push(sqrt);
-            if (N/sqrt !== sqrt) {
-                total.push(N/sqrt);
+            if (N / sqrt !== sqrt) {
+                total.push(N / sqrt);
             }
         }
         sqrt--;
@@ -40,41 +40,41 @@ const tests = [
     {
         "name": "Test 1",
         "arg": [24],
-        "expected":8
+        "expected": 8
     },
     {
         "name": "Test 1",
         "arg": [16],
-        "expected":5
+        "expected": 5
     },
     {
         "name": "Test 1",
         "arg": [36],
-        "expected":9
+        "expected": 9
     },
     {
         "name": "Test 1",
         "arg": [3],
-        "expected":2
+        "expected": 2
     },
     {
         "name": "Test 1",
         "arg": [8],
-        "expected":4
+        "expected": 4
     },
     {
         "name": "Test 1",
         "arg": [9],
-        "expected":3
+        "expected": 3
     },
     {
         "name": "Test 1",
         "arg": [4999696],
-        "expected":45
+        "expected": 45
     }
 ];
 
 tests.forEach((o, i) => {
     let result = solution(...o.arg);
-    console.log((o.name || 'TEST')  + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log((o.name || 'TEST') + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })

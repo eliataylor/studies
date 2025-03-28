@@ -4,8 +4,6 @@
  * This algorithm works on matrices where each row and each column is sorted.
  */
 
-import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
-
 /**
  * Row-Column Search
  *
@@ -20,30 +18,30 @@ import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
  * @returns The [row, column] coordinates if found, null otherwise
  */
 export function rowColumnSearch(matrix: number[][], target: number): [number, number] | null {
-  if (!matrix.length || !matrix[0].length) {
-    return null;
-  }
-
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-
-  // Start from top-right corner
-  let row = 0;
-  let col = cols - 1;
-
-  while (row < rows && col >= 0) {
-    if (matrix[row][col] === target) {
-      return [row, col];
-    } else if (matrix[row][col] > target) {
-      // The current column has values too large, move left
-      col--;
-    } else {
-      // The current row has values too small, move down
-      row++;
+    if (!matrix.length || !matrix[0].length) {
+        return null;
     }
-  }
 
-  return null;
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+
+    // Start from top-right corner
+    let row = 0;
+    let col = cols - 1;
+
+    while (row < rows && col >= 0) {
+        if (matrix[row][col] === target) {
+            return [row, col];
+        } else if (matrix[row][col] > target) {
+            // The current column has values too large, move left
+            col--;
+        } else {
+            // The current row has values too small, move down
+            row++;
+        }
+    }
+
+    return null;
 }
 
 // Uncomment to test this algorithm individually

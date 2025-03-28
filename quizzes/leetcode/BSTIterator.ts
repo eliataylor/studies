@@ -49,19 +49,6 @@ class BSTIteratorFlattened {
     }
 
     /**
-     * Performs an in-order traversal to collect all values in sorted order
-     */
-    private _inorder(root: TreeNode | null): void {
-        if (root === null) {
-            return;
-        }
-
-        this._inorder(root.left);
-        this.nodesSorted.push(root.val);
-        this._inorder(root.right);
-    }
-
-    /**
      * Returns the next smallest number in the BST
      * Time Complexity: O(1)
      */
@@ -75,6 +62,19 @@ class BSTIteratorFlattened {
      */
     hasNext(): boolean {
         return this.index + 1 < this.nodesSorted.length;
+    }
+
+    /**
+     * Performs an in-order traversal to collect all values in sorted order
+     */
+    private _inorder(root: TreeNode | null): void {
+        if (root === null) {
+            return;
+        }
+
+        this._inorder(root.left);
+        this.nodesSorted.push(root.val);
+        this._inorder(root.right);
     }
 }
 
@@ -93,16 +93,6 @@ class BSTIterator {
      */
     constructor(root: TreeNode | null) {
         this._leftmostInorder(root);
-    }
-
-    /**
-     * Adds all nodes in the leftmost branch of the tree to the stack
-     */
-    private _leftmostInorder(root: TreeNode | null): void {
-        while (root !== null) {
-            this.stack.push(root);
-            root = root.left;
-        }
     }
 
     /**
@@ -278,7 +268,6 @@ class BSTIterator {
         }
     }
 
-
     /**
      // https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/solution/
      * Finds the lowest common ancestor of two nodes (recursive approach)
@@ -345,16 +334,6 @@ class BSTIterator {
     }
 
     /**
-     * Helper function for containsNearbyAlmostDuplicate
-     * Maps a value to its bucket ID
-     */
-    private getID(x: number, w: number): number {
-        // Handle negative numbers properly
-        return x < 0 ? Math.floor((x + 1) / w) - 1 : Math.floor(x / w);
-    }
-
-
-    /**
      *    // https://leetcode.com/problems/contains-duplicate-iii/solution/
      *         Bucket sort is a sorting algorithm that works by distributing the elements of an array into a number of buckets.
      *         Each bucket is then sorted individually, using a different sorting algorithm. Here is an illustration of buckets.
@@ -402,6 +381,25 @@ class BSTIterator {
         }
 
         return false;
+    }
+
+    /**
+     * Adds all nodes in the leftmost branch of the tree to the stack
+     */
+    private _leftmostInorder(root: TreeNode | null): void {
+        while (root !== null) {
+            this.stack.push(root);
+            root = root.left;
+        }
+    }
+
+    /**
+     * Helper function for containsNearbyAlmostDuplicate
+     * Maps a value to its bucket ID
+     */
+    private getID(x: number, w: number): number {
+        // Handle negative numbers properly
+        return x < 0 ? Math.floor((x + 1) / w) - 1 : Math.floor(x / w);
     }
 }
 

@@ -5,8 +5,6 @@
  * where the element might be present and performing a binary search on that range.
  */
 
-import { runArraySearch, type ArraySearchFunction } from '../utils';
-
 /**
  * Exponential Search
  *
@@ -22,57 +20,57 @@ import { runArraySearch, type ArraySearchFunction } from '../utils';
  * @returns The index of the target if found, -1 otherwise
  */
 export function exponentialSearch(arr: number[], target: number): number {
-  const n = arr.length;
+    const n = arr.length;
 
-  // If array is empty
-  if (n === 0) {
-    return -1;
-  }
+    // If array is empty
+    if (n === 0) {
+        return -1;
+    }
 
-  // If target is the first element
-  if (arr[0] === target) {
-    return 0;
-  }
+    // If target is the first element
+    if (arr[0] === target) {
+        return 0;
+    }
 
-  // Find range for binary search by repeated doubling
-  let i = 1;
-  while (i < n && arr[i] <= target) {
-    i *= 2;
-  }
+    // Find range for binary search by repeated doubling
+    let i = 1;
+    while (i < n && arr[i] <= target) {
+        i *= 2;
+    }
 
-  // Call binary search for the found range
-  return binarySearch(
-    arr,
-    target,
-    Math.floor(i / 2),
-    Math.min(i, n - 1)
-  );
+    // Call binary search for the found range
+    return binarySearch(
+        arr,
+        target,
+        Math.floor(i / 2),
+        Math.min(i, n - 1)
+    );
 }
 
 /**
  * Helper binary search function for exponential search
  */
 function binarySearch(
-  arr: number[],
-  target: number,
-  left: number,
-  right: number
+    arr: number[],
+    target: number,
+    left: number,
+    right: number
 ): number {
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
 
-    if (arr[mid] === target) {
-      return mid;
+        if (arr[mid] === target) {
+            return mid;
+        }
+
+        if (arr[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
     }
 
-    if (arr[mid] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
-    }
-  }
-
-  return -1;
+    return -1;
 }
 
 // Uncomment to test this algorithm individually

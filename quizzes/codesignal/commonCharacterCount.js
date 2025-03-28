@@ -11,7 +11,7 @@ function commonCharacterCount(s1, s2) {
         console.log(l + ' check index is ' + i)
         if (i > -1) {
             common.push(tocheck[i]);
-            tocheck.splice(i,1);
+            tocheck.splice(i, 1);
         }
     })
     console.log("COMMONS ARE " + common.join(','));

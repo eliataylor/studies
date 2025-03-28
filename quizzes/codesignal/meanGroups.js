@@ -65,15 +65,15 @@ The mean values of all of the arrays are 0, so all of them are in the same group
 
 function meanGroups(a) {
     let means = {};
-        a.forEach((row, i) => {
-            let sum = row.reduce((acc, v) => (acc + v), 0);
-            let mean = sum / row.length;
-            if (!means[mean]) means[mean] = []
-            means[mean].push(i);
-            // means[mean] = means[mean].sort()
+    a.forEach((row, i) => {
+        let sum = row.reduce((acc, v) => (acc + v), 0);
+        let mean = sum / row.length;
+        if (!means[mean]) means[mean] = []
+        means[mean].push(i);
+        // means[mean] = means[mean].sort()
     })
     let result = Object.values(means);
-    result = result.sort( (a, b) => (a[0] - b[0]) );
+    result = result.sort((a, b) => (a[0] - b[0]));
     console.log(result);
     return result;
 
@@ -97,26 +97,26 @@ function meanGroups(a) {
 const tests = [
     {
         name: 'Test 1',
-        arg: [[[3,3,4,2],
-            [4,4],
-            [4,0,3,3],
-            [2,3],
-            [3,3,3]]],
-        expected: [[0,4],
+        arg: [[[3, 3, 4, 2],
+            [4, 4],
+            [4, 0, 3, 3],
+            [2, 3],
+            [3, 3, 3]]],
+        expected: [[0, 4],
             [1],
-            [2,3]]
+            [2, 3]]
     },
     {
         name: 'Test 2',
-        arg: [[[-5,2,3],
-            [0,0],
+        arg: [[[-5, 2, 3],
+            [0, 0],
             [0],
-            [-100,100]]],
-        expected: [[0,1,2,3]]
+            [-100, 100]]],
+        expected: [[0, 1, 2, 3]]
     },
     {
         name: 'Test 3',
-        arg: [[[2,2,-3],
+        arg: [[[2, 2, -3],
             [1],
             [-10],
             [7]]],

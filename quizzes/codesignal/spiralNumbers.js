@@ -6,7 +6,7 @@ function spiralNumbers(n) {
 
     let origin = n - 1 - innerSize;
 
-    while(val <= size) {
+    while (val <= size) {
 
         if (typeof matrix[y] === 'undefined') matrix[y] = [];
         matrix[y][x] = val;
@@ -15,7 +15,7 @@ function spiralNumbers(n) {
         let test = 1;
 
         if (val === 43) {
-            test =1
+            test = 1
         }
 
         // if X is at the beginning of innerSize && Y is at the beginning innerSize
@@ -78,15 +78,16 @@ const tests = [
             [16,15,14,13,12,11]]
 
     } */
-    {   name: 'Test 4',
-        arg:[7],
-        expected:[[1,2,3,4,5,6,7],
-            [24,25,26,27,28,29,8],
-            [23,40,41,42,43,30,9],
-            [22,39,48,49,44,31,10],
-            [21,38,47,46,45,32,11],
-            [20,37,36,35,34,33,12],
-            [19,18,17,16,15,14,13]]
+    {
+        name: 'Test 4',
+        arg: [7],
+        expected: [[1, 2, 3, 4, 5, 6, 7],
+            [24, 25, 26, 27, 28, 29, 8],
+            [23, 40, 41, 42, 43, 30, 9],
+            [22, 39, 48, 49, 44, 31, 10],
+            [21, 38, 47, 46, 45, 32, 11],
+            [20, 37, 36, 35, 34, 33, 12],
+            [19, 18, 17, 16, 15, 14, 13]]
     }
 ];
 
@@ -153,9 +154,9 @@ function spiralNumbers(n) {
     function getNewDirection(r, c, dy, dx, n) {
         if (c === 0 && r === 0) {
             return [dy, dx];
-        } else if ((c === r) && (r >= n/2)) {
+        } else if ((c === r) && (r >= n / 2)) {
             return [0, -1];
-        } else if ((r - c === 1) && (r <= n/2)) {
+        } else if ((r - c === 1) && (r <= n / 2)) {
             return [0, +1];
         } else if ((r + c === n - 1) && c > r) {
             return [+1, 0];
@@ -166,7 +167,7 @@ function spiralNumbers(n) {
         }
     };
 
-    const values = Array.from({length: n*n}, (v, i) => i+1);
+    const values = Array.from({length: n * n}, (v, i) => i + 1);
 
     let r = 0;
     let c = 0;
@@ -196,19 +197,19 @@ function spiralNumbers(n) {
         eRow = n - 1;
 
     while (sCol <= eCol && sRow <= eRow) {
-        for(let i = sCol; i<=eCol; i++){
+        for (let i = sCol; i <= eCol; i++) {
             result[sRow][i] = count++;
         }
         sRow++;
-        for(let i = sRow; i<=eRow; i++){
+        for (let i = sRow; i <= eRow; i++) {
             result[i][eCol] = count++;
         }
         eCol--;
-        for(let i = eCol; i >= sCol; i--){
+        for (let i = eCol; i >= sCol; i--) {
             result[eRow][i] = count++;
         }
         eRow--;
-        for(let i=eRow; i>=sRow; i--){
+        for (let i = eRow; i >= sRow; i--) {
             result[i][sCol] = count++;
         }
         sCol++;

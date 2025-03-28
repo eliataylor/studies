@@ -15,7 +15,7 @@
  * Note: This algorithm is most efficient when k is not significantly larger than n.
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Implementation of counting sort
@@ -24,37 +24,37 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const countingSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
+    const array = [...arr]; // Create a copy to avoid modifying the original
 
-  // Return if array is empty
-  if (array.length === 0) return array;
+    // Return if array is empty
+    if (array.length === 0) return array;
 
-  // Find the maximum element to determine the count array size
-  const max = Math.max(...array);
+    // Find the maximum element to determine the count array size
+    const max = Math.max(...array);
 
-  // Create a counting array of size max+1
-  const count: number[] = new Array(max + 1).fill(0);
+    // Create a counting array of size max+1
+    const count: number[] = new Array(max + 1).fill(0);
 
-  // Count the occurrences of each element
-  for (let i = 0; i < array.length; i++) {
-    count[array[i]]++;
-  }
+    // Count the occurrences of each element
+    for (let i = 0; i < array.length; i++) {
+        count[array[i]]++;
+    }
 
-  // Update count array to store the position of each element in the output
-  for (let i = 1; i <= max; i++) {
-    count[i] += count[i - 1];
-  }
+    // Update count array to store the position of each element in the output
+    for (let i = 1; i <= max; i++) {
+        count[i] += count[i - 1];
+    }
 
-  // Create the output array
-  const output: number[] = new Array(array.length);
+    // Create the output array
+    const output: number[] = new Array(array.length);
 
-  // Build the output array
-  for (let i = array.length - 1; i >= 0; i--) {
-    output[count[array[i]] - 1] = array[i];
-    count[array[i]]--;
-  }
+    // Build the output array
+    for (let i = array.length - 1; i >= 0; i--) {
+        output[count[array[i]] - 1] = array[i];
+        count[array[i]]--;
+    }
 
-  return output;
+    return output;
 };
 
 /**
@@ -63,42 +63,42 @@ export const countingSort: SortFunction = (arr: number[]): number[] => {
  * @returns The sorted array
  */
 export const extendedCountingSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
+    const array = [...arr]; // Create a copy to avoid modifying the original
 
-  // Return if array is empty
-  if (array.length === 0) return array;
+    // Return if array is empty
+    if (array.length === 0) return array;
 
-  // Find the minimum and maximum elements
-  const min = Math.min(...array);
-  const max = Math.max(...array);
+    // Find the minimum and maximum elements
+    const min = Math.min(...array);
+    const max = Math.max(...array);
 
-  // Calculate the range
-  const range = max - min + 1;
+    // Calculate the range
+    const range = max - min + 1;
 
-  // Create a counting array
-  const count: number[] = new Array(range).fill(0);
+    // Create a counting array
+    const count: number[] = new Array(range).fill(0);
 
-  // Create the output array
-  const output: number[] = new Array(array.length);
+    // Create the output array
+    const output: number[] = new Array(array.length);
 
-  // Count occurrences of each element
-  for (let i = 0; i < array.length; i++) {
-    // Adjust for negative numbers by subtracting min value
-    count[array[i] - min]++;
-  }
+    // Count occurrences of each element
+    for (let i = 0; i < array.length; i++) {
+        // Adjust for negative numbers by subtracting min value
+        count[array[i] - min]++;
+    }
 
-  // Update count array to store positions
-  for (let i = 1; i < range; i++) {
-    count[i] += count[i - 1];
-  }
+    // Update count array to store positions
+    for (let i = 1; i < range; i++) {
+        count[i] += count[i - 1];
+    }
 
-  // Build the output array
-  for (let i = array.length - 1; i >= 0; i--) {
-    output[count[array[i] - min] - 1] = array[i];
-    count[array[i] - min]--;
-  }
+    // Build the output array
+    for (let i = array.length - 1; i >= 0; i--) {
+        output[count[array[i] - min] - 1] = array[i];
+        count[array[i] - min]--;
+    }
 
-  return output;
+    return output;
 };
 
 /**

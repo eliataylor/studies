@@ -1,12 +1,11 @@
-
 function nextLarger(a) {
     if (a.length < 1) return a;
 
     let b = [];
-    for(let i=0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i++) {
         let val = a[i];
-        let i2 = i+1;
-        while(val > a[i2] && i2 < a.length) {
+        let i2 = i + 1;
+        while (val > a[i2] && i2 < a.length) {
             i2++;
         }
         if (i2 === a.length) {
@@ -25,11 +24,11 @@ function nextLargerStacked(a) {
     let result = new Array(a.length);
 
     let stack = new Array();
-    for (let i = a.length-1; i >= 0; i--) {
+    for (let i = a.length - 1; i >= 0; i--) {
         while (stack.length > 0 && a[i] >= stack[stack.length - 1]) {
             stack.pop();
         }
-        result[i] = stack.length === 0 ? -1 :  stack[stack.length - 1];
+        result[i] = stack.length === 0 ? -1 : stack[stack.length - 1];
         stack.push(a[i]); //  might require sorting
     }
     return result;

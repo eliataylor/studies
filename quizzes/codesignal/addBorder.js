@@ -45,6 +45,6 @@ tests.forEach((o, i) => {
     if (JSON.stringify(result) === JSON.stringify(o.expected)) {
         console.log("TEST PASSED!");
     } else {
-        console.log("GOT ", JSON.stringify(result), " EXPECTED ",  JSON.stringify(o.expected));
+        console.log("GOT ", JSON.stringify(result), " EXPECTED ", JSON.stringify(o.expected));
     }
 })

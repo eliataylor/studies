@@ -1,8 +1,8 @@
 function arrayToTree(word, tree = {}) {
     let node = tree;
 
-    for(const letter of word) {
-        if(!node[letter]) node[letter] = {};
+    for (const letter of word) {
+        if (!node[letter]) node[letter] = {};
         node = node[letter];
     }
 
@@ -13,7 +13,7 @@ function arrayToTree(word, tree = {}) {
 function wordBoggle(board, words) {
     // build a trie for all the words (for fast lookups)
     const trie = {};
-    for(const word of words) {
+    for (const word of words) {
         arrayToTree(word, trie);
     }
 
@@ -21,10 +21,10 @@ function wordBoggle(board, words) {
     // (is the first letter in the trie?)
     const wordsFound = new Set();
 
-    for(let i = 0; i < board.length; i++) {
-        for(let j = 0; j < board[i].length; j++) {
+    for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
             const letter = board[i][j];
-            if(trie[letter]) {
+            if (trie[letter]) {
                 //console.log('---------------- start ' + letter + ' start --------------------')
                 seek(i, j, trie[letter]);
                 // console.log('---------------- end ' + letter + ' end --------------------')
@@ -38,17 +38,17 @@ function wordBoggle(board, words) {
         visited.add(hash);
         // console.log('- add ' + hash, node)
 
-        if("$" in node) {
+        if ("$" in node) {
             // console.log('---------------- finish ' + node['$'] + ' finish --------------------')
             wordsFound.add(node["$"]); // adds the whole word but we're might still be searching other words in the tree
         } else {
-            for(let dx = -1; dx <= 1; dx++) {
-                for(let dy = -1; dy <= 1; dy++) {
-                    if(board[x + dx] && board[x + dx][y + dy]) {
+            for (let dx = -1; dx <= 1; dx++) {
+                for (let dy = -1; dy <= 1; dy++) {
+                    if (board[x + dx] && board[x + dx][y + dy]) {
                         const nextHash = (x + dx) + '' + (y + dy);
                         const letter = board[x + dx][y + dy];
 
-                        if(node[letter] && !visited.has(nextHash)) {
+                        if (node[letter] && !visited.has(nextHash)) {
                             // console.log('--- seek ' + nextHash + ' ' + letter)
                             seek(x + dx, y + dy, node[letter], visited);
                             // console.log('--- aftr ' + nextHash + ' ' + letter)
@@ -61,7 +61,7 @@ function wordBoggle(board, words) {
         visited.delete(hash);
     }
 
-    let sorted =  [...wordsFound].sort();
+    let sorted = [...wordsFound].sort();
     // console.log(sorted);
     return sorted;
 }
@@ -70,20 +70,20 @@ const tests = [
     {
         name: 'Test 8',
         arg: [[
-            ["W","E","I","R"],
-            ["V","A","I","N"],
-            ["T","F","C","N"],
-            ["P","E","D","E"]
+            ["W", "E", "I", "R"],
+            ["V", "A", "I", "N"],
+            ["T", "F", "C", "N"],
+            ["P", "E", "D", "E"]
         ], ["CEDE", "DEFINE", "DECENNIA", "DEFACE"]],
         expected: ["CEDE", "DECENNIA", "DEFACE", "DEFINE"]
     },
     {
         name: 'Test 8',
         arg: [[
-            ["O","T","T","S"],
-            ["H","O","P","E"],
-            ["E","R","A","R"],
-            ["M","O","D","N"]], ["APTER"]],
+            ["O", "T", "T", "S"],
+            ["H", "O", "P", "E"],
+            ["E", "R", "A", "R"],
+            ["M", "O", "D", "N"]], ["APTER"]],
         expected: ['APTER']
     },
     {

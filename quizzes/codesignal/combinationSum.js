@@ -23,14 +23,14 @@ combinationSum = (a, s) => {
 
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: [[2, 3, 5, 9], 9],
-        expected:"(2 2 2 3)(2 2 5)(3 3 3)(9)"
+        expected: "(2 2 2 3)(2 2 5)(3 3 3)(9)"
     },
     {
-        name:'Test 2',
-        arg: [ [2, 4, 6, 8], 8],
-        expected:"(2 2 2 2)(2 2 4)(2 6)(4 4)(8)"
+        name: 'Test 2',
+        arg: [[2, 4, 6, 8], 8],
+        expected: "(2 2 2 2)(2 2 4)(2 6)(4 4)(8)"
     }
 ];
 

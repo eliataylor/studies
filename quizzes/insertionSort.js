@@ -4,24 +4,24 @@
  * @returns {number[]} - The sorted array
  */
 function insertionSpliceSort(arr) {
-  // Create a copy of the array to avoid modifying the original
-  const result = [...arr];
+    // Create a copy of the array to avoid modifying the original
+    const result = [...arr];
 
-  for (let i = 0; i < result.length - 1; i++) {
-    // Check if current element is greater than the next one
-    while (i >= 0 && result[i] > result[i + 1]) {
-      // Remove the element at i+1 and store it
-      const elementToMove = result.splice(i + 1, 1)[0];
+    for (let i = 0; i < result.length - 1; i++) {
+        // Check if current element is greater than the next one
+        while (i >= 0 && result[i] > result[i + 1]) {
+            // Remove the element at i+1 and store it
+            const elementToMove = result.splice(i + 1, 1)[0];
 
-      // Insert it at position i
-      result.splice(i, 0, elementToMove);
+            // Insert it at position i
+            result.splice(i, 0, elementToMove);
 
-      // Move back one position since we've shifted elements
-      i--;
+            // Move back one position since we've shifted elements
+            i--;
+        }
     }
-  }
 
-  return result;
+    return result;
 }
 
 // Example usage:

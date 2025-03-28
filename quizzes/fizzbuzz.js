@@ -17,13 +17,13 @@ function FizzBuzz(arr) {
         if (a % 5 === 0) {
             console.log('Buzz')
         }
-        if (a % 3 === 0 &&  a % 5 === 0) {
+        if (a % 3 === 0 && a % 5 === 0) {
             console.log('FizzBuzz')
         }
     })
 }
 
 // TODO: make array of 1-100
-const tests = Array.from({ length: 100 }, (_, i) => i + 1);
+const tests = Array.from({length: 100}, (_, i) => i + 1);
 
 FizzBuzz(tests)

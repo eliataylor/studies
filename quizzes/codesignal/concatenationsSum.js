@@ -69,7 +69,7 @@ function concatenationsSum(arr) {
 
         let offset = Math.pow(10, el.toString().length);
         highSum += offset;
-        console.log([el, lowSum, highSum].join (' --- '));
+        console.log([el, lowSum, highSum].join(' --- '));
     });
 
     return lowSum * arr.length + lowSum * highSum;

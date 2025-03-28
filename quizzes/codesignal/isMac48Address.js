@@ -6,7 +6,7 @@ const allowed = '0123456789ABCDEF';
 // isMAC48Address = s => /^([A-F0-9]{2}-){5}[A-F0-9]{2}$/i.test(s);
 
 function isMAC48Address(inputString) {
-    if (inputString[0] === '-' || inputString[inputString.length-1] === '-' || inputString.indexOf('--') > -1) return false;
+    if (inputString[0] === '-' || inputString[inputString.length - 1] === '-' || inputString.indexOf('--') > -1) return false;
     let parts = inputString.split('-');
     parts = parts.filter(e => {
         if (e.length === 2 && allowed.indexOf(e[0]) > -1 && allowed.indexOf(e[1]) > -1) {
@@ -18,15 +18,13 @@ function isMAC48Address(inputString) {
 }
 
 
-
-
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: ["00-1B-63-84-45-E6"],
         expected: true
-    },{
-        name:'Test 2',
+    }, {
+        name: 'Test 2',
         arg: ["Z1-1B-63-84-45-E6"],
         expected: false
     }

@@ -31,7 +31,7 @@ There are 4 tiny pairs during the iteration, so the answer is 4.
  */
 
 function countTinyPairs(a, b, k) {
-    let tinypairs = a.reduce( (acc, v, i) => {
+    let tinypairs = a.reduce((acc, v, i) => {
         // let num = parseInt(v.toString() + b.slice(i * -1 - 1)[0].toString());
         let num = parseInt(v.toString() + b[b.length - i - 1].toString());
         // console.log(num);

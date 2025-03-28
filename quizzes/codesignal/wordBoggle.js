@@ -3,26 +3,26 @@ const SIDES = [
     [-1, 0],
     [-1, 1],
     [0, 1],
-    [0,-1],
+    [0, -1],
     [1, 1],
     [1, 0],
-    [1,-1]
+    [1, -1]
 ];
 const used = new Map();
 const VALID = new Set();
 
 function wordBoggle(board, words) {
     // for each word
-        // find starting point
-            // for each letter check
-                // if next Letter is  1 of 8 neighboring cells that has not been seen
-                    // continue to next letter
-                // else
-                    // check another starting point of previous letter
+    // find starting point
+    // for each letter check
+    // if next Letter is  1 of 8 neighboring cells that has not been seen
+    // continue to next letter
+    // else
+    // check another starting point of previous letter
 
     function findCells(word, i) {
         return board.reduce((acc, row, r) => {
-            row.forEach( (v, c) => {
+            row.forEach((v, c) => {
                 if (v === word[i]) {
                     acc.push(new Cell(c, r, i, word[i], null))
                 }
@@ -34,7 +34,7 @@ function wordBoggle(board, words) {
     function getLastAlternative(cell) {
         let toremove = [];
         // if (cell.alternatives && cell.alternatives.length > 0) return cell.alternatives.pop();
-        while(cell.parent) {
+        while (cell.parent) {
             toremove.push(cell.getId());
             cell = cell.parent;
             toremove.push(cell.getId());
@@ -58,20 +58,20 @@ function wordBoggle(board, words) {
         this.children = 0;
         this.alternatives = [];
 
-        this.getId = function() {
+        this.getId = function () {
             return this.y.toString() + ',' + this.x.toString();
         }
 
-        this.debug = function(pre='') {
+        this.debug = function (pre = '') {
             let msg = pre + ' ' + this.getId() + ': ' + this.letter;
             if (this.parent) {
-                msg += ' parent: ' + this.parent.getId() + ': ' +  this.parent.letter;
+                msg += ' parent: ' + this.parent.getId() + ': ' + this.parent.letter;
                 if (this.parent.children) {
-                    msg += ' has ' +this.parent.children+ ' children';
+                    msg += ' has ' + this.parent.children + ' children';
                 }
             }
             if (this.alternatives.length > 0) {
-                msg += ' - '+this.alternatives.length+' alt routes ';
+                msg += ' - ' + this.alternatives.length + ' alt routes ';
             }
             console.log(msg);
         }
@@ -83,7 +83,7 @@ function wordBoggle(board, words) {
         used.set(current.getId(), current);
         let l = current.wordIndex + 1;
 
-        while ( current && l < word.length - 1 ) {
+        while (current && l < word.length - 1) {
             if (VALID.has(word)) {
                 console.log('short-circut ' + word);
                 return true;
@@ -142,7 +142,7 @@ function wordBoggle(board, words) {
 
         let found = false;
         let roots = findCells(word, 0);
-        while(found === false && roots.length > 0) {
+        while (found === false && roots.length > 0) {
             used.clear();
             found = searchWord(word, roots.pop());
         }
@@ -165,20 +165,20 @@ const tests = [
     {
         name: 'Test 8',
         arg: [[
-            ["W","E","I","R"],
-            ["V","A","I","N"],
-            ["T","F","C","N"],
-            ["P","E","D","E"]
+            ["W", "E", "I", "R"],
+            ["V", "A", "I", "N"],
+            ["T", "F", "C", "N"],
+            ["P", "E", "D", "E"]
         ], ["DEFINE", "CEDE", "DECENNIA", "DEFACE"]],
         expected: ["DEFINE", "CEDE", "DECENNIA", "DEFACE"]
     },
     {
         name: 'Test 8',
         arg: [[
-            ["O","T","T","S"],
-            ["H","O","P","E"],
-            ["E","R","A","R"],
-            ["M","O","D","N"]], ["APTER"]],
+            ["O", "T", "T", "S"],
+            ["H", "O", "P", "E"],
+            ["E", "R", "A", "R"],
+            ["M", "O", "D", "N"]], ["APTER"]],
         expected: ['APTER']
     },
     {

@@ -11,5 +11,5 @@ function shapeArea(n) {
 }
 
 function shapeArea2(n) {
-    return Math.pow(n, 2) + Math.pow(n-1, 2);
+    return Math.pow(n, 2) + Math.pow(n - 1, 2);
 }

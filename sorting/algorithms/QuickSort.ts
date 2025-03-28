@@ -14,7 +14,7 @@
  * Space Complexity: O(log n) for the recursion stack
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Partitions the array around a pivot element
@@ -24,26 +24,26 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The pivot index
  */
 function partition(array: number[], low: number, high: number): number {
-  // Choose the rightmost element as the pivot
-  const pivot = array[high];
+    // Choose the rightmost element as the pivot
+    const pivot = array[high];
 
-  // Index of the smaller element
-  let i = low - 1;
+    // Index of the smaller element
+    let i = low - 1;
 
-  // Place elements smaller than the pivot to the left
-  // and larger elements to the right
-  for (let j = low; j < high; j++) {
-    if (array[j] <= pivot) {
-      i++;
-      [array[i], array[j]] = [array[j], array[i]];
+    // Place elements smaller than the pivot to the left
+    // and larger elements to the right
+    for (let j = low; j < high; j++) {
+        if (array[j] <= pivot) {
+            i++;
+            [array[i], array[j]] = [array[j], array[i]];
+        }
     }
-  }
 
-  // Place the pivot element in its correct position
-  [array[i + 1], array[high]] = [array[high], array[i + 1]];
+    // Place the pivot element in its correct position
+    [array[i + 1], array[high]] = [array[high], array[i + 1]];
 
-  // Return the pivot's index
-  return i + 1;
+    // Return the pivot's index
+    return i + 1;
 }
 
 /**
@@ -53,14 +53,14 @@ function partition(array: number[], low: number, high: number): number {
  * @param high The ending index
  */
 function quickSortRecursive(array: number[], low: number, high: number): void {
-  if (low < high) {
-    // Partition the array and get the pivot index
-    const pivotIndex = partition(array, low, high);
+    if (low < high) {
+        // Partition the array and get the pivot index
+        const pivotIndex = partition(array, low, high);
 
-    // Recursively sort the subarrays
-    quickSortRecursive(array, low, pivotIndex - 1);
-    quickSortRecursive(array, pivotIndex + 1, high);
-  }
+        // Recursively sort the subarrays
+        quickSortRecursive(array, low, pivotIndex - 1);
+        quickSortRecursive(array, pivotIndex + 1, high);
+    }
 }
 
 /**
@@ -69,12 +69,12 @@ function quickSortRecursive(array: number[], low: number, high: number): void {
  * @returns The sorted array
  */
 export const quickSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
+    const array = [...arr]; // Create a copy to avoid modifying the original
 
-  // Call the recursive quick sort function
-  quickSortRecursive(array, 0, array.length - 1);
+    // Call the recursive quick sort function
+    quickSortRecursive(array, 0, array.length - 1);
 
-  return array;
+    return array;
 };
 
 /**

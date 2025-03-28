@@ -6,8 +6,7 @@
  * preorder, inorder, and postorder.
  */
 
-import { TreeNode } from './TreeNode';
-import { runTreeSearch, type TreeSearchFunction } from '../utils';
+import {TreeNode} from './TreeNode';
 
 /**
  * Preorder DFS Search
@@ -22,23 +21,23 @@ import { runTreeSearch, type TreeSearchFunction } from '../utils';
  * @returns The found node or null if not found
  */
 export function preorderDFS(root: TreeNode | null, target: number): TreeNode | null {
-  // Base case: empty tree or target found
-  if (root === null) {
-    return null;
-  }
+    // Base case: empty tree or target found
+    if (root === null) {
+        return null;
+    }
 
-  if (root.value === target) {
-    return root;
-  }
+    if (root.value === target) {
+        return root;
+    }
 
-  // Search in left subtree
-  const leftResult = preorderDFS(root.left, target);
-  if (leftResult !== null) {
-    return leftResult;
-  }
+    // Search in left subtree
+    const leftResult = preorderDFS(root.left, target);
+    if (leftResult !== null) {
+        return leftResult;
+    }
 
-  // Search in right subtree
-  return preorderDFS(root.right, target);
+    // Search in right subtree
+    return preorderDFS(root.right, target);
 }
 
 /**
@@ -54,24 +53,24 @@ export function preorderDFS(root: TreeNode | null, target: number): TreeNode | n
  * @returns The found node or null if not found
  */
 export function inorderDFS(root: TreeNode | null, target: number): TreeNode | null {
-  // Base case: empty tree
-  if (root === null) {
-    return null;
-  }
+    // Base case: empty tree
+    if (root === null) {
+        return null;
+    }
 
-  // Search in left subtree
-  const leftResult = inorderDFS(root.left, target);
-  if (leftResult !== null) {
-    return leftResult;
-  }
+    // Search in left subtree
+    const leftResult = inorderDFS(root.left, target);
+    if (leftResult !== null) {
+        return leftResult;
+    }
 
-  // Check current node
-  if (root.value === target) {
-    return root;
-  }
+    // Check current node
+    if (root.value === target) {
+        return root;
+    }
 
-  // Search in right subtree
-  return inorderDFS(root.right, target);
+    // Search in right subtree
+    return inorderDFS(root.right, target);
 }
 
 /**
@@ -87,29 +86,29 @@ export function inorderDFS(root: TreeNode | null, target: number): TreeNode | nu
  * @returns The found node or null if not found
  */
 export function postorderDFS(root: TreeNode | null, target: number): TreeNode | null {
-  // Base case: empty tree
-  if (root === null) {
+    // Base case: empty tree
+    if (root === null) {
+        return null;
+    }
+
+    // Search in left subtree
+    const leftResult = postorderDFS(root.left, target);
+    if (leftResult !== null) {
+        return leftResult;
+    }
+
+    // Search in right subtree
+    const rightResult = postorderDFS(root.right, target);
+    if (rightResult !== null) {
+        return rightResult;
+    }
+
+    // Check current node
+    if (root.value === target) {
+        return root;
+    }
+
     return null;
-  }
-
-  // Search in left subtree
-  const leftResult = postorderDFS(root.left, target);
-  if (leftResult !== null) {
-    return leftResult;
-  }
-
-  // Search in right subtree
-  const rightResult = postorderDFS(root.right, target);
-  if (rightResult !== null) {
-    return rightResult;
-  }
-
-  // Check current node
-  if (root.value === target) {
-    return root;
-  }
-
-  return null;
 }
 
 /**
@@ -128,18 +127,18 @@ export function postorderDFS(root: TreeNode | null, target: number): TreeNode | 
  * @returns The found node or null if not found
  */
 export function bstSearch(root: TreeNode | null, target: number): TreeNode | null {
-  // Base case: empty tree or target found
-  if (root === null || root.value === target) {
-    return root;
-  }
+    // Base case: empty tree or target found
+    if (root === null || root.value === target) {
+        return root;
+    }
 
-  // If target is less than the current node, search in left subtree
-  if (target < root.value) {
-    return bstSearch(root.left, target);
-  }
+    // If target is less than the current node, search in left subtree
+    if (target < root.value) {
+        return bstSearch(root.left, target);
+    }
 
-  // If target is greater than the current node, search in right subtree
-  return bstSearch(root.right, target);
+    // If target is greater than the current node, search in right subtree
+    return bstSearch(root.right, target);
 }
 
 /**
@@ -155,33 +154,33 @@ export function bstSearch(root: TreeNode | null, target: number): TreeNode | nul
  * @returns The found node or null if not found
  */
 export function iterativePreorderDFS(root: TreeNode | null, target: number): TreeNode | null {
-  if (root === null) {
+    if (root === null) {
+        return null;
+    }
+
+    // Use stack to simulate recursion
+    const stack: TreeNode[] = [root];
+
+    while (stack.length > 0) {
+        // Pop the top node from stack
+        const current = stack.pop()!;
+
+        // Check if current node matches target
+        if (current.value === target) {
+            return current;
+        }
+
+        // Push right child first so that left is processed first (LIFO)
+        if (current.right !== null) {
+            stack.push(current.right);
+        }
+
+        if (current.left !== null) {
+            stack.push(current.left);
+        }
+    }
+
     return null;
-  }
-
-  // Use stack to simulate recursion
-  const stack: TreeNode[] = [root];
-
-  while (stack.length > 0) {
-    // Pop the top node from stack
-    const current = stack.pop()!;
-
-    // Check if current node matches target
-    if (current.value === target) {
-      return current;
-    }
-
-    // Push right child first so that left is processed first (LIFO)
-    if (current.right !== null) {
-      stack.push(current.right);
-    }
-
-    if (current.left !== null) {
-      stack.push(current.left);
-    }
-  }
-
-  return null;
 }
 
 // Uncomment to test these algorithms individually

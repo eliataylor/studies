@@ -18,7 +18,7 @@ So, the resulting array after the mutation will be [4, 5, -1, 2, 1].
 
 function practice(n, a) {
     let b = new Array(n);
-    a.forEach( (v,i) => {
+    a.forEach((v, i) => {
         b[i] = (a[i - 1]) ? a[i - 1] : 0;
         b[i] += a[i];
         b[i] += (a[i + 1]) ? a[i + 1] : 0;

@@ -6,6 +6,6 @@ function longestDigitsPrefix(inputString) {
     console.log(str);
     str = str.split('_');
     if (str.length === 0) return '';
-    str = str.splice(0,1)[0];
+    str = str.splice(0, 1)[0];
     return (parseInt(str) > -1) ? str : '';
 }

@@ -14,8 +14,8 @@
  * Space Complexity: O(n + k) where k is the number of buckets
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
-import { insertionSort } from './InsertionSort';
+import {SortFunction} from '../utils';
+import {insertionSort} from './InsertionSort';
 
 /**
  * Implementation of bucket sort
@@ -24,43 +24,43 @@ import { insertionSort } from './InsertionSort';
  * @returns The sorted array
  */
 export const bucketSort: SortFunction = (arr: number[], bucketCount?: number): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // If array is empty or has only one element, it's already sorted
-  if (n <= 1) return array;
+    // If array is empty or has only one element, it's already sorted
+    if (n <= 1) return array;
 
-  // Find the minimum and maximum values
-  const min = Math.min(...array);
-  const max = Math.max(...array);
+    // Find the minimum and maximum values
+    const min = Math.min(...array);
+    const max = Math.max(...array);
 
-  // Determine the range
-  const range = max - min + 1;
+    // Determine the range
+    const range = max - min + 1;
 
-  // Determine the number of buckets (default to array length)
-  const numBuckets = bucketCount || n;
+    // Determine the number of buckets (default to array length)
+    const numBuckets = bucketCount || n;
 
-  // Create buckets
-  const buckets: number[][] = Array.from({ length: numBuckets }, () => []);
+    // Create buckets
+    const buckets: number[][] = Array.from({length: numBuckets}, () => []);
 
-  // Distribute elements into buckets
-  for (let i = 0; i < n; i++) {
-    // Calculate appropriate bucket index
-    // This normalization maps the range to [0, numBuckets-1]
-    const bucketIndex = Math.floor((array[i] - min) / range * (numBuckets - 1));
-    buckets[bucketIndex].push(array[i]);
-  }
-
-  // Sort individual buckets (using insertion sort)
-  for (let i = 0; i < numBuckets; i++) {
-    if (buckets[i].length > 0) {
-      // Apply insertion sort to each bucket
-      buckets[i] = insertionSort(buckets[i]);
+    // Distribute elements into buckets
+    for (let i = 0; i < n; i++) {
+        // Calculate appropriate bucket index
+        // This normalization maps the range to [0, numBuckets-1]
+        const bucketIndex = Math.floor((array[i] - min) / range * (numBuckets - 1));
+        buckets[bucketIndex].push(array[i]);
     }
-  }
 
-  // Concatenate all buckets back into the original array
-  return buckets.flat();
+    // Sort individual buckets (using insertion sort)
+    for (let i = 0; i < numBuckets; i++) {
+        if (buckets[i].length > 0) {
+            // Apply insertion sort to each bucket
+            buckets[i] = insertionSort(buckets[i]);
+        }
+    }
+
+    // Concatenate all buckets back into the original array
+    return buckets.flat();
 };
 
 /**

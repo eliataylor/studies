@@ -5,8 +5,6 @@
  * and top to bottom (i.e., matrix[i][j] <= matrix[i][j+1] and matrix[i][j] <= matrix[i+1][j]).
  */
 
-import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
-
 /**
  * Binary Search Matrix
  *
@@ -21,34 +19,34 @@ import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
  * @returns The [row, column] coordinates if found, null otherwise
  */
 export function binarySearchMatrix(matrix: number[][], target: number): [number, number] | null {
-  if (!matrix.length || !matrix[0].length) {
-    return null;
-  }
-
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-  const totalElements = rows * cols;
-
-  let left = 0;
-  let right = totalElements - 1;
-
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
-
-    // Convert 1D index to 2D coordinates
-    const row = Math.floor(mid / cols);
-    const col = mid % cols;
-
-    if (matrix[row][col] === target) {
-      return [row, col];
-    } else if (matrix[row][col] < target) {
-      left = mid + 1;
-    } else {
-      right = mid - 1;
+    if (!matrix.length || !matrix[0].length) {
+        return null;
     }
-  }
 
-  return null;
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+    const totalElements = rows * cols;
+
+    let left = 0;
+    let right = totalElements - 1;
+
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
+
+        // Convert 1D index to 2D coordinates
+        const row = Math.floor(mid / cols);
+        const col = mid % cols;
+
+        if (matrix[row][col] === target) {
+            return [row, col];
+        } else if (matrix[row][col] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    return null;
 }
 
 // Uncomment to test this algorithm individually

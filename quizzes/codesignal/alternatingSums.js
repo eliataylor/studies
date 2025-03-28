@@ -1,7 +1,7 @@
 function alternatingSums(a) {
-    let teams = [0,0];
+    let teams = [0, 0];
     a.forEach((weight, i) => {
-        if (i%2 > 0) {
+        if (i % 2 > 0) {
             teams[1] += weight;
         } else {
             teams[0] += weight;
@@ -14,11 +14,14 @@ function alternatingSums(a) {
 
 
 const tests = [
-    {arg : [50, 60, 60, 45, 70],
-        expected : [180, 105],
-        },
-    {arg : [100, 50],
-        expected : [100, 50]},
+    {
+        arg: [50, 60, 60, 45, 70],
+        expected: [180, 105],
+    },
+    {
+        arg: [100, 50],
+        expected: [100, 50]
+    },
 
 ];
 

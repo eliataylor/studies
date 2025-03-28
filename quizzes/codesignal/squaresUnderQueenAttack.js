@@ -15,11 +15,11 @@ function squaresUnderQueenAttack(n, queens, queries) {
         if (a[1] === b[1]) {
             return true;
         }
-        return diagonalIntersection(a,b);
+        return diagonalIntersection(a, b);
     }
 
-    outter : for(let q=0; q < queries.length; q++) {
-        for(let queen of queens) {
+    outter : for (let q = 0; q < queries.length; q++) {
+        for (let queen of queens) {
             if (canAttack(queries[q], queen) === true) {
                 queries[q] = true;
                 continue outter;
@@ -35,20 +35,20 @@ function squaresUnderQueenAttack(n, queens, queries) {
 
 const tests = [
     {
-        name:'Test 4',
+        name: 'Test 4',
         arg: [5,
             [
-                [1,1],
-                [3,2]
+                [1, 1],
+                [3, 2]
             ],
             [
-                [1,1],
-                [0,3],
-                [0,4],
-                [3,4],
-                [2,0],
-                [4,3],
-                [4,0]
+                [1, 1],
+                [0, 3],
+                [0, 4],
+                [3, 4],
+                [2, 0],
+                [4, 3],
+                [4, 0]
             ]
         ],
         expected: [true, false, false, true, true, true, false]

@@ -52,11 +52,11 @@ function practice(A) {
 
     let p = 0;
     let part1 = A[p];
-    let part2 = A.slice(1).reduce( (acc, v) => acc + v, 0);
+    let part2 = A.slice(1).reduce((acc, v) => acc + v, 0);
 
     let min = Math.abs(part1 - part2);
 
-    while(++p < A.length) {
+    while (++p < A.length) {
         let shift = A[p];
         part1 += shift;
         part2 -= shift;
@@ -68,12 +68,12 @@ function practice(A) {
 const tests = [
     {
         name: 'Test 1',
-        arg: [[3,1,2,4,3]],
+        arg: [[3, 1, 2, 4, 3]],
         expected: 1
     },
     {
         name: 'Test 2',
-        arg: [[1,2]],
+        arg: [[1, 2]],
         expected: 1
     }
 ];

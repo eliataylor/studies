@@ -6,8 +6,8 @@ function calcAngleDegrees(x, y) {
     and without the conversion to degrees built in: if(x>0) {radians = x;}
     else {radians = 2*PI + x;} so we are just adding 2PI to the result if it is less than 0. –
  */
-function aTan2Degrees(x,y) {
-    var angle = (Math.atan2(x,y) * (180/Math.PI) + 360) % 360;
+function aTan2Degrees(x, y) {
+    var angle = (Math.atan2(x, y) * (180 / Math.PI) + 360) % 360;
 }
 
 
@@ -28,29 +28,29 @@ class triangle {
 
     }
 
-    areaOfTriangle(a,b,c) {
+    areaOfTriangle(a, b, c) {
         const sp = (a + b + c) / 2;
-        return Math.sqrt(sp * (sp - a) * (sp - b) * (sp - c) );
+        return Math.sqrt(sp * (sp - a) * (sp - b) * (sp - c));
     };
 
-    getArea(a,b,C) {
-        return  1/2 * a * b * Math.sin(C);
+    getArea(a, b, C) {
+        return 1 / 2 * a * b * Math.sin(C);
     }
 
     getArea(base, height) {
-        return  1/2 * base * height;
+        return 1 / 2 * base * height;
     }
 
 
-    getAngleC(a,b,c) {
+    getAngleC(a, b, c) {
         // (for all triangles)	a2 + b2 − 2ab cos(C) = c2
         // c2 = a2 + b2 − 2ab cos(C)
 
-        let C = Math.acos(  Math.pow(a,2) + Math.pow(b,2) - Math.pow(c,2) / 2 * a * b )
+        let C = Math.acos(Math.pow(a, 2) + Math.pow(b, 2) - Math.pow(c, 2) / 2 * a * b)
     }
 
 
-    getRightTriangle(a,b,c) {
+    getRightTriangle(a, b, c) {
         // (Pythagoras Theorem only for Right-Angled Triangles)	a2 + b2 = c2
     }
 
@@ -73,23 +73,20 @@ class triangle {
     }
 
 
-
 }
 
-function circle(radius)
-{
+function circle(radius) {
     this.radius = radius;
     // area method
-    this.area = function ()
-    {
+    this.area = function () {
         return Math.PI * this.radius * this.radius;
     };
     // perimeter method
-    this.perimeter = function ()
-    {
-        return 2*Math.PI*this.radius;
+    this.perimeter = function () {
+        return 2 * Math.PI * this.radius;
     };
 }
+
 var c = new circle(3);
 console.log('Area =', c.area().toFixed(2));
 console.log('perimeter =', c.perimeter().toFixed(2));

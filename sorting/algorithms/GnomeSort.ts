@@ -14,7 +14,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Implementation of gnome sort
@@ -22,27 +22,27 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const gnomeSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  let index = 0;
+    let index = 0;
 
-  while (index < n) {
-    if (index === 0) {
-      index++;
+    while (index < n) {
+        if (index === 0) {
+            index++;
+        }
+
+        // If the current element is greater or equal than the previous one
+        if (array[index] >= array[index - 1]) {
+            index++;
+        } else {
+            // Otherwise, swap them and move back one step
+            [array[index], array[index - 1]] = [array[index - 1], array[index]];
+            index--;
+        }
     }
 
-    // If the current element is greater or equal than the previous one
-    if (array[index] >= array[index - 1]) {
-      index++;
-    } else {
-      // Otherwise, swap them and move back one step
-      [array[index], array[index - 1]] = [array[index - 1], array[index]];
-      index--;
-    }
-  }
-
-  return array;
+    return array;
 };
 
 /**
@@ -51,20 +51,20 @@ export const gnomeSort: SortFunction = (arr: number[]): number[] => {
  * @returns The sorted array
  */
 export const optimizedGnomeSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  for (let pos = 1; pos < n; pos++) {
-    let index = pos;
+    for (let pos = 1; pos < n; pos++) {
+        let index = pos;
 
-    while (index > 0 && array[index] < array[index - 1]) {
-      // Swap elements
-      [array[index], array[index - 1]] = [array[index - 1], array[index]];
-      index--;
+        while (index > 0 && array[index] < array[index - 1]) {
+            // Swap elements
+            [array[index], array[index - 1]] = [array[index - 1], array[index]];
+            index--;
+        }
     }
-  }
 
-  return array;
+    return array;
 };
 
 /**

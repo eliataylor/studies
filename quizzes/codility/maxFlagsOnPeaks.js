@@ -63,15 +63,13 @@ function practice(A) {
     distances = distances.sort((a, b) => a - b);
 
     let flags = peaks.length;
-    while(flags > 0 && flags > distances[0]) {
+    while (flags > 0 && flags > distances[0]) {
         flags--;
         distances.shift();
     }
     return flags;
 
 }
-
-
 
 
 function textbookSolution(A) {
@@ -91,7 +89,7 @@ function textbookSolution(A) {
     function next_peak(A) {
         let next = [0] * N
         next[N - 1] = -1;
-        for (let i=0; i < N -2; i++) { // in xrange(N - 2, -1, -1)
+        for (let i = 0; i < N - 2; i++) { // in xrange(N - 2, -1, -1)
             if (peaks[i]) {
                 next[i] = i
             } else {
@@ -148,7 +146,7 @@ const tests = [
     },
     {
         name: 'Test 5',
-        arg: [[1,2,3,12,5,6,9]],
+        arg: [[1, 2, 3, 12, 5, 6, 9]],
         expected: 1
     },
     {
@@ -163,12 +161,12 @@ const tests = [
     },
     {
         name: 'Test base',
-        arg: [[1,2,3,4,5,6,9]],
+        arg: [[1, 2, 3, 4, 5, 6, 9]],
         expected: 0
     },
 ];
 
 tests.forEach((o, i) => {
     let result = textbookSolution(...o.arg);
-    console.log((o.name || 'TEST')  + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log((o.name || 'TEST') + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })

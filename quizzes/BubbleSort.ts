@@ -60,10 +60,10 @@ interface Person {
 }
 
 const people: Person[] = [
-    { name: "Alice", age: 30 },
-    { name: "Bob", age: 25 },
-    { name: "Charlie", age: 35 },
-    { name: "David", age: 20 }
+    {name: "Alice", age: 30},
+    {name: "Bob", age: 25},
+    {name: "Charlie", age: 35},
+    {name: "David", age: 20}
 ];
 
 // For custom objects, we need a custom comparator function

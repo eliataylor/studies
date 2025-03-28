@@ -1,6 +1,5 @@
-
 function absoluteValuesSumMinimization(a) {
-    return a[Math.floor((a.length-1)/2)]
+    return a[Math.floor((a.length - 1) / 2)]
 }
 
 function absoluteValuesSumMinimization(a) {

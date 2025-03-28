@@ -1,9 +1,9 @@
 function differentSquares(matrix) {
     let set1 = new Set();
-    for (let i = 0; i < matrix.length-1; i++) {
-        for (let j = 0; j < matrix[i].length-1; j++) {
-            set1.add(matrix[i][j] + " " + matrix[i][j+1] + " "
-                + matrix[i+1][j] + " " + matrix[i+1][j+1]);
+    for (let i = 0; i < matrix.length - 1; i++) {
+        for (let j = 0; j < matrix[i].length - 1; j++) {
+            set1.add(matrix[i][j] + " " + matrix[i][j + 1] + " "
+                + matrix[i + 1][j] + " " + matrix[i + 1][j + 1]);
         }
     }
     return set1.size;
@@ -18,8 +18,8 @@ function differentSquaresOld(matrix) {
 
     if (rows < 2 || cols < 2) return 0
 
-    rows = rows/2 * (rows%3)
-    cols = cols/2 + (cols%3)
+    rows = rows / 2 * (rows % 3)
+    cols = cols / 2 + (cols % 3)
 
     let val = rows + cols;
     return val;
@@ -28,7 +28,7 @@ function differentSquaresOld(matrix) {
 
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: [[
             [1, 2, 1],
             [2, 2, 2],
@@ -39,14 +39,14 @@ const tests = [
         expected: 6
     },
     {
-        name:'Test 2',
+        name: 'Test 2',
         arg: [[
-            [9,9,9,9,9],
-            [9,9,9,9,9],
-            [9,9,9,9,9],
-            [9,9,9,9,9],
-            [9,9,9,9,9],
-            [9,9,9,9,9]
+            [9, 9, 9, 9, 9],
+            [9, 9, 9, 9, 9],
+            [9, 9, 9, 9, 9],
+            [9, 9, 9, 9, 9],
+            [9, 9, 9, 9, 9],
+            [9, 9, 9, 9, 9]
         ]],
         expected: 1
     }

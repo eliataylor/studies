@@ -1,12 +1,13 @@
 function areSimilar(a, b) {
     if (a.length !== b.length) return false;
     opts = [];
-    for (let i=0; i < a.length; i++) {
+    for (let i = 0; i < a.length; i++) {
         if (b[i] != a[i]) {
             opts.push(i);
         }
         if (opts.length > 2) return false;
-    };
+    }
+    ;
 
     if (opts.length === 0) return true;
     if (opts.length !== 2) return false;
@@ -53,6 +54,6 @@ tests.forEach((o, i) => {
     if (JSON.stringify(result) === JSON.stringify(o.expected)) {
         console.log("TEST PASSED!");
     } else {
-        console.log("GOT ", JSON.stringify(result), " EXPECTED ",  JSON.stringify(o.expected));
+        console.log("GOT ", JSON.stringify(result), " EXPECTED ", JSON.stringify(o.expected));
     }
 })

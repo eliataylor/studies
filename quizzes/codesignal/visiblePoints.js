@@ -16,7 +16,7 @@ function visiblePoints(points) {
     'use strict';
 
     const pointCount = points.length,
-          viewingAreaSize = 45 * Math.PI / 180; // radians
+        viewingAreaSize = 45 * Math.PI / 180; // radians
 
     // Get the angle of each point
     for (let p = 0; p < pointCount; p++) {
@@ -44,7 +44,7 @@ function visiblePoints(points) {
             let point = points[diff];
             nextPointAngle = point[2];
             if (nextPoint >= pointCount) {
-             //    nextPointAngle += 2 * Math.PI;
+                //    nextPointAngle += 2 * Math.PI;
             }
         }
 
@@ -85,12 +85,12 @@ visiblePoints23 = p => {
     p.map(p => {
         x = p[0]
         y = p[1]
-        angle = Math.asin(x / Math.sqrt(x*x + y*y)) * 180 / Math.PI
+        angle = Math.asin(x / Math.sqrt(x * x + y * y)) * 180 / Math.PI
         angle = (y > 0 ? angle : 180 - angle) * 1e5 + .5 | 0
         angles.push(angle)
         angles.push(360 * 1e5 + angle)
     })
-    angles.sort((a,b) => a-b)
+    angles.sort((a, b) => a - b)
 
     max = 0
     i = j = 0
@@ -109,17 +109,17 @@ visiblePoints23 = p => {
 const tests = [
     {
         name: 'Test 1',
-        arg: [[[1,1],
-            [3,1],
-            [3,2],
-            [3,3],
-            [1,3],
-            [2,5],
-            [1,5],
-            [-1,-1],
-            [-1,-2],
-            [-2,-3],
-            [-4,-4]]],
+        arg: [[[1, 1],
+            [3, 1],
+            [3, 2],
+            [3, 3],
+            [1, 3],
+            [2, 5],
+            [1, 5],
+            [-1, -1],
+            [-1, -2],
+            [-2, -3],
+            [-4, -4]]],
         expected: 6
     }
 ];

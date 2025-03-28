@@ -14,7 +14,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Implementation of selection sort
@@ -22,26 +22,26 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const selectionSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  for (let i = 0; i < n - 1; i++) {
-    // Find the minimum element in the unsorted part of the array
-    let minIndex = i;
+    for (let i = 0; i < n - 1; i++) {
+        // Find the minimum element in the unsorted part of the array
+        let minIndex = i;
 
-    for (let j = i + 1; j < n; j++) {
-      if (array[j] < array[minIndex]) {
-        minIndex = j;
-      }
+        for (let j = i + 1; j < n; j++) {
+            if (array[j] < array[minIndex]) {
+                minIndex = j;
+            }
+        }
+
+        // Swap the found minimum element with the first element
+        if (minIndex !== i) {
+            [array[i], array[minIndex]] = [array[minIndex], array[i]];
+        }
     }
 
-    // Swap the found minimum element with the first element
-    if (minIndex !== i) {
-      [array[i], array[minIndex]] = [array[minIndex], array[i]];
-    }
-  }
-
-  return array;
+    return array;
 };
 
 /**

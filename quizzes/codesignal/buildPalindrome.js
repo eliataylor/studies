@@ -8,8 +8,8 @@ function checkPalindrome(inputString) {
 
 function buildPalindrome(st) {
     let original = st;
-    i=0;
-    while(checkPalindrome(st) === false) {
+    i = 0;
+    while (checkPalindrome(st) === false) {
         let char = original.substring(0, i).split('').reverse().join('');
         st = original + char;
         i++;

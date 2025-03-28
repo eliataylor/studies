@@ -1,18 +1,19 @@
 // dynamic
 function CombinationsUtil(n, k, comb, ans) {
-    if (n===0) {
-        ans.push(Object.assign([],comb));
+    if (n === 0) {
+        ans.push(Object.assign([], comb));
         return comb;
-    } else if (n<0) {
+    } else if (n < 0) {
         return comb;
     }
-    for(let i=1; i<=k; i++) {
+    for (let i = 1; i <= k; i++) {
         comb.push(i);
-        let test = CombinationsUtil(n-i, k ,comb, ans);
+        let test = CombinationsUtil(n - i, k, comb, ans);
         comb.pop();
     }
     return comb;
 }
+
 function climbingStaircase6(n, k) {
     let ans = [];
     let comb = [];
@@ -23,12 +24,12 @@ function climbingStaircase6(n, k) {
 function climbingStaircase(n, k) {
     const dp = [[[]]];
 
-    for(let i = 1; i <= n; i++) {
+    for (let i = 1; i <= n; i++) {
         let next = [];
-        for(let jump = 1; jump <= Math.min(i, k); jump++) {
+        for (let jump = 1; jump <= Math.min(i, k); jump++) {
             let ordered = dp[i - jump];
             ordered = ordered.map(arr => {
-               return [jump, ...arr]
+                return [jump, ...arr]
             });
             next.push(...ordered);
         }
@@ -40,12 +41,12 @@ function climbingStaircase(n, k) {
 
 // with memoization
 function climbingStaircase2(n, k, memo = {}) {
-    if(n === 0) return [[]];
-    if(n in memo) return memo[n];
+    if (n === 0) return [[]];
+    if (n in memo) return memo[n];
 
     let total = [];
 
-    for(let jump = 1; jump <= Math.min(n, k); jump++) {
+    for (let jump = 1; jump <= Math.min(n, k); jump++) {
         total.push(...climbingStaircase2(n - jump, k, memo).map(arr => [jump, ...arr]))
     }
 
@@ -54,11 +55,11 @@ function climbingStaircase2(n, k, memo = {}) {
 }
 
 function climbingStaircase1(n, k) {
-    if(n === 0) return [[]];
+    if (n === 0) return [[]];
 
     let total = [];
 
-    for(let jump = 1; jump <= Math.min(n, k); jump++) {
+    for (let jump = 1; jump <= Math.min(n, k); jump++) {
         total.push(...climbingStaircase1(n - jump, k).map(arr => [jump, ...arr]))
     }
 
@@ -70,9 +71,9 @@ function climbingStaircaseOld(n, k) {
 
     function permute(permutation, min) {
         let length = permutation.length,
-        result = [permutation.slice()],
-        c = new Array(length).fill(0),
-        i = 1, k, p;
+            result = [permutation.slice()],
+            c = new Array(length).fill(0),
+            i = 1, k, p;
 
         while (i < length) {
             if (c[i] < i) {
@@ -105,7 +106,7 @@ function climbingStaircaseOld(n, k) {
     let allSteps = new Uint8Array(k).map((item, i) => i + 1);
     let map = new Map();
     allSteps.forEach(v => {
-        map.set(v, {num:Math.floor(n/v), diff:n%v, step:v});
+        map.set(v, {num: Math.floor(n / v), diff: n % v, step: v});
     })
     console.log(map);
     map.forEach((obj, step) => {
@@ -125,7 +126,6 @@ function climbingStaircaseOld(n, k) {
 }
 
 
-
 const tests = [
     /* {
         name:'Test 1',
@@ -137,8 +137,8 @@ const tests = [
             [2,2]]
     }, */
     {
-        name:'Test 2',
-        arg: [7,3],
+        name: 'Test 2',
+        arg: [7, 3],
         expected: [
             [
                 1,

@@ -55,17 +55,17 @@ function checkPartial(xs, y) {
 
 const tests = [
     {
-        name:'Test 2',
-        arg:[4],
-        expected: [ [ 2, 4, 1, 3 ], [ 3, 1, 4, 2 ] ]
+        name: 'Test 2',
+        arg: [4],
+        expected: [[2, 4, 1, 3], [3, 1, 4, 2]]
     },
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: [6],
-        expected: [[2,4,6,1,3,5],
-            [3,6,2,5,1,4],
-            [4,1,5,2,6,3],
-            [5,3,1,6,4,2]]
+        expected: [[2, 4, 6, 1, 3, 5],
+            [3, 6, 2, 5, 1, 4],
+            [4, 1, 5, 2, 6, 3],
+            [5, 3, 1, 6, 4, 2]]
     }
 ];
 

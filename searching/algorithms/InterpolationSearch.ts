@@ -5,8 +5,6 @@
  * better for uniformly distributed data.
  */
 
-import { runArraySearch, type ArraySearchFunction } from '../utils';
-
 /**
  * Interpolation Search
  *
@@ -21,46 +19,46 @@ import { runArraySearch, type ArraySearchFunction } from '../utils';
  * @returns The index of the target if found, -1 otherwise
  */
 export function interpolationSearch(arr: number[], target: number): number {
-  let low = 0;
-  let high = arr.length - 1;
+    let low = 0;
+    let high = arr.length - 1;
 
-  // Since array is sorted, an element present in array must be in
-  // range defined by corners
-  while (
-    low <= high &&
-    target >= arr[low] &&
-    target <= arr[high]
-  ) {
-    // No division by zero
-    if (arr[high] === arr[low]) {
-      // If element is present at low or high
-      if (arr[low] === target) return low;
-      if (arr[high] === target) return high;
-      return -1;
+    // Since array is sorted, an element present in array must be in
+    // range defined by corners
+    while (
+        low <= high &&
+        target >= arr[low] &&
+        target <= arr[high]
+        ) {
+        // No division by zero
+        if (arr[high] === arr[low]) {
+            // If element is present at low or high
+            if (arr[low] === target) return low;
+            if (arr[high] === target) return high;
+            return -1;
+        }
+
+        // Probing the position with keeping
+        // uniform distribution in mind
+        const pos = low + Math.floor(
+            ((high - low) / (arr[high] - arr[low])) * (target - arr[low])
+        );
+
+        // Target found
+        if (arr[pos] === target) {
+            return pos;
+        }
+
+        // If target is larger, target is in upper part
+        if (arr[pos] < target) {
+            low = pos + 1;
+        }
+        // If target is smaller, target is in the lower part
+        else {
+            high = pos - 1;
+        }
     }
 
-    // Probing the position with keeping
-    // uniform distribution in mind
-    const pos = low + Math.floor(
-      ((high - low) / (arr[high] - arr[low])) * (target - arr[low])
-    );
-
-    // Target found
-    if (arr[pos] === target) {
-      return pos;
-    }
-
-    // If target is larger, target is in upper part
-    if (arr[pos] < target) {
-      low = pos + 1;
-    }
-    // If target is smaller, target is in the lower part
-    else {
-      high = pos - 1;
-    }
-  }
-
-  return -1;
+    return -1;
 }
 
 // Uncomment to test this algorithm individually

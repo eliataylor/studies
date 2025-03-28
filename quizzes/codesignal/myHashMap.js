@@ -76,29 +76,29 @@ The sum of the results for all get queries.
 function MyHashMap() {
     return {
 
-        map : {},
+        map: {},
 
-        insert : function (x,y) {
+        insert: function (x, y) {
             this.map[x] = y;
             console.log('insert', this.map);
         },
 
-        get : function(x) {
+        get: function (x) {
             console.log('get ' + x + ': ' + this.map[x]);
             return this.map[x] || 0;
         },
 
-        addToKey : function(x) {
+        addToKey: function (x) {
             let newmap = {};
-            for(let i in this.map) {
-                newmap[parseInt(i)+x] = this.map[i];
+            for (let i in this.map) {
+                newmap[parseInt(i) + x] = this.map[i];
             }
             this.map = newmap;
             console.log('addToKey ' + x, this.map);
         },
 
-        addToValue : function(y) {
-            for(let i in this.map) {
+        addToValue: function (y) {
+            for (let i in this.map) {
                 this.map[i] += y;
             }
             console.log('addToValue ' + y, this.map);
@@ -132,7 +132,7 @@ const tests = [
         name: 'Test 1',
         arg: [["insert", "insert", "addToValue", "addToKey", "get"], [[1, 2], [2, 3], [2], [1], [3]]],
         expected: 5
-    },{
+    }, {
         name: 'Test 2',
         arg: [["insert", "addToValue", "get", "insert", "addToKey", "addToValue", "get"], [[1, 2], [2], [1], [2, 3], [1], [-1], [3]]],
         expected: 6

@@ -1,6 +1,7 @@
 # TypeScript Sorting Algorithms
 
-This repository contains implementations of various sorting algorithms in TypeScript, along with a unified framework for testing and comparing their performance.
+This repository contains implementations of various sorting algorithms in TypeScript, along with a unified framework for
+testing and comparing their performance.
 
 ## Installation
 
@@ -18,7 +19,8 @@ npm run build
 
 ## Sorting Algorithm Test Framework
 
-The unified testing framework allows you to test individual algorithms or compare multiple algorithms under configurable conditions to understand their performance characteristics.
+The unified testing framework allows you to test individual algorithms or compare multiple algorithms under configurable
+conditions to understand their performance characteristics.
 
 ```bash
 npm run sort-test -- [options]
@@ -55,11 +57,13 @@ The framework provides powerful ways to test algorithms with different input cha
 - **Few unique values**: Many duplicate values (tests stability)
 
 The `--sortedness` parameter controls how sorted the array is (0-100%):
+
 - 0% = completely random
 - 100% = perfectly sorted according to the array type
 - Any value in between creates a partially sorted array
 
 This parameter works with all array types. For example, with a reversed array:
+
 - `--arrayType reversed --sortedness 100` = completely reversed
 - `--arrayType reversed --sortedness 0` = completely random
 - `--arrayType reversed --sortedness 80` = mostly reversed with some shuffling
@@ -127,58 +131,70 @@ npm run sort-test --algorithms "insertion,quick" --sortedness 95
 The following examples reveal how different algorithms perform under varying conditions:
 
 #### Small Random Array (10 elements, unsorted)
+
 ```bash
 npm run sort-test --algorithms all --size 10 --sortedness 1
 ```
+
 *Key insight: Simple O(n²) algorithms like insertion sort are often faster for very small arrays due to less overhead.*
 
 #### Small Nearly-Sorted Array (10 elements, 99% sorted)
+
 ```bash
 npm run sort-test --algorithms all --size 10 --sortedness 99
 ```
+
 *Key insight: Insertion sort often outperforms even O(n log n) algorithms on nearly sorted data.*
 
 #### Large Random Array (50000 elements, unsorted)
+
 ```bash
 npm run sort-test --algorithms all --size 50000 --sortedness 1
 ```
-*Key insight: O(n log n) algorithms dramatically outperform O(n²) algorithms on large datasets. Quick and heap sort typically excel here.*
+
+*Key insight: O(n log n) algorithms dramatically outperform O(n²) algorithms on large datasets. Quick and heap sort
+typically excel here.*
 
 #### Large Nearly-Sorted Array (50000 elements, 99% sorted)
+
 ```bash
 npm run sort-test --algorithms all --size 50000 --sortedness 99
 ```
-*Key insight: Algorithms like insertion sort and Tim sort that take advantage of existing order can outperform other algorithms on nearly sorted large arrays.*
+
+*Key insight: Algorithms like insertion sort and Tim sort that take advantage of existing order can outperform other
+algorithms on nearly sorted large arrays.*
 
 ## Understanding Sort Algorithm Performance
 
-The framework generates color-coded output showing the relative performance of algorithms. Here's how to interpret the results:
+The framework generates color-coded output showing the relative performance of algorithms. Here's how to interpret the
+results:
 
 - **Avg Time (ms)**: Average execution time across all runs
-- **Min/Max Time**: Shows the range of execution times 
+- **Min/Max Time**: Shows the range of execution times
 - **Relative Speed**: How many times slower an algorithm is compared to the fastest one
 - **Compared to Fastest**: Percentage difference from the fastest algorithm
 
 ## Time and Space Complexity
 
-| Algorithm       | Best Time     | Average Time  | Worst Time    | Space  | Stable | Best For                               |
-|-----------------|---------------|---------------|---------------|--------|--------|----------------------------------------|
-| Bubble Sort     | O(n)          | O(n²)         | O(n²)         | O(1)   | Yes    | Teaching, small or nearly sorted arrays|
-| Selection Sort  | O(n²)         | O(n²)         | O(n²)         | O(1)   | No     | Minimizing swaps                       |
-| Insertion Sort  | O(n)          | O(n²)         | O(n²)         | O(1)   | Yes    | Small or nearly sorted arrays          |
-| Gnome Sort      | O(n)          | O(n²)         | O(n²)         | O(1)   | Yes    | Simplicity of implementation           |
-| Comb Sort       | O(n log n)    | O(n²/2^p)     | O(n²)         | O(1)   | No     | Improving on bubble sort               |
-| Shell Sort      | O(n log n)    | O(n(log n)²)  | O(n²)         | O(1)   | No     | Improving on insertion sort            |
-| Merge Sort      | O(n log n)    | O(n log n)    | O(n log n)    | O(n)   | Yes    | Guaranteeing stable sorting            |
-| Quick Sort      | O(n log n)    | O(n log n)    | O(n²)         | O(log n)| No    | General purpose with good cache locality|
-| Heap Sort       | O(n log n)    | O(n log n)    | O(n log n)    | O(1)   | No     | Guaranteed worst case, in-place sorting |
-| Tim Sort        | O(n)          | O(n log n)    | O(n log n)    | O(n)   | Yes    | Real-world data with partial ordering  |
-| Intro Sort      | O(n log n)    | O(n log n)    | O(n log n)    | O(log n)| No    | General purpose, avoiding quick sort's worst case|
-| Counting Sort   | O(n + k)      | O(n + k)      | O(n + k)      | O(n + k)| Yes   | Small range integers                   |
-| Radix Sort      | O(nk)         | O(nk)         | O(nk)         | O(n + k)| Yes   | Integers or strings with limited digits|
-| Bucket Sort     | O(n + k)      | O(n + k)      | O(n²)         | O(n + k)| Yes   | Uniformly distributed data             |
+| Algorithm      | Best Time  | Average Time | Worst Time | Space    | Stable | Best For                                          |
+|----------------|------------|--------------|------------|----------|--------|---------------------------------------------------|
+| Bubble Sort    | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Teaching, small or nearly sorted arrays           |
+| Selection Sort | O(n²)      | O(n²)        | O(n²)      | O(1)     | No     | Minimizing swaps                                  |
+| Insertion Sort | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Small or nearly sorted arrays                     |
+| Gnome Sort     | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Simplicity of implementation                      |
+| Comb Sort      | O(n log n) | O(n²/2^p)    | O(n²)      | O(1)     | No     | Improving on bubble sort                          |
+| Shell Sort     | O(n log n) | O(n(log n)²) | O(n²)      | O(1)     | No     | Improving on insertion sort                       |
+| Merge Sort     | O(n log n) | O(n log n)   | O(n log n) | O(n)     | Yes    | Guaranteeing stable sorting                       |
+| Quick Sort     | O(n log n) | O(n log n)   | O(n²)      | O(log n) | No     | General purpose with good cache locality          |
+| Heap Sort      | O(n log n) | O(n log n)   | O(n log n) | O(1)     | No     | Guaranteed worst case, in-place sorting           |
+| Tim Sort       | O(n)       | O(n log n)   | O(n log n) | O(n)     | Yes    | Real-world data with partial ordering             |
+| Intro Sort     | O(n log n) | O(n log n)   | O(n log n) | O(log n) | No     | General purpose, avoiding quick sort's worst case |
+| Counting Sort  | O(n + k)   | O(n + k)     | O(n + k)   | O(n + k) | Yes    | Small range integers                              |
+| Radix Sort     | O(nk)      | O(nk)        | O(nk)      | O(n + k) | Yes    | Integers or strings with limited digits           |
+| Bucket Sort    | O(n + k)   | O(n + k)     | O(n²)      | O(n + k) | Yes    | Uniformly distributed data                        |
 
 Where:
+
 - n is the number of elements
 - k is the range of values or number of digits
 - p is the number of increments in comb sort

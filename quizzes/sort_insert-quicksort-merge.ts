@@ -1,10 +1,10 @@
 /**
  * Insertion Sort - builds the sorted array one element at a time
  * TIME COMPLEXITY:
-     * Best case: O(n) when the array is already sorted
-     * Average/Worst case: O(n²)
+ * Best case: O(n) when the array is already sorted
+ * Average/Worst case: O(n²)
  * SPACE COMPLEXITY:
-    * O(1) - sorts in-place with only a few variables
+ * O(1) - sorts in-place with only a few variables
  * @param array The array to sort
  * @returns A new sorted array
  */
@@ -153,7 +153,7 @@ function comparePerformance(sizes: number[]): void {
         // Generate a random array of the specified size
         const randomArray: number[] = Array.from(
             {length: size},
-            () => Math.floor(Math.random() * size*2)
+            () => Math.floor(Math.random() * size * 2)
         );
         console.log("Original Random Array:", randomArray);
 

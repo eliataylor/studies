@@ -13,10 +13,9 @@ function longestWord(text) {
 // }
 
 
-
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: ["Ready, steady, go! _bla, and 1and, 2nand1, and don't stop."],
         expected: "steady"
     }

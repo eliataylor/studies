@@ -17,8 +17,8 @@ a[5] = 278 and a[6] = 872 (i = 5 and j = 6).
 function digitAnagramsOld(a) {
     let sum = 0;
 
-    for(let i1 = a.length-1; i1 >= 0; i1--) {
-        for(let i2 = a.length-1; i2 >= 0; i2--) {
+    for (let i1 = a.length - 1; i1 >= 0; i1--) {
+        for (let i2 = a.length - 1; i2 >= 0; i2--) {
             if (i1 !== i2) {
                 if (a[i1] === a[i2]) {
                     sum++;
@@ -26,7 +26,7 @@ function digitAnagramsOld(a) {
                 } else {
                     let s1 = new Uint8Array(a[i1].toString().split(''));
                     let s2 = new Uint8Array(a[i2].toString().split(''));
-                    if (s1.sort().join('') === s2.sort().join(''))  {
+                    if (s1.sort().join('') === s2.sort().join('')) {
                         sum++;
                         // a.splice(i1, 1);
                     }
@@ -43,15 +43,15 @@ function digitAnagramsOld(a) {
 
 function digitAnagrams(a) {
     let sum = 0;
-    for(let i1 = 0; i1 < a.length; i1++) {
-        for(let i2 = 0; i2 < a.length; i2++) {
+    for (let i1 = 0; i1 < a.length; i1++) {
+        for (let i2 = 0; i2 < a.length; i2++) {
             if (i1 !== i2) {
                 if (a[i1] === a[i2]) {
                     sum++;
                 } else {
                     let s1 = new Uint8Array(a[i1].toString().split(''));
                     let s2 = new Uint8Array(a[i2].toString().split(''));
-                    if (s1.sort().join('') === s2.sort().join(''))  {
+                    if (s1.sort().join('') === s2.sort().join('')) {
                         sum++;
                     }
                 }
@@ -59,7 +59,7 @@ function digitAnagrams(a) {
         }
     }
     console.log(sum);
-    return sum/2;
+    return sum / 2;
 }
 
 const tests = [

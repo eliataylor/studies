@@ -14,7 +14,7 @@
  * Space Complexity: O(n)
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 // Minimum size of a run
 const MIN_RUN = 32;
@@ -25,12 +25,12 @@ const MIN_RUN = 32;
  * @returns The minimum run length
  */
 function getMinRun(n: number): number {
-  let r = 0;
-  while (n >= MIN_RUN) {
-    r |= (n & 1);
-    n >>= 1;
-  }
-  return n + r;
+    let r = 0;
+    while (n >= MIN_RUN) {
+        r |= (n & 1);
+        n >>= 1;
+    }
+    return n + r;
 }
 
 /**
@@ -40,15 +40,15 @@ function getMinRun(n: number): number {
  * @param right The end index
  */
 function insertionSortForRun(array: number[], left: number, right: number): void {
-  for (let i = left + 1; i <= right; i++) {
-    const temp = array[i];
-    let j = i - 1;
-    while (j >= left && array[j] > temp) {
-      array[j + 1] = array[j];
-      j--;
+    for (let i = left + 1; i <= right; i++) {
+        const temp = array[i];
+        let j = i - 1;
+        while (j >= left && array[j] > temp) {
+            array[j + 1] = array[j];
+            j--;
+        }
+        array[j + 1] = temp;
     }
-    array[j + 1] = temp;
-  }
 }
 
 /**
@@ -59,40 +59,40 @@ function insertionSortForRun(array: number[], left: number, right: number): void
  * @param right The end index of the second subarray
  */
 function merge(array: number[], left: number, mid: number, right: number): void {
-  // Calculate lengths of subarrays
-  const len1 = mid - left + 1;
-  const len2 = right - mid;
+    // Calculate lengths of subarrays
+    const len1 = mid - left + 1;
+    const len2 = right - mid;
 
-  // Create temporary arrays
-  const leftArr = array.slice(left, mid + 1);
-  const rightArr = array.slice(mid + 1, right + 1);
+    // Create temporary arrays
+    const leftArr = array.slice(left, mid + 1);
+    const rightArr = array.slice(mid + 1, right + 1);
 
-  // Merge the subarrays back into the original array
-  let i = 0, j = 0, k = left;
+    // Merge the subarrays back into the original array
+    let i = 0, j = 0, k = left;
 
-  while (i < len1 && j < len2) {
-    if (leftArr[i] <= rightArr[j]) {
-      array[k] = leftArr[i];
-      i++;
-    } else {
-      array[k] = rightArr[j];
-      j++;
+    while (i < len1 && j < len2) {
+        if (leftArr[i] <= rightArr[j]) {
+            array[k] = leftArr[i];
+            i++;
+        } else {
+            array[k] = rightArr[j];
+            j++;
+        }
+        k++;
     }
-    k++;
-  }
 
-  // Copy any remaining elements
-  while (i < len1) {
-    array[k] = leftArr[i];
-    i++;
-    k++;
-  }
+    // Copy any remaining elements
+    while (i < len1) {
+        array[k] = leftArr[i];
+        i++;
+        k++;
+    }
 
-  while (j < len2) {
-    array[k] = rightArr[j];
-    j++;
-    k++;
-  }
+    while (j < len2) {
+        array[k] = rightArr[j];
+        j++;
+        k++;
+    }
 }
 
 /**
@@ -101,36 +101,36 @@ function merge(array: number[], left: number, mid: number, right: number): void 
  * @returns The sorted array
  */
 export const timSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // Calculate the minimum run length
-  const minRun = getMinRun(n);
+    // Calculate the minimum run length
+    const minRun = getMinRun(n);
 
-  // Sort individual runs with insertion sort
-  for (let i = 0; i < n; i += minRun) {
-    const end = Math.min(i + minRun - 1, n - 1);
-    insertionSortForRun(array, i, end);
-  }
-
-  // Start merging from size minRun
-  // After this loop, we'll have size = 2*minRun
-  for (let size = minRun; size < n; size = 2 * size) {
-    // Pick starting point of left subarray for each merge
-    for (let left = 0; left < n; left += 2 * size) {
-      // Find ending point of left subarray
-      // mid+1 is starting point of right subarray
-      const mid = left + size - 1;
-      const right = Math.min(left + 2 * size - 1, n - 1);
-
-      // Merge the two subarrays if the mid point is valid
-      if (mid < right) {
-        merge(array, left, mid, right);
-      }
+    // Sort individual runs with insertion sort
+    for (let i = 0; i < n; i += minRun) {
+        const end = Math.min(i + minRun - 1, n - 1);
+        insertionSortForRun(array, i, end);
     }
-  }
 
-  return array;
+    // Start merging from size minRun
+    // After this loop, we'll have size = 2*minRun
+    for (let size = minRun; size < n; size = 2 * size) {
+        // Pick starting point of left subarray for each merge
+        for (let left = 0; left < n; left += 2 * size) {
+            // Find ending point of left subarray
+            // mid+1 is starting point of right subarray
+            const mid = left + size - 1;
+            const right = Math.min(left + 2 * size - 1, n - 1);
+
+            // Merge the two subarrays if the mid point is valid
+            if (mid < right) {
+                merge(array, left, mid, right);
+            }
+        }
+    }
+
+    return array;
 };
 
 /**

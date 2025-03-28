@@ -1,4 +1,3 @@
-
 //
 // Binary trees are already defined with this interface:
 // function Tree(x) {
@@ -6,11 +5,6 @@
 //   this.left = null;
 //   this.right = null;
 // }
-
-
-
-
-
 
 
 function getValuesAtLevel(arr) {
@@ -75,8 +69,8 @@ function traverseTree(t) {
 
 const tests = [
     {
-        name:'Test 1',
-        arg:[{
+        name: 'Test 1',
+        arg: [{
             "value": 1,
             "left": {
                 "value": 2,

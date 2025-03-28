@@ -16,10 +16,10 @@ function sudoku4(grid) {
                         return false;
                 }
                 // check square
-                var a = i - i%3,
-                    b = j - j%3;
-                for (var x = a; x < a+3; x++) {
-                    for (var y = b; y < b+3; y++) {
+                var a = i - i % 3,
+                    b = j - j % 3;
+                for (var x = a; x < a + 3; x++) {
+                    for (var y = b; y < b + 3; y++) {
                         if (x !== i && y !== j && grid[x][y] === c)
                             return false;
                     }
@@ -40,15 +40,15 @@ function sudoku3(grid) {
     }
 
 
-    for(let row = 0; row < 9; row ++) {
+    for (let row = 0; row < 9; row++) {
         let rowValues = {};
-        for(let col = 0; col < 9; col ++) {
+        for (let col = 0; col < 9; col++) {
             if (!isValidValue(rowValues, grid[row][col])) return false;
 
 
             if (row === 0) {
                 let colValues = {};
-                for (let i =0 ; i < 9; i++) {
+                for (let i = 0; i < 9; i++) {
                     console.log(i, col, grid[i][col])
                     if (!isValidValue(colValues, grid[i][col])) return false;
                 }
@@ -58,7 +58,7 @@ function sudoku3(grid) {
                 let subGrid = {};
                 for (let subX = 0; subX < 3; subX++) {
                     for (let subY = 0; subY < 3; subY++) {
-                        if (!isValidValue(subGrid, grid[row+subX][col + subY])) return false;
+                        if (!isValidValue(subGrid, grid[row + subX][col + subY])) return false;
 
                     }
                 }

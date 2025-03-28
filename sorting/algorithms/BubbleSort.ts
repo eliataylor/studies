@@ -13,7 +13,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Basic implementation of bubble sort
@@ -21,30 +21,30 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @returns The sorted array
  */
 export const bubbleSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  for (let i = 0; i < n; i++) {
-    // Flag to optimize if no swaps occur in a pass
-    let swapped = false;
+    for (let i = 0; i < n; i++) {
+        // Flag to optimize if no swaps occur in a pass
+        let swapped = false;
 
-    // Last i elements are already in place
-    for (let j = 0; j < n - i - 1; j++) {
-      // Compare adjacent elements
-      if (array[j] > array[j + 1]) {
-        // Swap them if they are in the wrong order
-        [array[j], array[j + 1]] = [array[j + 1], array[j]];
-        swapped = true;
-      }
+        // Last i elements are already in place
+        for (let j = 0; j < n - i - 1; j++) {
+            // Compare adjacent elements
+            if (array[j] > array[j + 1]) {
+                // Swap them if they are in the wrong order
+                [array[j], array[j + 1]] = [array[j + 1], array[j]];
+                swapped = true;
+            }
+        }
+
+        // If no swapping occurred in this pass, the array is sorted
+        if (!swapped) {
+            break;
+        }
     }
 
-    // If no swapping occurred in this pass, the array is sorted
-    if (!swapped) {
-      break;
-    }
-  }
-
-  return array;
+    return array;
 };
 
 /**

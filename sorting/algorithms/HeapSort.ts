@@ -14,7 +14,7 @@
  * Space Complexity: O(1) - sorts in place
  */
 
-import { SortFunction, runSort, TestArray } from '../utils';
+import {SortFunction} from '../utils';
 
 /**
  * Heapify a subtree rooted at index i
@@ -23,31 +23,31 @@ import { SortFunction, runSort, TestArray } from '../utils';
  * @param i The root index of the subtree
  */
 function heapify(array: number[], n: number, i: number): void {
-  // Initialize largest as root
-  let largest = i;
+    // Initialize largest as root
+    let largest = i;
 
-  // Calculate indices of left and right children
-  const left = 2 * i + 1;
-  const right = 2 * i + 2;
+    // Calculate indices of left and right children
+    const left = 2 * i + 1;
+    const right = 2 * i + 2;
 
-  // If left child is larger than root
-  if (left < n && array[left] > array[largest]) {
-    largest = left;
-  }
+    // If left child is larger than root
+    if (left < n && array[left] > array[largest]) {
+        largest = left;
+    }
 
-  // If right child is larger than largest so far
-  if (right < n && array[right] > array[largest]) {
-    largest = right;
-  }
+    // If right child is larger than largest so far
+    if (right < n && array[right] > array[largest]) {
+        largest = right;
+    }
 
-  // If largest is not root
-  if (largest !== i) {
-    // Swap root with largest
-    [array[i], array[largest]] = [array[largest], array[i]];
+    // If largest is not root
+    if (largest !== i) {
+        // Swap root with largest
+        [array[i], array[largest]] = [array[largest], array[i]];
 
-    // Recursively heapify the affected subtree
-    heapify(array, n, largest);
-  }
+        // Recursively heapify the affected subtree
+        heapify(array, n, largest);
+    }
 }
 
 /**
@@ -56,24 +56,24 @@ function heapify(array: number[], n: number, i: number): void {
  * @returns The sorted array
  */
 export const heapSort: SortFunction = (arr: number[]): number[] => {
-  const array = [...arr]; // Create a copy to avoid modifying the original
-  const n = array.length;
+    const array = [...arr]; // Create a copy to avoid modifying the original
+    const n = array.length;
 
-  // Build a max heap (rearrange the array)
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(array, n, i);
-  }
+    // Build a max heap (rearrange the array)
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+        heapify(array, n, i);
+    }
 
-  // Extract elements from the heap one by one
-  for (let i = n - 1; i > 0; i--) {
-    // Move current root (maximum) to the end
-    [array[0], array[i]] = [array[i], array[0]];
+    // Extract elements from the heap one by one
+    for (let i = n - 1; i > 0; i--) {
+        // Move current root (maximum) to the end
+        [array[0], array[i]] = [array[i], array[0]];
 
-    // Call heapify on the reduced heap
-    heapify(array, i, 0);
-  }
+        // Call heapify on the reduced heap
+        heapify(array, i, 0);
+    }
 
-  return array;
+    return array;
 };
 
 /**

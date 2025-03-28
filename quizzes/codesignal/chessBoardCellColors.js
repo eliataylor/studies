@@ -1,13 +1,13 @@
 function chessBoardCellColor(cell1, cell2) {
     const lookup = {
-        'A' : 2,
-        'B' : 1,
-        'C' : 2,
-        'D' : 1,
-        'E' : 2,
-        'F' : 1,
-        'G' : 2,
-        'H' : 1
+        'A': 2,
+        'B': 1,
+        'C': 2,
+        'D': 1,
+        'E': 2,
+        'F': 1,
+        'G': 2,
+        'H': 1
     };
     let remainder1 = cell1.charAt(1) % 2;
     let remainder2 = cell2.charAt(1) % 2;
@@ -23,9 +23,9 @@ function chessBoardCellColor(cell1, cell2) {
 // others
 
 //Get the color (0=black, 1=white) for a given cell
-var color = s => (Buffer(s)[0] - s[1])%2
+var color = s => (Buffer(s)[0] - s[1]) % 2
 
-var chessBoardCellColor = (a,b) => color(a) == color(b)
+var chessBoardCellColor = (a, b) => color(a) == color(b)
 
 
 function chessBoardCellColor(cell1, cell2) {

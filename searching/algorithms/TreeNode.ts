@@ -9,9 +9,9 @@
  * Interface for a basic binary tree node
  */
 export interface TreeNode {
-  value: number;
-  left: TreeNode | null;
-  right: TreeNode | null;
+    value: number;
+    left: TreeNode | null;
+    right: TreeNode | null;
 }
 
 /**
@@ -19,8 +19,8 @@ export interface TreeNode {
  * Extends TreeNode with additional properties for tracking visited status
  */
 export interface GraphTreeNode extends TreeNode {
-  visited?: boolean;
-  neighbors?: GraphTreeNode[];
+    visited?: boolean;
+    neighbors?: GraphTreeNode[];
 }
 
 /**
@@ -31,11 +31,11 @@ export interface GraphTreeNode extends TreeNode {
  * @returns A new TreeNode
  */
 export function createNode(
-  value: number,
-  left: TreeNode | null = null,
-  right: TreeNode | null = null
+    value: number,
+    left: TreeNode | null = null,
+    right: TreeNode | null = null
 ): TreeNode {
-  return { value, left, right };
+    return {value, left, right};
 }
 
 /**
@@ -44,7 +44,7 @@ export function createNode(
  * @returns The root node of the BST
  */
 export function createBSTFromSortedArray(sortedArray: number[]): TreeNode | null {
-  return buildBST(sortedArray, 0, sortedArray.length - 1);
+    return buildBST(sortedArray, 0, sortedArray.length - 1);
 }
 
 /**
@@ -55,19 +55,19 @@ export function createBSTFromSortedArray(sortedArray: number[]): TreeNode | null
  * @returns Root node of the created BST
  */
 function buildBST(arr: number[], start: number, end: number): TreeNode | null {
-  if (start > end) {
-    return null;
-  }
+    if (start > end) {
+        return null;
+    }
 
-  // Middle element becomes the root
-  const mid = Math.floor((start + end) / 2);
-  const node = createNode(arr[mid]);
+    // Middle element becomes the root
+    const mid = Math.floor((start + end) / 2);
+    const node = createNode(arr[mid]);
 
-  // Recursively construct left and right subtrees
-  node.left = buildBST(arr, start, mid - 1);
-  node.right = buildBST(arr, mid + 1, end);
+    // Recursively construct left and right subtrees
+    node.left = buildBST(arr, start, mid - 1);
+    node.right = buildBST(arr, mid + 1, end);
 
-  return node;
+    return node;
 }
 
 /**
@@ -76,18 +76,18 @@ function buildBST(arr: number[], start: number, end: number): TreeNode | null {
  * @returns Array of values in inorder traversal order
  */
 export function inorderTraversal(root: TreeNode | null): number[] {
-  const result: number[] = [];
+    const result: number[] = [];
 
-  function traverse(node: TreeNode | null) {
-    if (node) {
-      traverse(node.left);
-      result.push(node.value);
-      traverse(node.right);
+    function traverse(node: TreeNode | null) {
+        if (node) {
+            traverse(node.left);
+            result.push(node.value);
+            traverse(node.right);
+        }
     }
-  }
 
-  traverse(root);
-  return result;
+    traverse(root);
+    return result;
 }
 
 /**
@@ -95,21 +95,21 @@ export function inorderTraversal(root: TreeNode | null): number[] {
  * @returns A sample BST
  */
 export function createSampleBST(): TreeNode {
-  //        50
-  //      /    \
-  //     30     70
-  //    /  \   /  \
-  //   20  40 60  80
+    //        50
+    //      /    \
+    //     30     70
+    //    /  \   /  \
+    //   20  40 60  80
 
-  const root = createNode(50);
-  root.left = createNode(30);
-  root.right = createNode(70);
-  root.left.left = createNode(20);
-  root.left.right = createNode(40);
-  root.right.left = createNode(60);
-  root.right.right = createNode(80);
+    const root = createNode(50);
+    root.left = createNode(30);
+    root.right = createNode(70);
+    root.left.left = createNode(20);
+    root.left.right = createNode(40);
+    root.right.left = createNode(60);
+    root.right.right = createNode(80);
 
-  return root;
+    return root;
 }
 
 /**
@@ -119,25 +119,25 @@ export function createSampleBST(): TreeNode {
  * @param isLeft Whether the current node is a left child (default: true)
  */
 export function printTree(
-  root: TreeNode | null,
-  prefix: string = '',
-  isLeft: boolean = true
+    root: TreeNode | null,
+    prefix: string = '',
+    isLeft: boolean = true
 ): void {
-  if (!root) {
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}null`);
-    return;
-  }
-
-  console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${root.value}`);
-
-  // Recursively print the children
-  const childPrefix = prefix + (isLeft ? '    ' : '│   ');
-  if (root.left || root.right) {
-    if (root.right) {
-      printTree(root.right, childPrefix, false);
+    if (!root) {
+        console.log(`${prefix}${isLeft ? '└── ' : '┌── '}null`);
+        return;
     }
-    if (root.left) {
-      printTree(root.left, childPrefix, true);
+
+    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${root.value}`);
+
+    // Recursively print the children
+    const childPrefix = prefix + (isLeft ? '    ' : '│   ');
+    if (root.left || root.right) {
+        if (root.right) {
+            printTree(root.right, childPrefix, false);
+        }
+        if (root.left) {
+            printTree(root.left, childPrefix, true);
+        }
     }
-  }
 }

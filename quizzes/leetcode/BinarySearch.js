@@ -446,11 +446,11 @@ function testStandardBinarySearch() {
     console.log("=== TESTING STANDARD BINARY SEARCH IMPLEMENTATIONS ===");
 
     const testCases = [
-        { arr: [1, 2, 3, 4, 5], target: 3, expected: 2 },
-        { arr: [1, 2, 3, 4, 5], target: 6, expected: -1 },
-        { arr: [1, 3, 5, 7, 9], target: 5, expected: 2 },
-        { arr: [1, 3, 5, 7, 9], target: 4, expected: -1 },
-        { arr: [], target: 5, expected: -1 }
+        {arr: [1, 2, 3, 4, 5], target: 3, expected: 2},
+        {arr: [1, 2, 3, 4, 5], target: 6, expected: -1},
+        {arr: [1, 3, 5, 7, 9], target: 5, expected: 2},
+        {arr: [1, 3, 5, 7, 9], target: 4, expected: -1},
+        {arr: [], target: 5, expected: -1}
     ];
 
     testCases.forEach((testCase, index) => {

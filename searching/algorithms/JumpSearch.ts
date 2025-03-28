@@ -5,8 +5,6 @@
  * jumping ahead by fixed steps and then performing a linear search.
  */
 
-import { runArraySearch, type ArraySearchFunction } from '../utils';
-
 /**
  * Jump Search
  *
@@ -21,37 +19,37 @@ import { runArraySearch, type ArraySearchFunction } from '../utils';
  * @returns The index of the target if found, -1 otherwise
  */
 export function jumpSearch(arr: number[], target: number): number {
-  const n = arr.length;
+    const n = arr.length;
 
-  // Finding block size to be jumped (optimal step size is √n)
-  let step = Math.floor(Math.sqrt(n));
+    // Finding block size to be jumped (optimal step size is √n)
+    let step = Math.floor(Math.sqrt(n));
 
-  // Finding the block where element is present (if it is present)
-  let prev = 0;
-  while (arr[Math.min(step, n) - 1] < target) {
-    prev = step;
-    step += Math.floor(Math.sqrt(n));
-    if (prev >= n) {
-      return -1;
+    // Finding the block where element is present (if it is present)
+    let prev = 0;
+    while (arr[Math.min(step, n) - 1] < target) {
+        prev = step;
+        step += Math.floor(Math.sqrt(n));
+        if (prev >= n) {
+            return -1;
+        }
     }
-  }
 
-  // Doing a linear search for target in block beginning with prev
-  while (arr[prev] < target) {
-    prev++;
+    // Doing a linear search for target in block beginning with prev
+    while (arr[prev] < target) {
+        prev++;
 
-    // If we reached next block or end of array, element is not present
-    if (prev === Math.min(step, n)) {
-      return -1;
+        // If we reached next block or end of array, element is not present
+        if (prev === Math.min(step, n)) {
+            return -1;
+        }
     }
-  }
 
-  // If element is found
-  if (arr[prev] === target) {
-    return prev;
-  }
+    // If element is found
+    if (arr[prev] === target) {
+        return prev;
+    }
 
-  return -1;
+    return -1;
 }
 
 // Uncomment to test this algorithm individually

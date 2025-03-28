@@ -9,7 +9,7 @@ full stops, question marks and exclamation points don't appear anywhere else in 
 Given a sentence, return true if it is correct and false otherwise.
  */
 function isSentenceCorrect(sentence) {
-    var re = /^[A-Z][^.?!]*[.?!]$/ ;
+    var re = /^[A-Z][^.?!]*[.?!]$/;
     return re.test(sentence);
 }
 

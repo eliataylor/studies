@@ -54,18 +54,22 @@ N is an integer within the range [0..100,000];
 each element of array A is an integer that can have one of the following values: 0, 1.
  */
 
-import has = Reflect.has;
+import has
+
+= Reflect.has;
 
 function solution(A) {
 
     function isFibonacci(num) {
         // has upper bound of F(~70) === ~190392490709135
         let sq5 = num * num * 5;
+
         function isPerfectSquare(n) {
             let sq = Math.floor(Math.sqrt(n));
             return n === sq * sq;
         }
-        if ( isPerfectSquare(sq5-4) || isPerfectSquare(sq5+4)) {
+
+        if (isPerfectSquare(sq5 - 4) || isPerfectSquare(sq5 + 4)) {
             return true;
         }
         return false;
@@ -77,7 +81,7 @@ function solution(A) {
 
     // TODO while last or first is not with fib(distance), remove it as a leaf
     let left = A.indexOf(1);
-    while(left > -1 && isFibonacci(left + 1) === false) {
+    while (left > -1 && isFibonacci(left + 1) === false) {
         A[left] = -1; // never reachable
         left = A.indexOf(1);
     }
@@ -86,14 +90,11 @@ function solution(A) {
 
     let next = A.indexOf(1, left);
     while (next > -1) {
-        if(isFibonacci(next + 1) === true) {
+        if (isFibonacci(next + 1) === true) {
             A[left] = -1; // all previous are skippable;
             left = next;
         }
     }
-
-
-
 
 
     function canLandHome(left, right, min, jumps) {
@@ -107,12 +108,12 @@ function solution(A) {
             right = left;
 
             let routes = [];
-            while(A.indexOf(1, left) > -1) {
+            while (A.indexOf(1, left) > -1) {
                 let route = A.indexOf(1, left)
                 A[route] = -1;
                 routes.push(route);
             }
-            while(routes.length > 0) {
+            while (routes.length > 0) {
                 let hasRoute = canLandHome(routes.pop(), right, min);
                 if (hasRoute === true) {
                     jumps = temp;
@@ -138,12 +139,12 @@ function solution(A) {
 const tests = [
     {
         "name": "Test 1",
-        "arg": [[0,0,0,1,1,0,1,0,0,0,0]],
-        "expected":3
+        "arg": [[0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0]],
+        "expected": 3
     }
 ];
 
 tests.forEach((o, i) => {
     let result = solution(...o.arg);
-    console.log((o.name || 'TEST')  + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
+    console.log((o.name || 'TEST') + ': ' + i + ((JSON.stringify(result) === JSON.stringify(o.expected)) ? ' PASSED' : ' FAILED'));
 })

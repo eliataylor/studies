@@ -10,8 +10,8 @@ function listFibonacci(n) {
 function fibonacci(number) {
     var sqRootOf5 = Math.sqrt(5);
 
-    var Phi = (1+sqRootOf5)/2;
-    var phi = (1-sqRootOf5)/2
+    var Phi = (1 + sqRootOf5) / 2;
+    var phi = (1 - sqRootOf5) / 2
 
     // number + 1 // if expecting 0 based index
     return Math.round((Math.pow(Phi, number) - Math.pow(phi, number)) / sqRootOf5);
@@ -22,7 +22,7 @@ let f = listFibonacci(10);
 console.log(f);
 
 let index = 9;
-while(index >= 0) {
+while (index >= 0) {
     let calc = fibonacci(index);
     if (calc === f[index]) {
         console.log('correct: ' + f[index] + ' found at  ' + index + ' = ' + calc);

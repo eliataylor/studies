@@ -99,9 +99,9 @@ function isValidBST(root) {
 
 
 /***
-The Morris traversal achieves O(1) extra space complexity by temporarily modifying the tree structure during traversal.
+ The Morris traversal achieves O(1) extra space complexity by temporarily modifying the tree structure during traversal.
  **/
- function isValidBST(root) {
+function isValidBST(root) {
     let prev = -Infinity;
     let current = root;
 

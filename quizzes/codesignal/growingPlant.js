@@ -1,7 +1,7 @@
 function growingPlant(upSpeed, downSpeed, desiredHeight) {
 
 
-    let height = 0,days = 1;
+    let height = 0, days = 1;
     height += upSpeed;
     while (height < desiredHeight) {
         days += 1;
@@ -40,8 +40,7 @@ function growingPlant(upSpeed, downSpeed, desiredHeight) {
 }
 
 // OTHERS
-function growingPlant( upSpeed,  downSpeed,  desiredHeight)
-{
+function growingPlant(upSpeed, downSpeed, desiredHeight) {
     // The height after x days (up - down) * (x - 1) + up
     // We want dh <= (u - d) * (x - 1) + u
     // (dh - u) / (u - d) + 1 <= x
@@ -49,4 +48,5 @@ function growingPlant( upSpeed,  downSpeed,  desiredHeight)
 }
 
 function growingPlant($u, $d, $h) {
-    return $h<=$u?1:floor(($h-$u-1)/($u-$d))+2;}
+    return $h <= $u ? 1 : floor(($h - $u - 1) / ($u - $d)) + 2;
+}

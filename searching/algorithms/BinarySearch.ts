@@ -5,8 +5,6 @@
  * by repeatedly dividing the search interval in half.
  */
 
-import { runArraySearch, type ArraySearchFunction } from '../utils';
-
 /**
  * Binary Search
  *
@@ -21,29 +19,29 @@ import { runArraySearch, type ArraySearchFunction } from '../utils';
  * @returns The index of the target if found, -1 otherwise
  */
 export function binarySearch(arr: number[], target: number): number {
-  let left = 0;
-  let right = arr.length - 1;
+    let left = 0;
+    let right = arr.length - 1;
 
-  while (left <= right) {
-    const mid = Math.floor((left + right) / 2);
+    while (left <= right) {
+        const mid = Math.floor((left + right) / 2);
 
-    // Check if target is present at mid
-    if (arr[mid] === target) {
-      return mid;
+        // Check if target is present at mid
+        if (arr[mid] === target) {
+            return mid;
+        }
+
+        // If target is greater, ignore left half
+        if (arr[mid] < target) {
+            left = mid + 1;
+        }
+        // If target is smaller, ignore right half
+        else {
+            right = mid - 1;
+        }
     }
 
-    // If target is greater, ignore left half
-    if (arr[mid] < target) {
-      left = mid + 1;
-    }
-    // If target is smaller, ignore right half
-    else {
-      right = mid - 1;
-    }
-  }
-
-  // Target not in array
-  return -1;
+    // Target not in array
+    return -1;
 }
 
 /**
@@ -61,30 +59,30 @@ export function binarySearch(arr: number[], target: number): number {
  * @returns The index of the target if found, -1 otherwise
  */
 export function recursiveBinarySearch(
-  arr: number[],
-  target: number,
-  left: number = 0,
-  right: number = arr.length - 1
+    arr: number[],
+    target: number,
+    left: number = 0,
+    right: number = arr.length - 1
 ): number {
-  // Base case: element not found
-  if (left > right) {
-    return -1;
-  }
+    // Base case: element not found
+    if (left > right) {
+        return -1;
+    }
 
-  const mid = Math.floor((left + right) / 2);
+    const mid = Math.floor((left + right) / 2);
 
-  // Target found
-  if (arr[mid] === target) {
-    return mid;
-  }
+    // Target found
+    if (arr[mid] === target) {
+        return mid;
+    }
 
-  // Search in left half
-  if (arr[mid] > target) {
-    return recursiveBinarySearch(arr, target, left, mid - 1);
-  }
+    // Search in left half
+    if (arr[mid] > target) {
+        return recursiveBinarySearch(arr, target, left, mid - 1);
+    }
 
-  // Search in right half
-  return recursiveBinarySearch(arr, target, mid + 1, right);
+    // Search in right half
+    return recursiveBinarySearch(arr, target, mid + 1, right);
 }
 
 // Uncomment to test this algorithm individually

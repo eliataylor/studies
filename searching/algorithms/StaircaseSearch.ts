@@ -5,8 +5,6 @@
  * It's similar to row-column search but starts from bottom-left.
  */
 
-import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
-
 /**
  * Staircase Search
  *
@@ -21,30 +19,30 @@ import { runMatrixSearch, type MatrixSearchFunction } from '../utils';
  * @returns The [row, column] coordinates if found, null otherwise
  */
 export function staircaseSearch(matrix: number[][], target: number): [number, number] | null {
-  if (!matrix.length || !matrix[0].length) {
-    return null;
-  }
-
-  const rows = matrix.length;
-  const cols = matrix[0].length;
-
-  // Start from bottom-left corner
-  let row = rows - 1;
-  let col = 0;
-
-  while (row >= 0 && col < cols) {
-    if (matrix[row][col] === target) {
-      return [row, col];
-    } else if (matrix[row][col] > target) {
-      // The current row has values too large, move up
-      row--;
-    } else {
-      // The current column has values too small, move right
-      col++;
+    if (!matrix.length || !matrix[0].length) {
+        return null;
     }
-  }
 
-  return null;
+    const rows = matrix.length;
+    const cols = matrix[0].length;
+
+    // Start from bottom-left corner
+    let row = rows - 1;
+    let col = 0;
+
+    while (row >= 0 && col < cols) {
+        if (matrix[row][col] === target) {
+            return [row, col];
+        } else if (matrix[row][col] > target) {
+            // The current row has values too large, move up
+            row--;
+        } else {
+            // The current column has values too small, move right
+            col++;
+        }
+    }
+
+    return null;
 }
 
 // Uncomment to test this algorithm individually

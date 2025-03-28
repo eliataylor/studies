@@ -5,8 +5,6 @@
  * for an element in a list sequentially.
  */
 
-import { runArraySearch, type ArraySearchFunction } from '../utils';
-
 /**
  * Linear Search
  *
@@ -21,12 +19,12 @@ import { runArraySearch, type ArraySearchFunction } from '../utils';
  * @returns The index of the target if found, -1 otherwise
  */
 export function linearSearch(arr: number[], target: number): number {
-  for (let i = 0; i < arr.length; i++) {
-    if (arr[i] === target) {
-      return i;
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === target) {
+            return i;
+        }
     }
-  }
-  return -1;
+    return -1;
 }
 
 // Uncomment to test this algorithm individually

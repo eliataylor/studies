@@ -39,7 +39,7 @@ function nQueens(n) {
 }
 
 function getSafetyMatrix(n, solution) {
-    const safetyMatrix = Array.from({ length: n }, _ => new Array(n).fill(true));
+    const safetyMatrix = Array.from({length: n}, _ => new Array(n).fill(true));
 
     // row 1-indexed, column 0-indexed
     solution.forEach((row, column) => {

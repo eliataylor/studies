@@ -5,8 +5,7 @@
  * depth before moving to nodes at the next depth level.
  */
 
-import { TreeNode } from './TreeNode';
-import { runTreeSearch, type TreeSearchFunction } from '../utils';
+import {TreeNode} from './TreeNode';
 
 /**
  * Breadth-First Search (BFS)
@@ -22,33 +21,33 @@ import { runTreeSearch, type TreeSearchFunction } from '../utils';
  * @returns The found node or null if not found
  */
 export function bfs(root: TreeNode | null, target: number): TreeNode | null {
-  if (root === null) {
+    if (root === null) {
+        return null;
+    }
+
+    // Use queue to store nodes to be visited
+    const queue: TreeNode[] = [root];
+
+    while (queue.length > 0) {
+        // Remove the first node from the queue
+        const current = queue.shift()!;
+
+        // Check if current node matches target
+        if (current.value === target) {
+            return current;
+        }
+
+        // Add child nodes to the queue
+        if (current.left !== null) {
+            queue.push(current.left);
+        }
+
+        if (current.right !== null) {
+            queue.push(current.right);
+        }
+    }
+
     return null;
-  }
-
-  // Use queue to store nodes to be visited
-  const queue: TreeNode[] = [root];
-
-  while (queue.length > 0) {
-    // Remove the first node from the queue
-    const current = queue.shift()!;
-
-    // Check if current node matches target
-    if (current.value === target) {
-      return current;
-    }
-
-    // Add child nodes to the queue
-    if (current.left !== null) {
-      queue.push(current.left);
-    }
-
-    if (current.right !== null) {
-      queue.push(current.right);
-    }
-  }
-
-  return null;
 }
 
 /**
@@ -64,38 +63,38 @@ export function bfs(root: TreeNode | null, target: number): TreeNode | null {
  * @returns Array of arrays, where each inner array contains nodes at one level
  */
 export function levelOrderTraversal(root: TreeNode | null): number[][] {
-  const result: number[][] = [];
+    const result: number[][] = [];
 
-  if (root === null) {
-    return result;
-  }
-
-  // Use queue to store nodes to be visited
-  const queue: TreeNode[] = [root];
-
-  while (queue.length > 0) {
-    const levelSize = queue.length;
-    const currentLevel: number[] = [];
-
-    // Process all nodes at the current level
-    for (let i = 0; i < levelSize; i++) {
-      const current = queue.shift()!;
-      currentLevel.push(current.value);
-
-      // Add child nodes to the queue for next level
-      if (current.left !== null) {
-        queue.push(current.left);
-      }
-
-      if (current.right !== null) {
-        queue.push(current.right);
-      }
+    if (root === null) {
+        return result;
     }
 
-    result.push(currentLevel);
-  }
+    // Use queue to store nodes to be visited
+    const queue: TreeNode[] = [root];
 
-  return result;
+    while (queue.length > 0) {
+        const levelSize = queue.length;
+        const currentLevel: number[] = [];
+
+        // Process all nodes at the current level
+        for (let i = 0; i < levelSize; i++) {
+            const current = queue.shift()!;
+            currentLevel.push(current.value);
+
+            // Add child nodes to the queue for next level
+            if (current.left !== null) {
+                queue.push(current.left);
+            }
+
+            if (current.right !== null) {
+                queue.push(current.right);
+            }
+        }
+
+        result.push(currentLevel);
+    }
+
+    return result;
 }
 
 /**
@@ -112,33 +111,33 @@ export function levelOrderTraversal(root: TreeNode | null): number[][] {
  * @returns An object with the found node and its level, or null if not found
  */
 export function bfsWithLevel(root: TreeNode | null, target: number): { node: TreeNode, level: number } | null {
-  if (root === null) {
+    if (root === null) {
+        return null;
+    }
+
+    // Use queue to store nodes to be visited along with their levels
+    const queue: { node: TreeNode, level: number }[] = [{node: root, level: 0}];
+
+    while (queue.length > 0) {
+        // Remove the first node from the queue
+        const {node: current, level} = queue.shift()!;
+
+        // Check if current node matches target
+        if (current.value === target) {
+            return {node: current, level};
+        }
+
+        // Add child nodes to the queue with incremented level
+        if (current.left !== null) {
+            queue.push({node: current.left, level: level + 1});
+        }
+
+        if (current.right !== null) {
+            queue.push({node: current.right, level: level + 1});
+        }
+    }
+
     return null;
-  }
-
-  // Use queue to store nodes to be visited along with their levels
-  const queue: { node: TreeNode, level: number }[] = [{ node: root, level: 0 }];
-
-  while (queue.length > 0) {
-    // Remove the first node from the queue
-    const { node: current, level } = queue.shift()!;
-
-    // Check if current node matches target
-    if (current.value === target) {
-      return { node: current, level };
-    }
-
-    // Add child nodes to the queue with incremented level
-    if (current.left !== null) {
-      queue.push({ node: current.left, level: level + 1 });
-    }
-
-    if (current.right !== null) {
-      queue.push({ node: current.right, level: level + 1 });
-    }
-  }
-
-  return null;
 }
 
 /**
@@ -158,79 +157,79 @@ export function bfsWithLevel(root: TreeNode | null, target: number): { node: Tre
  * @returns True if a path exists between startValue and endValue, false otherwise
  */
 export function bidirectionalBFS(
-  root: TreeNode | null,
-  startValue: number,
-  endValue: number
+    root: TreeNode | null,
+    startValue: number,
+    endValue: number
 ): boolean {
-  if (root === null) {
-    return false;
-  }
-
-  // If either value doesn't exist in the tree, no path exists
-  const startNode = bfs(root, startValue);
-  const endNode = bfs(root, endValue);
-
-  if (startNode === null || endNode === null) {
-    return false;
-  }
-
-  // Use two sets to track visited nodes from both directions
-  const visitedFromStart = new Set<number>();
-  const visitedFromEnd = new Set<number>();
-
-  // Use two queues for BFS from both directions
-  const queueFromStart: TreeNode[] = [startNode];
-  const queueFromEnd: TreeNode[] = [endNode];
-
-  visitedFromStart.add(startValue);
-  visitedFromEnd.add(endValue);
-
-  while (queueFromStart.length > 0 && queueFromEnd.length > 0) {
-    // Expand from start side
-    if (expandBFS(queueFromStart, visitedFromStart, visitedFromEnd)) {
-      return true;
+    if (root === null) {
+        return false;
     }
 
-    // Expand from end side
-    if (expandBFS(queueFromEnd, visitedFromEnd, visitedFromStart)) {
-      return true;
-    }
-  }
+    // If either value doesn't exist in the tree, no path exists
+    const startNode = bfs(root, startValue);
+    const endNode = bfs(root, endValue);
 
-  return false;
+    if (startNode === null || endNode === null) {
+        return false;
+    }
+
+    // Use two sets to track visited nodes from both directions
+    const visitedFromStart = new Set<number>();
+    const visitedFromEnd = new Set<number>();
+
+    // Use two queues for BFS from both directions
+    const queueFromStart: TreeNode[] = [startNode];
+    const queueFromEnd: TreeNode[] = [endNode];
+
+    visitedFromStart.add(startValue);
+    visitedFromEnd.add(endValue);
+
+    while (queueFromStart.length > 0 && queueFromEnd.length > 0) {
+        // Expand from start side
+        if (expandBFS(queueFromStart, visitedFromStart, visitedFromEnd)) {
+            return true;
+        }
+
+        // Expand from end side
+        if (expandBFS(queueFromEnd, visitedFromEnd, visitedFromStart)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 /**
  * Helper function to expand BFS from one side in bidirectional search
  */
 function expandBFS(
-  queue: TreeNode[],
-  visited: Set<number>,
-  otherVisited: Set<number>
+    queue: TreeNode[],
+    visited: Set<number>,
+    otherVisited: Set<number>
 ): boolean {
-  if (queue.length === 0) {
-    return false;
-  }
-
-  const current = queue.shift()!;
-
-  // Check children
-  const children = [current.left, current.right].filter(node => node !== null) as TreeNode[];
-
-  for (const child of children) {
-    if (!visited.has(child.value)) {
-      // If this node has been visited from the other direction,
-      // we found a meeting point
-      if (otherVisited.has(child.value)) {
-        return true;
-      }
-
-      visited.add(child.value);
-      queue.push(child);
+    if (queue.length === 0) {
+        return false;
     }
-  }
 
-  return false;
+    const current = queue.shift()!;
+
+    // Check children
+    const children = [current.left, current.right].filter(node => node !== null) as TreeNode[];
+
+    for (const child of children) {
+        if (!visited.has(child.value)) {
+            // If this node has been visited from the other direction,
+            // we found a meeting point
+            if (otherVisited.has(child.value)) {
+                return true;
+            }
+
+            visited.add(child.value);
+            queue.push(child);
+        }
+    }
+
+    return false;
 }
 
 // Uncomment to test these algorithms individually

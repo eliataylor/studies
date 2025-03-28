@@ -4,7 +4,7 @@ function differentSymbolsNaive(s) {
 }
 
 function differentSymbolsNaive(str) {
-    let dups ={};
-    while (str.length >0) dups[str.splice(0,1)] = true;
+    let dups = {};
+    while (str.length > 0) dups[str.splice(0, 1)] = true;
     return Object.keys(dups).length;
 }

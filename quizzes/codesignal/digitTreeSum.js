@@ -9,7 +9,7 @@ function digitTreeSum(t) {
     if (!t) return 0;
     let digits = [];
     let queue = [t];
-    while(queue.length > 0) {
+    while (queue.length > 0) {
         let node = queue.shift();
         if (node.value) {
             digits.push(node.value);
@@ -40,7 +40,7 @@ function digitTreeSum(t) {
 
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: [{
             "value": 1,
             "left": {

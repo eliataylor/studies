@@ -1,6 +1,7 @@
 # TypeScript Search Algorithms
 
-This repository contains implementations of various search algorithms in TypeScript for different data structures, along with a unified framework for testing and comparing their performance.
+This repository contains implementations of various search algorithms in TypeScript for different data structures, along
+with a unified framework for testing and comparing their performance.
 
 ## Installation
 
@@ -18,7 +19,8 @@ npm run build
 
 ## Search Algorithm Test Framework
 
-The unified testing framework allows you to test individual algorithms or compare multiple algorithms across different data structures to understand their performance characteristics.
+The unified testing framework allows you to test individual algorithms or compare multiple algorithms across different
+data structures to understand their performance characteristics.
 
 ```bash
 npm run search-test -- [options]
@@ -92,8 +94,10 @@ npm run search-test -- --algorithms tree --percent-present 100
 - **binary**: Binary Search - Efficient algorithm for sorted arrays that repeatedly divides the search interval in half.
 - **recursiveBinary**: Recursive Binary Search - A recursive implementation of binary search.
 - **jump**: Jump Search - Improvement over linear search for sorted arrays that jumps ahead by fixed steps.
-- **interpolation**: Interpolation Search - Improved variant of binary search that estimates the position of the target value.
-- **exponential**: Exponential Search - Combination of binary search and exponential checking that works well for unbounded arrays.
+- **interpolation**: Interpolation Search - Improved variant of binary search that estimates the position of the target
+  value.
+- **exponential**: Exponential Search - Combination of binary search and exponential checking that works well for
+  unbounded arrays.
 - **fibonacci**: Fibonacci Search - Search algorithm that uses Fibonacci numbers to divide the array.
 
 ### 2D Matrix Search Algorithms
@@ -109,42 +113,44 @@ npm run search-test -- --algorithms tree --percent-present 100
 - **inorderDFS**: Inorder Depth-First Search - Explores the left subtree, then root, then right subtree.
 - **postorderDFS**: Postorder Depth-First Search - Explores the left subtree, then right subtree, then root.
 - **bst**: Binary Search Tree Search - Optimized search specifically for binary search trees.
-- **bfs**: Breadth-First Search - Explores all neighbor nodes at the present depth before moving to nodes at the next depth level.
+- **bfs**: Breadth-First Search - Explores all neighbor nodes at the present depth before moving to nodes at the next
+  depth level.
 
 ## Time and Space Complexity
 
 ### Array Search Algorithms
 
-| Algorithm           | Best Time | Average Time | Worst Time | Space  | Requirements        | Notes                                  |
-|---------------------|-----------|--------------|------------|--------|---------------------|----------------------------------------|
-| Linear Search       | O(1)      | O(n)         | O(n)       | O(1)   | None                | Works on any array                     |
-| Binary Search       | O(1)      | O(log n)     | O(log n)   | O(1)   | Sorted array        | Very efficient for large sorted arrays |
-| Recursive Binary    | O(1)      | O(log n)     | O(log n)   | O(log n)| Sorted array       | Uses stack space for recursion         |
-| Jump Search         | O(1)      | O(√n)        | O(√n)      | O(1)   | Sorted array        | Good middle ground between linear and binary |
-| Interpolation Search| O(1)      | O(log log n) | O(n)       | O(1)   | Sorted, uniform distribution | Faster than binary search for uniform data |
-| Exponential Search  | O(1)      | O(log n)     | O(log n)   | O(1)   | Sorted array        | Useful for unbounded arrays           |
-| Fibonacci Search    | O(1)      | O(log n)     | O(log n)   | O(1)   | Sorted array        | Reduces divisions to additions        |
+| Algorithm            | Best Time | Average Time | Worst Time | Space    | Requirements                 | Notes                                        |
+|----------------------|-----------|--------------|------------|----------|------------------------------|----------------------------------------------|
+| Linear Search        | O(1)      | O(n)         | O(n)       | O(1)     | None                         | Works on any array                           |
+| Binary Search        | O(1)      | O(log n)     | O(log n)   | O(1)     | Sorted array                 | Very efficient for large sorted arrays       |
+| Recursive Binary     | O(1)      | O(log n)     | O(log n)   | O(log n) | Sorted array                 | Uses stack space for recursion               |
+| Jump Search          | O(1)      | O(√n)        | O(√n)      | O(1)     | Sorted array                 | Good middle ground between linear and binary |
+| Interpolation Search | O(1)      | O(log log n) | O(n)       | O(1)     | Sorted, uniform distribution | Faster than binary search for uniform data   |
+| Exponential Search   | O(1)      | O(log n)     | O(log n)   | O(1)     | Sorted array                 | Useful for unbounded arrays                  |
+| Fibonacci Search     | O(1)      | O(log n)     | O(log n)   | O(1)     | Sorted array                 | Reduces divisions to additions               |
 
 ### 2D Matrix Search Algorithms
 
-| Algorithm           | Best Time   | Average Time | Worst Time  | Space  | Requirements            | Notes                                |
-|---------------------|-------------|--------------|-------------|--------|-------------------------|------------------------------------- |
-| Row-Column Search   | O(1)        | O(m+n)       | O(m+n)      | O(1)   | Sorted rows and columns | Fast for sorted matrices             |
-| Binary Search Matrix| O(1)        | O(log(m*n))  | O(log(m*n)) | O(1)   | Sorted matrix           | Treats matrix as flattened array     |
-| Staircase Search    | O(1)        | O(m+n)       | O(m+n)      | O(1)   | Sorted rows and columns | Simple implementation                |
-| Block Search        | O(1)        | O(√(m*n))    | O(m+n)      | O(1)   | Sorted matrix           | Efficient for large matrices         |
+| Algorithm            | Best Time | Average Time | Worst Time  | Space | Requirements            | Notes                            |
+|----------------------|-----------|--------------|-------------|-------|-------------------------|----------------------------------|
+| Row-Column Search    | O(1)      | O(m+n)       | O(m+n)      | O(1)  | Sorted rows and columns | Fast for sorted matrices         |
+| Binary Search Matrix | O(1)      | O(log(m*n))  | O(log(m*n)) | O(1)  | Sorted matrix           | Treats matrix as flattened array |
+| Staircase Search     | O(1)      | O(m+n)       | O(m+n)      | O(1)  | Sorted rows and columns | Simple implementation            |
+| Block Search         | O(1)      | O(√(m*n))    | O(m+n)      | O(1)  | Sorted matrix           | Efficient for large matrices     |
 
 ### Tree Search Algorithms
 
-| Algorithm           | Best Time | Average Time | Worst Time | Space     | Notes                               |
-|---------------------|-----------|--------------|------------|-----------|-------------------------------------|
-| Preorder DFS        | O(1)      | O(n)         | O(n)       | O(h)      | h is the height of the tree         |
-| Inorder DFS         | O(1)      | O(n)         | O(n)       | O(h)      | Good for BST traversal in order     |
-| Postorder DFS       | O(1)      | O(n)         | O(n)       | O(h)      | Used for deletion and cleanup       |
-| BST Search          | O(1)      | O(log n)     | O(n)       | O(h)      | O(log n) for balanced BSTs          |
-| BFS                 | O(1)      | O(n)         | O(n)       | O(w)      | w is the max width of the tree      |
+| Algorithm     | Best Time | Average Time | Worst Time | Space | Notes                           |
+|---------------|-----------|--------------|------------|-------|---------------------------------|
+| Preorder DFS  | O(1)      | O(n)         | O(n)       | O(h)  | h is the height of the tree     |
+| Inorder DFS   | O(1)      | O(n)         | O(n)       | O(h)  | Good for BST traversal in order |
+| Postorder DFS | O(1)      | O(n)         | O(n)       | O(h)  | Used for deletion and cleanup   |
+| BST Search    | O(1)      | O(log n)     | O(n)       | O(h)  | O(log n) for balanced BSTs      |
+| BFS           | O(1)      | O(n)         | O(n)       | O(w)  | w is the max width of the tree  |
 
 Where:
+
 - n is the number of elements
 - m and n are the dimensions of the matrix
 - h is the height of the tree
@@ -152,10 +158,11 @@ Where:
 
 ## Understanding Search Algorithm Performance
 
-The framework generates color-coded output showing the relative performance of algorithms. Here's how to interpret the results:
+The framework generates color-coded output showing the relative performance of algorithms. Here's how to interpret the
+results:
 
 - **Avg Time (ms)**: Average execution time across all search targets
-- **Min/Max Time**: Shows the range of execution times 
+- **Min/Max Time**: Shows the range of execution times
 - **Success Rate**: Percentage of searches with correct results
 
 ## Help Information
@@ -170,9 +177,9 @@ npm run search-help
 
 - `utils.ts`: Utility functions for testing and comparing search algorithms
 - Algorithm implementations:
-  - Array search algorithms: `LinearSearch.ts`, `BinarySearch.ts`, etc.
-  - Matrix search algorithms: `RowColumnSearch.ts`, `StaircaseSearch.ts`, etc.
-  - Tree search algorithms: `DFSSearch.ts`, `BFSSearch.ts`, etc.
+    - Array search algorithms: `LinearSearch.ts`, `BinarySearch.ts`, etc.
+    - Matrix search algorithms: `RowColumnSearch.ts`, `StaircaseSearch.ts`, etc.
+    - Tree search algorithms: `DFSSearch.ts`, `BFSSearch.ts`, etc.
 - `SearchTester.ts`: Command-line interface for running and comparing algorithms
 - `SearchHelp.ts`: Help utility with algorithm information and examples
 

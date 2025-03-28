@@ -1,17 +1,17 @@
 // brute force: https://gist.github.com/getaaron/b77f4935737a685c7ec2
 
 const directions = [
-    [ 1,-1], [ 1, 0], [ 1, 1],
-    [ 0,-1], [ 0, 0], [ 0, 1],
-    [-1,-1], [-1, 0], [-1, 1]
+    [1, -1], [1, 0], [1, 1],
+    [0, -1], [0, 0], [0, 1],
+    [-1, -1], [-1, 0], [-1, 1]
 ];
 
 
-function flattenCube(r,c,solution) {
+function flattenCube(r, c, solution) {
     let set1 = new Set();
     directions.forEach(([R, C]) => {
-        if (solution[R+r] && solution[R+r][C+c]) {
-            set1.add(solution[R+r][C+c]);
+        if (solution[R + r] && solution[R + r][C + c]) {
+            set1.add(solution[R + r][C + c]);
         }
     });
     return set1;
@@ -22,7 +22,7 @@ function isValidSet(r, c, solution) {
     if (!c) {
         set1 = new Set(solution[r]);
     } else {
-        solution.forEach( r => set1.add(r[c]) );
+        solution.forEach(r => set1.add(r[c]));
     }
     if (set1.has('.')) return 0;
     return set1.size === 9;
@@ -31,7 +31,7 @@ function isValidSet(r, c, solution) {
 function isValidCube(r, c, solution) {
     if (r < 1 || r > solution.length - 2) return 0;
     if (c < 1 || c > solution.length - 2) return 0;
-    let set1 = flattenCube(r,c,solution);
+    let set1 = flattenCube(r, c, solution);
     if (set1.has('.')) return 0;
     return set1.size === 9;
 }
@@ -41,29 +41,31 @@ function solveSudoku(board) {
     let safety = new Array() //  memoization can only fill available spaces
     let backtrack = [];
 
-    board.forEach((r,rI) => {
-        r.forEach((c,cI) => {
-           let set1 = new Set();
-           if (parseInt(c) > 0) {
-               set1.add(parseInt(c));
-               // set to all others in row / column / cube
-           }
-           if (!safety[r]) safety[r] = new Array();
-           safety[r][c].push(set1);
+    board.forEach((r, rI) => {
+        r.forEach((c, cI) => {
+            let set1 = new Set();
+            if (parseInt(c) > 0) {
+                set1.add(parseInt(c));
+                // set to all others in row / column / cube
+            }
+            if (!safety[r]) safety[r] = new Array();
+            safety[r][c].push(set1);
         });
     })
 
-    placeAttempt(r,c,solution) {
+    placeAttempt(r, c, solution)
+    {
 
     }
 
-    pickAttempt(r,c,solution) {
+    pickAttempt(r, c, solution)
+    {
 
     }
 
     let attempt = 1;
-    for (let r=0; r < safety.length; r++) {
-        for (let c=0; c < r.length; c++) {
+    for (let r = 0; r < safety.length; r++) {
+        for (let c = 0; c < r.length; c++) {
 
             if (parseInt(board[r][c]) > 0) {
                 continue; // pre-defined value, skip
@@ -82,7 +84,7 @@ function solveSudoku(board) {
             safety[r].forEach(r2 => r2.add(attempt));
             safety.forEach((r2, rI) => safety[rI][c].add(attempt));
             directions.forEach(([R, C]) => {
-                safety[R+r][C+c].add(attempt);
+                safety[R + r][C + c].add(attempt);
             });
             solution[r][c] = attempt;
 

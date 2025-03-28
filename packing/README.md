@@ -1,10 +1,12 @@
 # TypeScript Packing Algorithms
 
-This module contains implementations of various packing algorithms in TypeScript with a unified testing framework. These algorithms solve the fundamental problem of efficiently arranging objects within constrained spaces.
+This module contains implementations of various packing algorithms in TypeScript with a unified testing framework. These
+algorithms solve the fundamental problem of efficiently arranging objects within constrained spaces.
 
 ## What are Packing Algorithms?
 
-Packing algorithms address optimization problems where items of different dimensions need to be placed efficiently within containers. They have widespread applications:
+Packing algorithms address optimization problems where items of different dimensions need to be placed efficiently
+within containers. They have widespread applications:
 
 - **Logistics**: Optimizing cargo in shipping containers
 - **Manufacturing**: Minimizing material waste in cutting stock problems
@@ -111,7 +113,8 @@ This tests all bin packing algorithms with 200 random items to see which produce
 npm run packing-test --algorithms rectangle --item-type uniform --count 150
 ```
 
-This tests rectangular packing algorithms using uniformly sized items, which can highlight algorithm performance under more predictable conditions.
+This tests rectangular packing algorithms using uniformly sized items, which can highlight algorithm performance under
+more predictable conditions.
 
 ### 3. Comparing Online vs. Offline Algorithms
 
@@ -139,30 +142,31 @@ Tests how strip packing algorithms perform with non-square container dimensions.
 
 ## Algorithm Selection Guide
 
-| When You Need To... | Try These Algorithms |
-|---------------------|----------------------|
-| Minimize number of containers | Best Fit Bin, First Fit Bin |
-| Maximize value with limited space | 0/1 Knapsack, Fractional Knapsack |
-| Pack large numbers of similar items | Shelf Packing, Next Fit Strip |
-| Handle items arriving in real-time | Online First Fit, Online Shelf |
-| Achieve highest space utilization | Maximal Rectangles, Skyline Packing |
-| Balance speed and efficiency | First Fit Bin, Guillotine Packing |
-| Handle items with vastly different sizes | Best Fit Bin, Skyline Packing |
+| When You Need To...                      | Try These Algorithms                |
+|------------------------------------------|-------------------------------------|
+| Minimize number of containers            | Best Fit Bin, First Fit Bin         |
+| Maximize value with limited space        | 0/1 Knapsack, Fractional Knapsack   |
+| Pack large numbers of similar items      | Shelf Packing, Next Fit Strip       |
+| Handle items arriving in real-time       | Online First Fit, Online Shelf      |
+| Achieve highest space utilization        | Maximal Rectangles, Skyline Packing |
+| Balance speed and efficiency             | First Fit Bin, Guillotine Packing   |
+| Handle items with vastly different sizes | Best Fit Bin, Skyline Packing       |
 
 ## Time and Space Complexity
 
-| Algorithm | Time Complexity | Space Complexity | Best Use Case |
-|-----------|-----------------|------------------|---------------|
-| First Fit Bin | O(n²) | O(n) | General purpose bin packing |
-| Best Fit Bin | O(n²) | O(n) | Minimizing wasted space |
-| Next Fit Bin | O(n) | O(n) | Speed-critical situations |
-| 0/1 Knapsack | O(nW) | O(nW) | Optimal value with indivisible items |
-| Fractional Knapsack | O(n log n) | O(n) | Value optimization with divisible items |
-| Shelf Packing | O(n log n) | O(n) | Simple implementation for rectangle packing |
-| Maximal Rectangles | O(n³) | O(n²) | Highest space utilization |
-| Skyline Packing | O(n²) | O(n) | Complex irregular packing |
+| Algorithm           | Time Complexity | Space Complexity | Best Use Case                               |
+|---------------------|-----------------|------------------|---------------------------------------------|
+| First Fit Bin       | O(n²)           | O(n)             | General purpose bin packing                 |
+| Best Fit Bin        | O(n²)           | O(n)             | Minimizing wasted space                     |
+| Next Fit Bin        | O(n)            | O(n)             | Speed-critical situations                   |
+| 0/1 Knapsack        | O(nW)           | O(nW)            | Optimal value with indivisible items        |
+| Fractional Knapsack | O(n log n)      | O(n)             | Value optimization with divisible items     |
+| Shelf Packing       | O(n log n)      | O(n)             | Simple implementation for rectangle packing |
+| Maximal Rectangles  | O(n³)           | O(n²)            | Highest space utilization                   |
+| Skyline Packing     | O(n²)           | O(n)             | Complex irregular packing                   |
 
 Where:
+
 - n is the number of items
 - W is the knapsack capacity
 

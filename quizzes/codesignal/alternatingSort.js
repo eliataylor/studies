@@ -30,10 +30,10 @@ The new array b will look like [1, 3, 4, 6, 5], which is not in strictly ascendi
 
 function alternatingSort(a) {
     let b = new Array();
-    while(a.length > 0) {
+    while (a.length > 0) {
         b.push(b.length % 2 === 0 ? a.shift() : a.pop());
         if (b.length > 1) {
-            if (b[b.length-2] >= b[b.length-1]) {
+            if (b[b.length - 2] >= b[b.length - 1]) {
                 return false;
             }
         }

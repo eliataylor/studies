@@ -1,8 +1,8 @@
-var mergeSimple = function(nums1, m, nums2, n) {
+var mergeSimple = function (nums1, m, nums2, n) {
     if (nums1.length > m) nums1.splice(m); // js doesn't need the end prepopulated
     if (nums2.length > n) nums2.splice(n); // js doesn't need the end prepopulated
 
-    let b = nums1.concat(nums2).sort((a,b)=> a-b);
+    let b = nums1.concat(nums2).sort((a, b) => a - b);
     nums1.splice(0, nums1.length, ...b);
     return nums1;
 };
@@ -45,7 +45,7 @@ var merge = function (nums1, m, nums2, n) {
                 nums1.unshift(target);
                 target = -1;
                 break;
-            } else if (nums1[mid] <= target && (nums1[mid + 1] >= target || !nums1[mid+1]) ) {
+            } else if (nums1[mid] <= target && (nums1[mid + 1] >= target || !nums1[mid + 1])) {
                 if (nums1[mid + 1] >= target) {
                     nums1.splice(mid + 1, 0, target);
                 } else {
@@ -53,7 +53,7 @@ var merge = function (nums1, m, nums2, n) {
                 }
                 target = -1;
                 break;
-            } else if (nums1[mid - 1] <= target && (nums1[mid] >= target || !nums1[mid-1]) ) {
+            } else if (nums1[mid - 1] <= target && (nums1[mid] >= target || !nums1[mid - 1])) {
                 if (nums1[mid - 1] <= target) {
                     nums1.splice(mid, 0, target);
                 } else {
@@ -80,13 +80,13 @@ var merge = function (nums1, m, nums2, n) {
 const tests = [
     {
         name: 'Test 5',
-        arg: [[0,0,3,0,0,0,0,0,0],3,[-1,1,1,1,2,3],6],
-        expected: [-1,0,0,1,1,1,2,3,3]
-    },{
+        arg: [[0, 0, 3, 0, 0, 0, 0, 0, 0], 3, [-1, 1, 1, 1, 2, 3], 6],
+        expected: [-1, 0, 0, 1, 1, 1, 2, 3, 3]
+    }, {
         name: 'Test 6',
-        arg: [[-1,0,0,3,3,3,0,0,0],6,[1,2,2],3],
-        expected: [-1,0,0,1,2,2,3,3,3]
-    },{
+        arg: [[-1, 0, 0, 3, 3, 3, 0, 0, 0], 6, [1, 2, 2], 3],
+        expected: [-1, 0, 0, 1, 2, 2, 3, 3, 3]
+    }, {
         name: 'Test 4',
         arg: [[4, 0, 0, 0, 0, 0], 1, [1, 2, 3, 5, 6], 5],
         expected: [1, 2, 3, 4, 5, 6]

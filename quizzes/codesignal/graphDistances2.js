@@ -4,29 +4,31 @@
  *
  */
 
-var Heap = function(sort) {
+var Heap = function (sort) {
     this._array = [];
     this._sort = sort;
 
     Object.defineProperty(this, 'length', {
         enumerable: true,
-        get: function() { return this._array.length },
+        get: function () {
+            return this._array.length
+        },
     });
 
     if (typeof this._sort !== 'function') {
-        this._sort = function(a, b) {
+        this._sort = function (a, b) {
             return a - b;
         }
     }
 };
 
-Heap.prototype.push = function(node) {
+Heap.prototype.push = function (node) {
     node = node || {};
     this._array.push(node);
     this._bubble();
 };
 
-Heap.prototype.pop = function() {
+Heap.prototype.pop = function () {
     if (this.isEmpty()) {
         return null;
     }
@@ -39,19 +41,19 @@ Heap.prototype.pop = function() {
     return top;
 };
 
-Heap.prototype.peek = function() {
+Heap.prototype.peek = function () {
     return this._array[0];
 };
 
-Heap.prototype.isEmpty = function() {
+Heap.prototype.isEmpty = function () {
     return this.length === 0;
 };
 
-Heap.prototype._compare = function(i, j) {
+Heap.prototype._compare = function (i, j) {
     return this._sort(this._array[i], this._array[j]) > 0;
 };
 
-Heap.prototype._bubble = function() {
+Heap.prototype._bubble = function () {
     var i = this.length - 1;
     var j = this._parent(i);
 
@@ -89,7 +91,7 @@ Heap.prototype._heapify = function (index) {
 
 };
 
-Heap.prototype._sink = function() {
+Heap.prototype._sink = function () {
     var i = 0;
     var lc = this._left(i);
     var rc = this._right(i);
@@ -136,29 +138,31 @@ Heap.prototype.changeKey = function (index, value) {
 
 };
 
-Heap.prototype.update  = function(node) {
-    var idx =  this._array.map(function(e) { return e.index; }).indexOf(node.index);
+Heap.prototype.update = function (node) {
+    var idx = this._array.map(function (e) {
+        return e.index;
+    }).indexOf(node.index);
     if (idx >= 0) {
         this.changeKey(idx, node);
     }
 };
 
-Heap.prototype._parent = function(i) {
-    var pi = (i - 1)/2 >> 0;
+Heap.prototype._parent = function (i) {
+    var pi = (i - 1) / 2 >> 0;
     return pi >= 0 ? pi : null;
 };
 
-Heap.prototype._left = function(i) {
-    var li = i*2 + 1;
+Heap.prototype._left = function (i) {
+    var li = i * 2 + 1;
     return li < this.length ? li : null;
 };
 
-Heap.prototype._right = function(i) {
-    var ri = i*2 + 2;
+Heap.prototype._right = function (i) {
+    var ri = i * 2 + 2;
     return ri < this.length ? ri : null;
 };
 
-Heap.prototype._swap = function(i, j) {
+Heap.prototype._swap = function (i, j) {
     var a = this._array;
     var v = a[i];
     a[i] = a[j];
@@ -179,7 +183,7 @@ function graphDistances(g, s) {
             return b.distance - a.distance;
         });
 
-        for (let i=0; i<g.length; i++) {
+        for (let i = 0; i < g.length; i++) {
             let vert = new Vertex(i, Infinity);
 
             if (src === i) {
@@ -193,7 +197,7 @@ function graphDistances(g, s) {
         }
         let current = new Vertex(src, 0);
         while (current.index !== dest && isFinite(current.distance)) {
-            for (let i=0; i<g.length; i++) {
+            for (let i = 0; i < g.length; i++) {
                 if (current.index !== i && !visited[i] && g[i][current.index] !== -1) {
 
                     let dist = current.distance + g[i][current.index];
@@ -217,7 +221,7 @@ function graphDistances(g, s) {
     }
 
     let output = [];
-    for (let i=0; i<g.length; i++) {
+    for (let i = 0; i < g.length; i++) {
         let d = getDistance(i, s);
         output.push(d);
     }
@@ -228,31 +232,31 @@ function graphDistances(g, s) {
 const tests = [
     {
         name: 'Test 1',
-        arg: [[[-1,3,2],
-            [2,-1,0],
-            [-1,0,-1]], 0],
+        arg: [[[-1, 3, 2],
+            [2, -1, 0],
+            [-1, 0, -1]], 0],
         expected: [0, 2, 2]
     },
     {
         name: 'Test 2',
-        arg: [[[-1,1,2],
-            [0,-1,3],
-            [0,0,-1]], 1],
+        arg: [[[-1, 1, 2],
+            [0, -1, 3],
+            [0, 0, -1]], 1],
         expected: [0, 0, 2]
     },
     {
         name: 'Test 3',
-        arg: [[[-1,0,0,0],
-            [-1,-1,-1,30],
-            [1,1,-1,1],
-            [2,2,0,-1]], 3],
+        arg: [[[-1, 0, 0, 0],
+            [-1, -1, -1, 30],
+            [1, 1, -1, 1],
+            [2, 2, 0, -1]], 3],
         expected: [1, 1, 0, 0]
     },
     {
         name: 'Test 4',
-        arg: [[[-1,-1,2],
-            [1,-1,0],
-            [-1,1,-1]], 0],
+        arg: [[[-1, -1, 2],
+            [1, -1, 0],
+            [-1, 1, -1]], 0],
         expected: [0, 3, 2]
     }
 ];

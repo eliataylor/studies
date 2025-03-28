@@ -3,6 +3,7 @@ function factorial(n, r = 1) {
     while (n > 0) r *= n--;
     return r;
 }
+
 function calcPerms(n, r) {
     return factorial(n) / factorial(n - r);
 }
@@ -32,11 +33,11 @@ function permute(permutation) {
 
 
 function isNearlySequential(a) {
-    for(var i=1; i < a.length; i++){ // loop at each consective pair
-        let str1 = a[i-1];
+    for (var i = 1; i < a.length; i++) { // loop at each consective pair
+        let str1 = a[i - 1];
         let str2 = a[i];
         let count = 0;
-        for (var j=0; j < str1.length; j++) { // compare each letter between strings
+        for (var j = 0; j < str1.length; j++) { // compare each letter between strings
             if (str1[j] !== str2[j]) {
                 count++;
                 if (count > 1) return false;
@@ -89,7 +90,7 @@ function findNext(current, a) {
     if (a.length === 0) return a;
     for (let i = 0; i < a.length; i++) {
         if (differsByOneChar(current, a[i])) {
-            let remaining = findNext(a[i], a.slice(0, i).concat(a.slice(i+1)));
+            let remaining = findNext(a[i], a.slice(0, i).concat(a.slice(i + 1)));
             if (remaining.length === 0) return remaining;
         }
     }
@@ -108,9 +109,17 @@ function differsByOneChar(s1, s2) {
 
 /// oTHERS PHP:
 function stringsRearrangement($i) {
-    foreach ($i as $v) {
+    foreach($i
+    as
+    $v
+)
+    {
         $o = 0;
-        foreach ($i as $z) $o += levenshtein($v, $z) == 1;
+        foreach($i
+        as
+        $z
+    )
+        $o += levenshtein($v, $z) == 1;
         if (!$o || $o > 4) return 0;
         $x += $o < 2;
     }

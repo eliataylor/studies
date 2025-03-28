@@ -14,16 +14,16 @@ nthNumber(s, n) = "233".
  */
 
 function nthNumber(s, n) {
-    var re = new RegExp("(?:.*?\\d+){"+(n-1)+"}.*?[0]*(\\d+)");
+    var re = new RegExp("(?:.*?\\d+){" + (n - 1) + "}.*?[0]*(\\d+)");
     return re.exec(s)[1];
 }
 
 function nthNumber(s, n) {
-    var re = new RegExp("\\D*(?:0*(\\d+)\\D*){"+ n + "}");
+    var re = new RegExp("\\D*(?:0*(\\d+)\\D*){" + n + "}");
     return re.exec(s)[1];
 }
 
 function nthNumber(s, n) {
-    var re = new RegExp("\\D*(?:0*(\\d+)\\D*){"+ n + "}");
+    var re = new RegExp("\\D*(?:0*(\\d+)\\D*){" + n + "}");
     return re.exec(s)[1];
 }

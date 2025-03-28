@@ -2,10 +2,10 @@ longestPath = f => f.split("\f").reduce((m, i) => {
     let t = i.split("\t");
     let name = t.pop();
     m.a[t.length] = name;
-    let value =  m.a.slice(0, t.length + 1).join("/");
+    let value = m.a.slice(0, t.length + 1).join("/");
     m.value = m.value.length < value.length && name.indexOf(".") >= 0 ? value : m.value;
     return m;
-}, { a: [], value: ""}).value.length;
+}, {a: [], value: ""}).value.length;
 
 
 // OTHERS
@@ -33,9 +33,9 @@ function longestPath(fileSystem) {
     if (!trees.length) return 0;
     let longest = 0;
     const stack = [];
-    trees.forEach(node => stack.push({ node, pathLength: node.name.length}));
+    trees.forEach(node => stack.push({node, pathLength: node.name.length}));
     while (stack.length) {
-        const { node, pathLength } = stack.pop();
+        const {node, pathLength} = stack.pop();
         if (node.type === 'file' && pathLength > longest) {
             longest = pathLength;
         }

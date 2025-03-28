@@ -11,16 +11,20 @@ function allLongestStrings(inputArray) {
 }
 
 const tests = [
-    {arg : ["aba",
+    {
+        arg: ["aba",
             "aa",
             "ad",
             "vcd",
             "aba"],
-        expected : ["aba",
+        expected: ["aba",
             "vcd",
-            "aba"]},
-    {arg : ["aa"],
-        expected : ["aa"]},
+            "aba"]
+    },
+    {
+        arg: ["aa"],
+        expected: ["aa"]
+    },
 
 ];
 

@@ -20,18 +20,18 @@ class NaryTree {
      * @return {string}
      */
         // Encodes a tree to a single string.
-    serialize = function(root) {
-        if(root == null) return  null
+    serialize = function (root) {
+        if (root == null) return null
         let queue = [root, null]
         let finalArray = []
-        while(queue.length) {
+        while (queue.length) {
             const front = queue.shift()
-            if(!front) {
+            if (!front) {
                 finalArray.push(front)
                 continue
             }
             finalArray.push(front.val)
-            while(front.children.length) {
+            while (front.children.length) {
                 queue.push(front.children.shift())
             }
             queue.push(null)
@@ -45,14 +45,14 @@ class NaryTree {
      * @return {Node}
      */
         // Decodes your encoded data to tree.
-    deserialize = function(data) {
-        if(data == null) return null
+    deserialize = function (data) {
+        if (data == null) return null
         let root = new Node(data.shift(), [])
         let queue = [root]
         let topQueue = null
-        while(data.length) {
+        while (data.length) {
             const top = data.shift()
-            if(top == null) {
+            if (top == null) {
                 topQueue = queue.shift()
                 continue
             }

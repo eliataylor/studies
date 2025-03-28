@@ -12,12 +12,12 @@ function sumUpNumbers(text) {
 
 const tests = [
     {
-        name:'Test 1',
+        name: 'Test 1',
         arg: ["2 apples, 12 oranges"],
         expected: 14
     },
     {
-        name:'Test 3',
+        name: 'Test 3',
         arg: ["123450"],
         expected: 123450
     }
