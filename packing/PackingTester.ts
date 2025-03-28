@@ -156,6 +156,7 @@ program
     const itemCount = parseInt(options.count, 10);
     const containerWidth = parseInt(options.width, 10);
     const containerHeight = parseInt(options.height, 10);
+    const containerCapacity = parseInt(options.capacity, 10);
     const maxItemWidth = parseInt(options.maxItemWidth, 10);
     const maxItemHeight = parseInt(options.maxItemHeight, 10);
     const itemType = options.itemType as ItemSetType;
@@ -163,9 +164,14 @@ program
 
     // Generate items
     const items = generateItems(itemCount, maxItemWidth, maxItemHeight, itemType);
-
     // Create container specification
-    const containerSpec = createContainerSpec(containerWidth, containerHeight);
+    // Check if we're using knapsack algorithms and set capacity accordingly
+    const isKnapsack = algorithmNames.some(name => name.includes('knapsack'));
+    const capacity = isKnapsack || containerCapacity > 0 ?
+      (containerCapacity > 0 ? containerCapacity : containerWidth * containerHeight) :
+      undefined;
+
+    const containerSpec = createContainerSpec(containerWidth, containerHeight, capacity);
 
     // Display test configuration
     Logger.section('Test Configuration');

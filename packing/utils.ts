@@ -154,10 +154,13 @@ export function createContainerSpec(
   height: number = 1000,
   capacity?: number
 ): Omit<Container, 'id' | 'items'> {
+  // If capacity is not provided, default it to the container area for knapsack problems
+  const containerCapacity = capacity !== undefined ? capacity : width * height;
+
   return {
     width,
     height,
-    capacity
+    capacity: containerCapacity
   };
 }
 
