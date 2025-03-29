@@ -3,6 +3,7 @@ import chalk from 'chalk';
 import {getBorderCharacters, table} from 'table';
 import {Logger} from '../logger';
 import {ArrayType, generateArray} from "../sorting/utils";
+import {generateTree} from "./TreeUtils";
 
 // ========== Type Definitions ==========
 
@@ -70,7 +71,7 @@ export function generateDataStructure(type: string, dimensions: number[]): any {
         case 'matrix':
             return generateSortedMatrix(dimensions[0], dimensions[1]);
         case 'tree':
-            return generateBinarySearchTree(dimensions);
+            return generateTree('balanced-bst', dimensions);
         default:
             throw new Error(`Unknown data structure type: ${type}`);
     }
@@ -160,43 +161,6 @@ export function generateSortedMatrix(rows: number = 10, cols: number = 10, testC
     }
 
     return matrix;
-}
-
-/**
- * Generates a random binary search tree with n nodes
- * @param dimensions Number of nodes in the tree
- * @returns The root node of the generated BST
- */
-export function generateBinarySearchTree(dimensions: number[]): TreeNode | null {
-
-    // Generate sorted array of unique values
-    const values = generateArray(dimensions[0], 0, 100, 0, dimensions[0]*dimensions[1]);
-
-    // Convert sorted array to balanced BST
-    return sortedArrayToBST(values, 0, values.length - 1);
-}
-
-/**
- * Helper function to convert a sorted array to a balanced BST
- * @param arr Sorted array
- * @param start Start index
- * @param end End index
- * @returns Root node of the generated BST
- */
-function sortedArrayToBST(arr: number[], start: number, end: number): TreeNode | null {
-    if (start > end) return null;
-
-    const mid = Math.floor((start + end) / 2);
-    const node: TreeNode = {
-        value: arr[mid],
-        left: null,
-        right: null
-    };
-
-    node.left = sortedArrayToBST(arr, start, mid - 1);
-    node.right = sortedArrayToBST(arr, mid + 1, end);
-
-    return node;
 }
 
 // ========== Utility Functions ==========
