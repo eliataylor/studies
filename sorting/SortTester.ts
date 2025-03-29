@@ -83,7 +83,7 @@ program
     .option('-A, --algorithms <string>', 'Comma-separated list of algorithms to test, single algorithm, or category ("basic", "efficient", "nonComparison", "all")')
     .option('-s, --size <number>', 'Size of the array to sort', '1000')
     .option('--seed <string>', 'Random seed for reproducible arrays')
-    .option('-r, --runs <number>', 'Number of runs per algorithm', '1')
+    .option('-r, --runs <number>', 'Number of runs per algorithm', '4')
     .option('--min <number>', 'Minimum value in the array', '0')
     .option('--max <number>', 'Maximum value in the array', '1000')
     .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.ASCENDING)

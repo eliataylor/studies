@@ -28,7 +28,7 @@ npm install
 - `--min <number>`: Minimum value in the array (default: 0)
 - `--max <number>`: Maximum value in the array (default: 1000)
 - `--seed <string>`: Random seed for reproducible arrays
-- `-r, --runs <number>`: Number of runs per algorithm (default: 1)
+- `-r, --runs <number>`: Number of runs per algorithm (default: 4)
 - `-t, --arrayType <type>`: Type of array to generate (ascending, descending)
 - `--sortedness <number>`: Level of sortedness from 0 (random) to 100 (sorted) (default: 0)
 - `--uniqueness <number>`: Level of uniqueness from 0 (all same values) to 100 (all unique values) (default: 100)

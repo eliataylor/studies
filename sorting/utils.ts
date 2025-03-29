@@ -88,20 +88,19 @@ export function generateArray(
         return array; // return completely random array
     }
 
+    // sort it ascending or descending then shuffle according to sortedness
     if (arrayType === ArrayType.DESCENDING) {
         array.sort((a, b) => b - a);
     } else if (arrayType === ArrayType.ASCENDING) {
         array.sort((a, b) => a - b);
     }
 
-
-
     const sortedCount = Math.floor((sortedness / 100) * size);
     const unsortedCount = size - sortedCount;
 
-    // TODO: add argument to control if unsorted area is only a specific area of array
-    for (let i = 0; i < unsortedCount; i++) {
-        let fromIndex = Math.floor(Math.random() * size);
+    // shuffle by sorting random pairs of elements
+    for (let i = 0; i < unsortedCount / 2; i++) {
+        const fromIndex = Math.floor(Math.random() * size);
         let toIndex = Math.floor(Math.random() * size);
         while (fromIndex === toIndex) {
             toIndex = Math.floor(Math.random() * size);
