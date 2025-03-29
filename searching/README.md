@@ -22,54 +22,12 @@ npm install
 ### Command-Line Options
 
 - `-a, --algorithms <string>`: Algorithm name, comma-separated list, or category name (`array`, `matrix`, `tree`, `all`)
-- `-s, --sizes <string>`: Comma-separated list of data sizes to test (default: "1000")
+- `-s, --dimensions <string>`: Comma-separated list of data sizes to test (default: "1000")
 - `--targets <number>`: Number of search targets to test (default: 10)
 - `--percent-present <number>`: Percentage of targets present in data (0-100) (default: 50)
 - `--seed <string>`: Random seed for reproducible test data
-- `-v, --verbose`: Show detailed information about searches
-- `--compare`: Force comparison mode (automatically enabled for multiple algorithms)
 
-### Example Usage Scenarios
-
-#### 1. Testing a Single Algorithm
-
-```bash
-# Test binary search with an array of 1000 elements
-npm run search-test -- --algorithms binary
-
-# Test staircase search with a 100x100 matrix
-npm run search-test -- --algorithms staircase --sizes 100
-```
-
-#### 2. Comparing Algorithm Categories
-
-```bash
-# Compare all array search algorithms
-npm run search-test -- --algorithms array
-
-# Compare all tree search algorithms with 5 targets
-npm run search-test -- --algorithms tree --targets 5
-```
-
-#### 3. Comparing Specific Algorithms
-
-```bash
-# Compare binary search, interpolation search, and jump search
-npm run search-test -- --algorithms "binary,interpolation,jump"
-
-# Compare all matrix search algorithms across different sizes
-npm run search-test -- --algorithms matrix --sizes "10,50,100"
-```
-
-#### 4. Detailed Analysis
-
-```bash
-# Verbose output for detailed search information
-npm run search-test -- --algorithms "binary,linear" --verbose
-
-# Compare tree search algorithms with 100% present targets
-npm run search-test -- --algorithms tree --percent-present 100
-```
+See [EXAMPLES.md](EXAMPLES.md) for more detailed examples.
 
 ## Available Algorithms
 
@@ -100,6 +58,7 @@ npm run search-test -- --algorithms tree --percent-present 100
 - **bst**: Binary Search Tree Search - Optimized search specifically for binary search trees.
 - **bfs**: Breadth-First Search - Explores all neighbor nodes at the present depth before moving to nodes at the next
   depth level.
+
 
 ## Time and Space Complexity
 

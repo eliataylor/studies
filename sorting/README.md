@@ -59,6 +59,8 @@ The `--uniqueness` parameter controls the percentage of unique values in the arr
 - 100% = all values are unique (no duplicates)
 - Values in between control the ratio of unique values to duplicates
 
+See [EXAMPLES.md](EXAMPLES.md) for more detailed examples.
+
 ## Available Algorithms
 
 ### Basic O(n²) Algorithms
@@ -84,8 +86,6 @@ The `--uniqueness` parameter controls the percentage of unique values in the arr
 - **counting**: Counting Sort - O(n+k) performance for small ranges of integers
 - **radix**: Radix Sort - Efficient for integers with limited number of digits
 - **bucket**: Bucket Sort - Good for uniformly distributed data
-
-See [EXAMPLES.md](EXAMPLES.md) for more detailed examples.
 
 
 ## Time and Space Complexity

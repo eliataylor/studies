@@ -93,6 +93,10 @@ program
     .version('1.0.0')
     .option('-a, --algorithms <string>', 'Algorithm(s) to run (comma-separated list, category name, or "all")', 'all')
     .option('-d, --dimensions <string>', 'size or dimensions of matrix', '50x50')
+
+    .option('--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0')
+    .option('--uniqueness <number>', 'Level of uniqueness from 0 (all same values) to 100 (all unique values)', '100')
+
     .option('--targets <number>', 'Number of search targets to test', '1')
     .option('--percent-present <number>', 'Percentage of targets present in data (0-100)', '50')
     .option('--seed <string>', 'Random seed for reproducible data')
