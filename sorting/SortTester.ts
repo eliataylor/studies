@@ -15,7 +15,7 @@
 import {program} from 'commander';
 import seedrandom from 'seedrandom';
 import chalk from 'chalk';
-import {Logger, LogLevel} from '../logger';
+import {Logger, LOG_LEVELS} from '../logger';
 import {ArrayType, compareAlgorithms, generateArray, type SortFunction} from './utils';
 
 // Import all sorting algorithms
@@ -64,15 +64,6 @@ export const ALGORITHM_CATEGORIES: Record<string, string[]> = {
     'efficient': ['merge', 'quick', 'heap', 'tim', 'intro'],
     'nonComparison': ['counting', 'radix', 'bucket'],
     'all': Object.keys(ALL_SORT_FUNCTIONS)
-};
-
-// Map of log level names to enum values
-const LOG_LEVELS: Record<string, LogLevel> = {
-    'none': LogLevel.NONE,
-    'error': LogLevel.ERROR,
-    'info': LogLevel.INFO,
-    'debug': LogLevel.DEBUG,
-    'trace': LogLevel.TRACE
 };
 
 

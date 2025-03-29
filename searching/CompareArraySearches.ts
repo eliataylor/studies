@@ -6,21 +6,16 @@
  */
 
 import {
-    compareSearchAlgorithms,
-    generateRandomArray,
     generateSortedArray,
-    printDatasetInfo,
-    runArraySearch,
-    selectSearchTargets
-} from '../utils';
+} from './utils';
 
 // Import array search algorithms
-import {linearSearch} from './LinearSearch';
-import {binarySearch, recursiveBinarySearch} from './BinarySearch';
-import {jumpSearch} from './JumpSearch';
-import {interpolationSearch} from './InterpolationSearch';
-import {exponentialSearch} from './ExponentialSearch';
-import {fibonacciSearch} from './FibonacciSearch';
+import {linearSearch} from './algorithms/LinearSearch';
+import {binarySearch, recursiveBinarySearch} from './algorithms/BinarySearch';
+import {jumpSearch} from './algorithms/JumpSearch';
+import {interpolationSearch} from './algorithms/InterpolationSearch';
+import {exponentialSearch} from './algorithms/ExponentialSearch';
+import {fibonacciSearch} from './algorithms/FibonacciSearch';
 
 // Define array sizes for testing
 const ARRAY_SIZES = [
@@ -43,17 +38,6 @@ const TEST_CASES = [
 function compareArraySearchAlgorithms() {
     console.log('===== ARRAY SEARCH ALGORITHMS COMPARISON =====\n');
 
-    // Collect all search functions
-    const searchFunctions = {
-        'Linear Search': linearSearch,
-        'Binary Search': binarySearch,
-        'Recursive Binary Search': recursiveBinarySearch,
-        'Jump Search': jumpSearch,
-        'Interpolation Search': interpolationSearch,
-        'Exponential Search': exponentialSearch,
-        'Fibonacci Search': fibonacciSearch
-    };
-
     // Run each test case
     TEST_CASES.forEach(testCase => {
         console.log(`\n----- Test Case: ${testCase} -----\n`);
@@ -65,13 +49,13 @@ function compareArraySearchAlgorithms() {
             // Generate appropriate arrays based on test case
             switch (testCase) {
                 case 'sorted-uniform':
-                    array = generateSortedArray(size, true);
+                    array = generateSortedArray([size,size], true);
                     description = 'Sorted array with uniform distribution';
                     break;
 
                 case 'sorted-clustered':
                     // Create array with repeated values (less unique values)
-                    array = generateSortedArray(size, false);
+                    array = generateSortedArray([size,size], false);
                     description = 'Sorted array with clustered values';
                     break;
 
@@ -88,52 +72,10 @@ function compareArraySearchAlgorithms() {
                     break;
 
                 default:
-                    array = generateSortedArray(size);
+                    array = generateSortedArray([size,size]);
                     description = 'Standard sorted array';
             }
 
-            // Select search targets
-            const targets = selectSearchTargets(array, 50, 5);
-
-            // Print dataset info
-            printDatasetInfo('Array', size, {'Type': description});
-
-            // Compare search algorithms
-            compareSearchAlgorithms(
-                searchFunctions,
-                runArraySearch,
-                [array],
-                targets
-            );
         });
     });
-
-    // Special test: Unsorted array (only linear search works here)
-    console.log('\n----- Test Case: Unsorted Array -----\n');
-
-    const linearOnly = {
-        'Linear Search': linearSearch
-    };
-
-    ARRAY_SIZES.slice(0, 3).forEach(size => { // Using only smaller sizes for unsorted
-        const array = generateRandomArray(size);
-        const targets = selectSearchTargets(array, 50, 5);
-
-        printDatasetInfo('Array', size, {'Type': 'Unsorted random array'});
-
-        compareSearchAlgorithms(
-            linearOnly,
-            runArraySearch,
-            [array],
-            targets
-        );
-    });
 }
-
-// Run the comparison
-compareArraySearchAlgorithms();
-
-/**
- * To run:
- * ts-node CompareArraySearch.ts
- */

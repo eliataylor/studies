@@ -5,19 +5,12 @@
  * of different sizes and characteristics.
  */
 
-import {
-    compareSearchAlgorithms,
-    generateBinarySearchTree,
-    printDatasetInfo,
-    runTreeSearch,
-    selectSearchTargets
-} from '../utils';
+import {generateBinarySearchTree, selectSearchTargets} from './utils';
 
-import {createNode, TreeNode} from './TreeNode';
+import {createNode, TreeNode} from './algorithms/TreeNode';
 
 // Import tree search algorithms
-import {bstSearch, inorderDFS, iterativePreorderDFS, postorderDFS, preorderDFS} from './DFSSearch';
-import {bfs, bfsWithLevel} from './BFSSearch';
+import {bfsWithLevel} from './algorithms/BFSSearch';
 
 // Define tree sizes for testing
 const TREE_SIZES = [
@@ -151,16 +144,6 @@ function collectTreeValues(root: TreeNode | null): number[] {
 function compareTreeSearchAlgorithms() {
     console.log('===== TREE SEARCH ALGORITHMS COMPARISON =====\n');
 
-    // Collect all search functions
-    const searchFunctions = {
-        'Preorder DFS': preorderDFS,
-        'Inorder DFS': inorderDFS,
-        'Postorder DFS': postorderDFS,
-        'Iterative Preorder DFS': iterativePreorderDFS,
-        'BFS': bfs,
-        'BST Search': bstSearch
-    };
-
     // Run each test case
     TEST_CASES.forEach(testCase => {
         console.log(`\n----- Test Case: ${testCase} -----\n`);
@@ -200,7 +183,7 @@ function compareTreeSearchAlgorithms() {
                     break;
 
                 default:
-                    tree = generateBinarySearchTree(size);
+                    tree = generateBinarySearchTree([size, size]);
                     description = 'Standard binary search tree';
             }
 
@@ -210,25 +193,6 @@ function compareTreeSearchAlgorithms() {
             // Select search targets (50% exist in tree)
             const targets = selectSearchTargets(values, 50, 5);
 
-            // Print dataset info
-            printDatasetInfo('Tree', size, {'Type': description});
-
-            // Adjust search functions based on tree type
-            let functionsToTest = {...searchFunctions};
-
-            // BST search only works properly on binary search trees
-            if (testCase !== 'balanced-bst') {
-                // @ts-ignore
-                delete functionsToTest['BST Search'];
-            }
-
-            // Compare search algorithms
-            compareSearchAlgorithms(
-                functionsToTest,
-                runTreeSearch,
-                [tree],
-                targets
-            );
         });
     });
 
@@ -258,11 +222,3 @@ function compareTreeSearchAlgorithms() {
         }
     }
 }
-
-// Run the comparison
-compareTreeSearchAlgorithms();
-
-/**
- * To run:
- * ts-node CompareTreeSearch.ts
- */

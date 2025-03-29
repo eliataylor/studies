@@ -18,6 +18,15 @@ export enum LogLevel {
     TRACE = 4    // Verbose step-by-step execution details
 }
 
+// Map of log level names to enum values
+export const LOG_LEVELS: Record<string, LogLevel> = {
+    'none': LogLevel.NONE,
+    'error': LogLevel.ERROR,
+    'info': LogLevel.INFO,
+    'debug': LogLevel.DEBUG,
+    'trace': LogLevel.TRACE
+};
+
 // Default log level
 let currentLogLevel: LogLevel = LogLevel.NONE;
 

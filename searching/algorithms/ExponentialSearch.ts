@@ -72,20 +72,3 @@ function binarySearch(
 
     return -1;
 }
-
-// Uncomment to test this algorithm individually
-// import { generateSortedArray, selectSearchTargets } from './utils';
-//
-// // Generate test array and targets
-// const testArray = generateSortedArray(1000);
-// const targets = selectSearchTargets(testArray, 50, 5);
-//
-// // Run tests
-// console.log('=== Exponential Search Test ===');
-// console.log(`Array size: ${testArray.length}`);
-//
-// targets.forEach(({ target, exists }) => {
-//   console.log(`\nSearching for ${target} (${exists ? 'exists' : 'does not exist'})`);
-//   const result = runArraySearch(exponentialSearch, testArray, target, 'Exponential Search');
-//   console.log(`Result: ${result.result}, Time: ${result.time.toFixed(4)} ms, Success: ${result.success ? 'Yes' : 'No'}`);
-// });

@@ -11,22 +11,7 @@ with a unified framework for testing and comparing their performance.
 npm install
 ```
 
-2. Build the TypeScript files:
-
-```bash
-npm run build
-```
-
-## Search Algorithm Test Framework
-
-The unified testing framework allows you to test individual algorithms or compare multiple algorithms across different
-data structures to understand their performance characteristics.
-
-```bash
-npm run search-test -- [options]
-```
-
-### Key Features
+## Search Algorithm Unit Testing
 
 - Test individual or multiple search algorithms across various scenarios
 - Organize algorithms by data structure type (array, matrix, tree)
@@ -182,15 +167,6 @@ npm run search-help
     - Tree search algorithms: `DFSSearch.ts`, `BFSSearch.ts`, etc.
 - `SearchTester.ts`: Command-line interface for running and comparing algorithms
 - `SearchHelp.ts`: Help utility with algorithm information and examples
-
-## Contributing
-
-Contributions are welcome! You can:
-
-1. Add new search algorithms
-2. Improve existing implementations
-3. Enhance the testing framework
-4. Fix bugs or improve documentation
 
 Please ensure your code follows the existing style and includes appropriate tests.
 
