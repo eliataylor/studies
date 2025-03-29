@@ -30,6 +30,7 @@ export enum ArrayType {
  *
  * @param size The size of the array
  * @param sortedness Level of sortedness from 0 (completely random) to 100 (fully sorted)
+ * @param uniqueness Level of uniqueness from 0 (all same values) to 100 (all unique)
  * @param min Minimum value in the array
  * @param max Maximum value in the array
  * @param arrayType The base type of array to generate

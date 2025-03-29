@@ -59,7 +59,7 @@ const ALL_SORT_FUNCTIONS: Record<string, SortFunction> = {
 };
 
 // Mapping of algorithm categories
-const ALGORITHM_CATEGORIES: Record<string, string[]> = {
+export const ALGORITHM_CATEGORIES: Record<string, string[]> = {
     'basic': ['bubble', 'selection', 'insertion', 'gnome', 'optimizedGnome', 'comb', 'shell'],
     'efficient': ['merge', 'quick', 'heap', 'tim', 'intro'],
     'nonComparison': ['counting', 'radix', 'bucket'],

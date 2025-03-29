@@ -23,6 +23,8 @@ import {SortFunction} from '../utils';
  * @param arr The array to sort
  * @returns The sorted array
  */
+
+// TODO: pass in min / max for more accurate speed measurements
 export const countingSort: SortFunction = (arr: number[]): number[] => {
     const array = [...arr]; // Create a copy to avoid modifying the original
 

@@ -2,22 +2,15 @@
  * Help.ts - Utility to display nicely formatted CLI help information
  *
  * Run with:
- * npm run help
+ * npm run sort-help
  */
 
 import chalk from 'chalk';
 import type {TableUserConfig} from 'table';
 import {getBorderCharacters, table} from 'table';
 import {Logger} from '../logger';
-
-// All sorting algorithms organized by categories
-const ALGORITHM_CATEGORIES: Record<string, string[]> = {
-    'basic': ['bubble', 'selection', 'insertion', 'gnome', 'optimizedGnome', 'comb', 'shell'],
-    'efficient': ['merge', 'quick', 'heap', 'tim', 'intro'],
-    'nonComparison': ['counting', 'radix', 'bucket'],
-    'all': ['bubble', 'selection', 'insertion', 'gnome', 'optimizedGnome', 'comb', 'shell',
-        'merge', 'quick', 'heap', 'tim', 'intro', 'counting', 'radix', 'bucket']
-};
+import {ArrayType} from './utils';
+import {ALGORITHM_CATEGORIES} from "./SortTester";
 
 // Display main program header
 function displayHeader(): void {
@@ -31,10 +24,8 @@ function displayCommands(): void {
 
     const commandsTable = [
         [chalk.bold('Command'), chalk.bold('Description')],
-        ['npm run sort', 'Run a specific sorting algorithm with configurable parameters'],
-        ['npm run compare', 'Compare multiple sorting algorithms with the same dataset'],
-        ['npm run test', 'Test sorting algorithms with different array configurations'],
-        ['npm run help', 'Display this help information']
+        ['npm run sort-test', 'Run and test sorting algorithms with configurable parameters'],
+        ['npm run sort-help', 'Display this help information']
     ];
 
     const config: TableUserConfig = {
@@ -48,27 +39,31 @@ function displayCommands(): void {
     console.log(table(commandsTable, config));
 }
 
-// Display sort command options
-function displaySortOptions(): void {
-    Logger.section('Sort Command Options');
-    console.log(chalk.italic('npm run sort -- [options]\n'));
+// Display sort-test command options
+function displaySortTestOptions(): void {
+    Logger.section('Sort-Test Command Options');
+    console.log(chalk.italic('npm run sort-test -- [options]\n'));
 
     const optionsTable = [
         [chalk.bold('Option'), chalk.bold('Description'), chalk.bold('Default')],
-        ['-a, --algorithm <name>', 'Algorithm to run (required)', ''],
+        ['-A, --algorithms <string>', 'Comma-separated list of algorithms, single algorithm, or category ("basic", "efficient", "nonComparison", "all")', '"all"'],
         ['-s, --size <number>', 'Size of the array to sort', '1000'],
-        ['-m, --min <number>', 'Minimum value in the array', '0'],
-        ['-M, --max <number>', 'Maximum value in the array', '1000'],
+        ['--min <number>', 'Minimum value in the array', '0'],
+        ['--max <number>', 'Maximum value in the array', '1000'],
         ['--seed <string>', 'Random seed for reproducible arrays', ''],
-        ['-v, --verbose', 'Show the entire sorted array', ''],
-        ['-r, --runs <number>', 'Number of runs (avg time will be reported)', '1']
+        ['-r, --runs <number>', 'Number of runs per algorithm', '1'],
+        ['-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, 'ascending'],
+        ['--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0'],
+        ['--uniqueness <number>', 'Level of uniqueness from 0 (all same) to 100 (all unique)', '100'],
+        ['-l, --loglevel <level>', 'Set logging level (none, error, info, debug, trace)', 'none'],
+        ['-h, --help', 'Display help information', '']
     ];
 
     const config: TableUserConfig = {
         border: getBorderCharacters('norc'),
         columns: {
-            0: {width: 25},
-            1: {width: 35},
+            0: {width: 30},
+            1: {width: 40},
             2: {width: 10}
         }
     };
@@ -76,68 +71,10 @@ function displaySortOptions(): void {
     console.log(table(optionsTable, config));
 
     // Example usage
-    console.log(chalk.bold('Example:'));
-    console.log(chalk.blue('npm run sort -- --algorithm quick --size 1000 --min 0 --max 10000 --seed 12345 --runs 3\n'));
-}
-
-// Display compare command options
-function displayCompareOptions(): void {
-    Logger.section('Compare Command Options');
-    console.log(chalk.italic('npm run compare -- [options]\n'));
-
-    const optionsTable = [
-        [chalk.bold('Option'), chalk.bold('Description'), chalk.bold('Default')],
-        ['-s, --size <number>', 'Size of the array to sort', '1000'],
-        ['-m, --min <number>', 'Minimum value in the array', '0'],
-        ['-M, --max <number>', 'Maximum value in the array', '1000'],
-        ['--seed <string>', 'Random seed for reproducible arrays', ''],
-        ['-a, --algorithms <string>', 'Comma-separated list of algorithms or category', '"all"'],
-        ['-r, --runs <number>', 'Number of runs for each algorithm', '1']
-    ];
-
-    const config = {
-        border: getBorderCharacters('norc'),
-        columns: {
-            0: {width: 25},
-            1: {width: 35},
-            2: {width: 10}
-        }
-    };
-
-    console.log(table(optionsTable, config));
-
-    // Example usage
-    console.log(chalk.bold('Example:'));
-    console.log(chalk.blue('npm run compare -- --size 5000 --algorithms "quick,merge,heap" --runs 3\n'));
-}
-
-// Display test command options
-function displayTestOptions(): void {
-    Logger.section('Test Command Options');
-    console.log(chalk.italic('npm run test -- [options]\n'));
-
-    const optionsTable = [
-        [chalk.bold('Option'), chalk.bold('Description'), chalk.bold('Default')],
-        ['-a, --algorithms <string>', 'Comma-separated list of algorithms or category', '"efficient"'],
-        ['-s, --sizes <string>', 'Comma-separated list of array sizes to test', '"100,1000,10000"'],
-        ['--seed <string>', 'Random seed for reproducible arrays', ''],
-        ['-r, --runs <number>', 'Number of runs per test', '1']
-    ];
-
-    const config = {
-        border: getBorderCharacters('norc'),
-        columns: {
-            0: {width: 25},
-            1: {width: 35},
-            2: {width: 10}
-        }
-    };
-
-    console.log(table(optionsTable, config));
-
-    // Example usage
-    console.log(chalk.bold('Example:'));
-    console.log(chalk.blue('npm run test -- --algorithms "quick,merge" --sizes "10,100,1000,10000" --runs 2\n'));
+    console.log(chalk.bold('Examples:'));
+    console.log(chalk.blue('npm run sort-test -- --algorithms quick --size 1000 --min 0 --max 10000 --seed 12345 --runs 3'));
+    console.log(chalk.blue('npm run sort-test -- --algorithms "quick,merge,heap" --size 5000 --sortedness 50 --runs 3'));
+    console.log(chalk.blue('npm run sort-test -- --algorithms "efficient" --arrayType descending --sortedness 80 --size 1000\n'));
 }
 
 // Display available algorithms
@@ -174,6 +111,7 @@ function displayTimeComplexity(): void {
         ['Selection Sort', 'O(n²)', 'O(n²)', 'O(n²)', 'O(1)', 'No'],
         ['Insertion Sort', 'O(n)', 'O(n²)', 'O(n²)', 'O(1)', 'Yes'],
         ['Gnome Sort', 'O(n)', 'O(n²)', 'O(n²)', 'O(1)', 'Yes'],
+        ['Optimized Gnome', 'O(n)', 'O(n²)', 'O(n²)', 'O(1)', 'Yes'],
         ['Comb Sort', 'O(n log n)', 'O(n²/2ᵖ)', 'O(n²)', 'O(1)', 'No'],
         ['Shell Sort', 'O(n log n)', 'O(n(log n)²)', 'O(n²)', 'O(1)', 'No'],
         ['Merge Sort', 'O(n log n)', 'O(n log n)', 'O(n log n)', 'O(n)', 'Yes'],
@@ -202,20 +140,47 @@ function displayTimeComplexity(): void {
     console.log(`Where ${chalk.italic('n')} is the number of elements and ${chalk.italic('k')} is the range of values or number of digits.`);
 }
 
+// Display information about array types and sortedness
+function displayArrayOptions(): void {
+    Logger.section('Array Options and Configurations');
+
+    Logger.subsection('Array Types');
+    console.log(`${chalk.bold('ascending')}: Array is sorted in ascending order (1, 2, 3, ...)`);
+    console.log(`${chalk.bold('descending')}: Array is sorted in descending order (3, 2, 1, ...)`);
+
+    Logger.subsection('Sortedness Level');
+    console.log(`Sortedness controls how sorted the initial array is (0-100%):`);
+    console.log(`${chalk.bold('0%')}: Completely random array`);
+    console.log(`${chalk.bold('100%')}: Perfectly sorted according to the array type`);
+    console.log(`${chalk.bold('Values in between')}: Partially sorted array`);
+
+    Logger.subsection('Uniqueness Level');
+    console.log(`Uniqueness controls the percentage of unique values in the array (0-100%):`);
+    console.log(`${chalk.bold('0%')}: All values are the same (many duplicates)`);
+    console.log(`${chalk.bold('100%')}: All values are unique (no duplicates)`);
+    console.log(`${chalk.bold('Values in between')}: Controls the ratio of unique values to duplicates`);
+
+    Logger.subsection('Examples');
+    console.log(`${chalk.bold('--arrayType ascending --sortedness 100')}: Completely sorted in ascending order`);
+    console.log(`${chalk.bold('--arrayType descending --sortedness 100')}: Completely sorted in descending order`);
+    console.log(`${chalk.bold('--arrayType ascending --sortedness 80')}: Mostly sorted ascending with some shuffling`);
+    console.log(`${chalk.bold('--arrayType ascending --sortedness 0')}: Completely random array`);
+    console.log(`${chalk.bold('--uniqueness 50')}: Approximately half of the values will be unique`);
+}
+
 /**
  * Main function to display all help information
  */
 function main(): void {
     displayHeader();
     displayCommands();
-    displaySortOptions();
-    displayCompareOptions();
-    displayTestOptions();
+    displaySortTestOptions();
     displayAlgorithms();
+    displayArrayOptions();
     displayTimeComplexity();
 
     // Final note
-    console.log(chalk.dim('\nFor more information, check the README.md file.\n'));
+    console.log(chalk.dim('\nFor more information, check the README.md and EXAMPLES.md files.\n'));
 }
 
 // Run the main function
