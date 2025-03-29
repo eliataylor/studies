@@ -35,23 +35,24 @@ npm run search-help
 
 ```bash
 # Test a specific search algorithm
-npm run search-test -- --algorithms binary --sizes 1000
+npm run packing-test --algorithms "firstFitBin,onlineFirstFit" --count 150
 
 # Compare multiple search algorithms
-npm run search-test -- --algorithms "binary,linear,jump"
+npm run packing-test --algorithms bin --count 200
 
 # Display search help information
 npm run search-help
 ```
 
 ### Review [Quizzes](./quizzes/)
-- a bunch of quizzes I've take from LeetCode, Codility, Codesignal, HackerRank, etc.
+- Quizzes I've completed from LeetCode, Codility, Codesignal, HackerRank, etc.
 
 
 ## Installation
 ```bash
 # Install dependencies
 npm install
+npm run live
 ```
 
 ## License
