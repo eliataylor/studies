@@ -50,7 +50,6 @@ npm run search-help
 
 ## Installation
 ```bash
-# Install dependencies
 npm install
 npm run live
 ```
