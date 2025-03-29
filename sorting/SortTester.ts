@@ -81,11 +81,11 @@ program
     .name('npm run sort-test --')
     .description('Unified testing framework for sorting algorithms')
     .option('-A, --algorithms <string>', 'Comma-separated list of algorithms to test, single algorithm, or category ("basic", "efficient", "nonComparison", "all")')
-    .option('-s, --size <number>', 'Size of the array to sort', '1000')
+    .option('-s, --size <number>', 'Size of the array to sort', '10000')
     .option('--seed <string>', 'Random seed for reproducible arrays')
     .option('-r, --runs <number>', 'Number of runs per algorithm', '4')
     .option('--min <number>', 'Minimum value in the array', '0')
-    .option('--max <number>', 'Maximum value in the array', '1000')
+    .option('--max <number>', 'Maximum value in the array', '0')
     .option('-t, --arrayType <type>', `Type of array to generate (${Object.values(ArrayType).join(', ')})`, ArrayType.ASCENDING)
     .option('--sortedness <number>', 'Level of sortedness from 0 (random) to 100 (sorted)', '0')
     .option('--uniqueness <number>', 'Level of uniqueness from 0 (all same values) to 100 (all unique values)', '100')
@@ -130,7 +130,7 @@ if (options.seed) {
 // Parse options
 const size = parseInt(options.size, 10);
 const min = parseInt(options.min, 10);
-const max = parseInt(options.max, 10);
+const max = parseInt(options.max, 10) === 0 ? size : parseInt(options.max, 10);
 const runs = parseInt(options.runs, 10);
 const sortedness = Math.max(0, Math.min(100, parseInt(options.sortedness, 10)));
 const uniqueness = Math.max(0, Math.min(100, parseInt(options.uniqueness, 10)));

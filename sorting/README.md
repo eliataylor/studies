@@ -24,9 +24,9 @@ npm install
 ### Command-Line Options
 
 - `-A, --algorithms <string>`: Algorithm name, comma-separated list, or category name ("basic", "efficient", "nonComparison", "all")
-- `-s, --size <number>`: Size of the array to sort (default: 1000)
+- `-s, --size <number>`: Size of the array to sort (default: 10000)
 - `--min <number>`: Minimum value in the array (default: 0)
-- `--max <number>`: Maximum value in the array (default: 1000)
+- `--max <number>`: Maximum value in the array (default: --size)
 - `--seed <string>`: Random seed for reproducible arrays
 - `-r, --runs <number>`: Number of runs per algorithm (default: 4)
 - `-t, --arrayType <type>`: Type of array to generate (ascending, descending)
