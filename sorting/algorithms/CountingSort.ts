@@ -42,17 +42,20 @@ export const countingSort: SortFunction = (arr: number[]): number[] => {
         count[array[i]]++;
     }
 
-    // Update count array to store the position of each element in the output
+    // Update count array to store the position of each element in the output (cumulative sum loop
     for (let i = 1; i <= max; i++) {
         count[i] += count[i - 1];
     }
+    // Now count[i] = number of elements ≤ i
 
     // Create the output array
     const output: number[] = new Array(array.length);
 
     // Build the output array
     for (let i = array.length - 1; i >= 0; i--) {
-        output[count[array[i]] - 1] = array[i];
+        const val = array[i];
+        
+        output[count[val] - 1] = array[i];
         count[array[i]]--;
     }
 

@@ -89,23 +89,22 @@ See [EXAMPLES.md](EXAMPLES.md) for more detailed examples.
 
 
 ## Time and Space Complexity
-
-| Algorithm      | Best Time  | Average Time | Worst Time | Space    | Stable | Best For                                          |
-|----------------|------------|--------------|------------|----------|--------|---------------------------------------------------|
-| Bubble Sort    | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Teaching, small or nearly sorted arrays           |
-| Selection Sort | O(n²)      | O(n²)        | O(n²)      | O(1)     | No     | Minimizing swaps                                  |
-| Insertion Sort | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Small or nearly sorted arrays                     |
-| Gnome Sort     | O(n)       | O(n²)        | O(n²)      | O(1)     | Yes    | Simplicity of implementation                      |
-| Comb Sort      | O(n log n) | O(n²/2^p)    | O(n²)      | O(1)     | No     | Improving on bubble sort                          |
-| Shell Sort     | O(n log n) | O(n(log n)²) | O(n²)      | O(1)     | No     | Improving on insertion sort                       |
-| Merge Sort     | O(n log n) | O(n log n)   | O(n log n) | O(n)     | Yes    | Guaranteeing stable sorting                       |
-| Quick Sort     | O(n log n) | O(n log n)   | O(n²)      | O(log n) | No     | General purpose with good cache locality          |
-| Heap Sort      | O(n log n) | O(n log n)   | O(n log n) | O(1)     | No     | Guaranteed worst case, in-place sorting           |
-| Tim Sort       | O(n)       | O(n log n)   | O(n log n) | O(n)     | Yes    | Real-world data with partial ordering             |
-| Intro Sort     | O(n log n) | O(n log n)   | O(n log n) | O(log n) | No     | General purpose, avoiding quick sort's worst case |
-| Counting Sort  | O(n + k)   | O(n + k)     | O(n + k)   | O(n + k) | Yes    | Small range integers                              |
-| Radix Sort     | O(nk)      | O(nk)        | O(nk)      | O(n + k) | Yes    | Integers or strings with limited digits           |
-| Bucket Sort    | O(n + k)   | O(n + k)     | O(n²)      | O(n + k) | Yes    | Uniformly distributed data                        |
+| Algorithm      | Best Time  | When Best Case Occurs | Average Time | Worst Time | When Worst Case Occurs | Space    | Stable |
+|----------------|------------|----------------------|--------------|------------|------------------------|----------|--------|
+| Bubble Sort    | O(n)       | Already sorted array | O(n²)        | O(n²)      | Reverse sorted array   | O(1)     | Yes    |
+| Selection Sort | O(n²)      | All cases            | O(n²)        | O(n²)      | All cases              | O(1)     | No     |
+| Insertion Sort | O(n)       | Already sorted array | O(n²)        | O(n²)      | Reverse sorted array   | O(1)     | Yes    |
+| Gnome Sort     | O(n)       | Already sorted array | O(n²)        | O(n²)      | Reverse sorted array   | O(1)     | Yes    |
+| Comb Sort      | O(n log n) | Evenly distributed elements | O(n²/2^p)    | O(n²)      | Many inversions present | O(1)     | No     |
+| Shell Sort     | O(n log n) | Nearly sorted array  | O(n(log n)²) | O(n²)      | Depends on gap sequence | O(1)     | No     |
+| Merge Sort     | O(n log n) | All cases            | O(n log n)   | O(n log n) | All cases              | O(n)     | Yes    |
+| Quick Sort     | O(n log n) | Balanced partitioning | O(n log n)   | O(n²)      | Already sorted/worst pivot choice | O(log n) | No     |
+| Heap Sort      | O(n log n) | All cases            | O(n log n)   | O(n log n) | All cases              | O(1)     | No     |
+| Tim Sort       | O(n)       | Already sorted array | O(n log n)   | O(n log n) | Few natural runs       | O(n)     | Yes    |
+| Intro Sort     | O(n log n) | Balanced partitioning | O(n log n)   | O(n log n) | Controlled by fallback to heapsort | O(log n) | No     |
+| Counting Sort  | O(n + k)   | All cases            | O(n + k)     | O(n + k)   | All cases              | O(n + k) | Yes    |
+| Radix Sort     | O(nk)      | All cases            | O(nk)        | O(nk)      | All cases              | O(n + k) | Yes    |
+| Bucket Sort    | O(n + k)   | Uniform distribution | O(n + k)     | O(n²)      | All elements in one bucket | O(n + k) | Yes    |
 
 Where:
 
