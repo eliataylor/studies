@@ -15,6 +15,7 @@
  */
 
 import {SortFunction} from '../utils';
+import {Logger, LogLevel} from '../../logger';
 
 /**
  * Performs counting sort on the array based on the specified digit position
@@ -32,10 +33,14 @@ function countingSortByDigit(array: number[], exp: number): void {
         count[digit]++;
     }
 
+    Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${exp}: Grouped by Digits: ${JSON.stringify(count)}`);
+
     // Adjust count to store position of this digit in output
     for (let i = 1; i < 10; i++) {
         count[i] += count[i - 1];
     }
+
+    Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${exp}: Adjust count to store position: ${JSON.stringify(count)}`);
 
     // Build the output array
     for (let i = n - 1; i >= 0; i--) {
@@ -44,10 +49,15 @@ function countingSortByDigit(array: number[], exp: number): void {
         count[digit]--;
     }
 
+    Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${exp}: build output: ${JSON.stringify(output)}`);
+    Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${exp}: count: ${JSON.stringify(output)}`);
+
     // Copy the output array to the original array
     for (let i = 0; i < n; i++) {
         array[i] = output[i];
     }
+
+    Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${exp}: final: ${JSON.stringify(array)}`);
 }
 
 /**
@@ -56,12 +66,15 @@ function countingSortByDigit(array: number[], exp: number): void {
  * @returns The sorted array
  */
 export const radixSort: SortFunction = (arr: number[]): number[] => {
-    const array = [...arr].map(Math.floor); // Create a copy and ensure integers
 
-    // Handle negative numbers by giving an error or using a different algorithm
+    const array = [...arr];
+    /* Handle negative numbers by giving an error or using a different algorithm
+
+    const array = [...arr].map(Math.floor); // Create a copy and ensure integers
     if (array.some(num => num < 0)) {
         throw new Error('Radix sort implementation only works with non-negative integers');
     }
+     */
 
     // Find the maximum number to determine the number of digits
     const max = Math.max(...array);
@@ -70,6 +83,8 @@ export const radixSort: SortFunction = (arr: number[]): number[] => {
     for (let exp = 1; Math.floor(max / exp) > 0; exp *= 10) {
         countingSortByDigit(array, exp);
     }
+
+    Logger.algorithmStep(LogLevel.DEBUG, `FINAL: ${JSON.stringify(array)}`);
 
     return array;
 };

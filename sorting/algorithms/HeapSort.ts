@@ -15,6 +15,7 @@
  */
 
 import {SortFunction} from '../utils';
+import {Logger, LogLevel} from '../../logger';
 
 /**
  * Heapify a subtree rooted at index i
@@ -60,8 +61,12 @@ export const heapSort: SortFunction = (arr: number[]): number[] => {
     const n = array.length;
 
     // Build a max heap (rearrange the array)
+    /* The reason we start at Math.floor(n / 2) - 1 is that in a binary heap represented as an array,
+    leaf nodes are at indices from n/2 to n-1, and non-leaf nodes are at indices from 0 to n/2-1. */
     for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
         heapify(array, n, i);
+
+        Logger.algorithmStep(LogLevel.DEBUG, `BUCKET ${i}: ${JSON.stringify(array)}`);
     }
 
     // Extract elements from the heap one by one
